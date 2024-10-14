@@ -1,5 +1,8 @@
 {
   "expo": {
+    "experiments": {
+      "tsconfigPaths": true
+    },
     "name": "teen-finance",
     "slug": "teen-finance",
     "version": "1.0.0",

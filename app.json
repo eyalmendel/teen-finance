@@ -1,5 +1,7 @@
 {
   "expo": {
+    "newArchEnabled": true,
+    "jsEngine": "hermes",
     "experiments": {
       "tsconfigPaths": true
     },

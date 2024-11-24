@@ -24,13 +24,12 @@ function AppCard({ label, style, onPress }: Props) {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'green',
     },
 
     label: {
-        fontSize: 14,
+        fontSize: 16,
+        fontWeight: '700',
+        textAlign: 'right',
     },
 });
 

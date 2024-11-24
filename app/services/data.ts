@@ -4,12 +4,36 @@ import { Subject } from 'app/models/subject';
 
 export const getSubjects = (): Subject[] => {
     return [
-        { id: 0, name: 'paycheck' },
-        { id: 1, name: 'opening a bank account' },
-        { id: 2, name: 'making income' },
-        { id: 3, name: 'saving' },
-        { id: 4, name: 'investments' },
-        { id: 5, name: 'employment rights' },
+        {
+            id: 0,
+            name: 'saving',
+            icon: require('@assets/icons/saving.png'),
+        },
+        {
+            id: 1,
+            name: 'paycheck',
+            icon: require('../../assets/icons/paycheck.png'),
+        },
+        {
+            id: 2,
+            name: 'investments',
+            icon: require('@assets/icons/investment.png'),
+        },
+        {
+            id: 3,
+            name: 'opening a bank account',
+            icon: require('@assets/icons/bank_account.png'),
+        },
+        {
+            id: 4,
+            name: 'employment rights',
+            icon: require('@assets/icons/employment_rights.png'),
+        },
+        {
+            id: 5,
+            name: 'making income',
+            icon: require('@assets/icons/income.png'),
+        },
     ];
 };
 

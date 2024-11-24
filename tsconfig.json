@@ -11,6 +11,7 @@
       "@enums/*": ["app/enums/*"],
       "@services/*": ["app/services/*"],
       "@utils/*": ["app/utils/*"],
+      "@assets/*": ["assets/*"]
     }
   }
 }

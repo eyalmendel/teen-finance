@@ -1,13 +1,13 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
 
-import AppCard from '@components/AppCard';
 import Screen from '@components/Screen';
+import { COLORS } from '@config/colors';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { setSelectedSubjectName } from '@services/state';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
@@ -37,12 +37,15 @@ function SubjectsScreen({ navigation }: Props) {
                 data={subjects}
                 keyExtractor={(subject) => subject.id.toString()}
                 contentContainerStyle={styles.list}
+                numColumns={2}
                 renderItem={({ item }) => (
-                    <AppCard
+                    <Pressable
                         style={styles.cardContainer}
-                        label={translate(item.name)}
                         onPress={() => handleSubjectSelection(item)}
-                    ></AppCard>
+                    >
+                        <Image style={styles.image} source={item.icon}></Image>
+                        <Text style={styles.label}>{translate(item.name)}</Text>
+                    </Pressable>
                 )}
             ></FlatList>
         </Screen>
@@ -51,22 +54,39 @@ function SubjectsScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 18,
+        fontSize: 28,
         textAlign: 'center',
+        fontWeight: 'bold',
+        color: COLORS.primary,
+        marginBottom: 32,
     },
     list: {
-        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
         flexWrap: 'wrap',
-        gap: 24,
-        margin: 24,
     },
     cardContainer: {
-        width: 120,
-        height: 105,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '40%',
+        height: 120,
         borderRadius: 6,
+        margin: 16,
+        paddingHorizontal: 12,
+        paddingVertical: 12,
+        gap: 4,
+        backgroundColor: COLORS.purple,
+    },
+    image: {
+        width: '25%',
+        height: '25%',
+        objectFit: 'contain',
+    },
+    label: {
+        fontSize: 14,
+        fontWeight: '700',
+        textAlign: 'right',
     },
 });
 

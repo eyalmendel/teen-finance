@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
-import AppCard from '@components/AppCard';
 import Screen from '@components/Screen';
 import { LearningUnit } from '@models/learning-unit';
 import { getGameUnitsBySubjectName } from '@services/data';
@@ -28,7 +27,7 @@ function GameStyleScreen() {
 
     return (
         <Screen>
-            <FlatList
+            {/* <FlatList
                 data={games}
                 keyExtractor={(game) => game.id.toString()}
                 contentContainerStyle={styles.list}
@@ -38,7 +37,7 @@ function GameStyleScreen() {
                         style={styles.cardContainer}
                     ></AppCard>
                 )}
-            ></FlatList>
+            ></FlatList> */}
         </Screen>
     );
 }

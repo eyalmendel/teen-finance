@@ -4,4 +4,5 @@ export const COLORS = {
     secondary: '#9ce799',
     white: '#fff',
     purple: '#e1e1fa',
+    eggWhite: '#fdfdfd',
 };

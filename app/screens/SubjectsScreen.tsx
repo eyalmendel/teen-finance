@@ -9,6 +9,8 @@ import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
 import { setSelectedSubjectName } from '@services/state';
+import { TEXT } from '@config/text';
+import ScreenTitle from '@components/ScreenTitle';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -31,7 +33,7 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <Text style={styles.title}>{translate('subjectsScreenTitle')}</Text>
+            <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
 
             <FlatList
                 data={subjects}
@@ -53,13 +55,6 @@ function SubjectsScreen({ navigation }: Props) {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 28,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: COLORS.primary,
-        marginBottom: 32,
-    },
     list: {
         width: '100%',
         justifyContent: 'center',

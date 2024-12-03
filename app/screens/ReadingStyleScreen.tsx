@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native';
 
-import AppCard from '@components/AppCard';
 import Screen from '@components/Screen';
 import { StringKey } from '@config/strings';
 import { LearningUnit } from '@models/learning-unit';
@@ -30,7 +29,7 @@ function ReadingStyleScreen() {
 
     return (
         <Screen>
-            {learningUnits?.length === 0 ? (
+            {/* {learningUnits?.length === 0 ? (
                 <Text>No Units For Now</Text>
             ) : (
                 <FlatList
@@ -44,7 +43,7 @@ function ReadingStyleScreen() {
                         ></AppCard>
                     )}
                 ></FlatList>
-            )}
+            )} */}
         </Screen>
     );
 }

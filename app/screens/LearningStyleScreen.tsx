@@ -1,12 +1,14 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
 
-import AppCard from '@components/AppCard';
 import { LearningStyle } from '@models/learning-style';
 import { translate } from '@services/language';
 import Screen from '@components/Screen';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
+import { TEXT } from '@config/text';
+import { COLORS } from '@config/colors';
+import ScreenTitle from '@components/ScreenTitle';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -14,10 +16,30 @@ type Props = NativeStackScreenProps<
 >;
 
 const LEARNING_STYLES: LearningStyle[] = [
-    { id: 0, name: 'read', screen: RouteNames.READING },
-    { id: 1, name: 'watch', screen: RouteNames.VIDEO },
-    { id: 2, name: 'listen', screen: RouteNames.AUDIO },
-    { id: 3, name: 'play', screen: RouteNames.GAMING },
+    {
+        id: 0,
+        name: 'read',
+        screen: RouteNames.READING,
+        icon: require('@assets/icons/reading-style.png'),
+    },
+    {
+        id: 1,
+        name: 'watch',
+        screen: RouteNames.VIDEO,
+        icon: require('@assets/icons/watching-style.png'),
+    },
+    {
+        id: 2,
+        name: 'listen',
+        screen: RouteNames.AUDIO,
+        icon: require('@assets/icons/listening-style.png'),
+    },
+    {
+        id: 3,
+        name: 'play',
+        screen: RouteNames.GAMING,
+        icon: require('@assets/icons/playing-style.png'),
+    },
 ];
 
 function LearningStyleScreen({ navigation }: Props) {
@@ -27,16 +49,21 @@ function LearningStyleScreen({ navigation }: Props) {
 
     return (
         <Screen>
+            <ScreenTitle
+                text={translate('learningStylesScreenTitle')}
+            ></ScreenTitle>
             <FlatList
                 data={LEARNING_STYLES}
                 keyExtractor={(style) => style.id.toString()}
                 contentContainerStyle={styles.list}
                 renderItem={({ item }) => (
-                    <AppCard
-                        label={translate(item.name)}
-                        style={styles.cardContainer}
+                    <Pressable
+                        style={[styles.cardContainer, styles.shadow]}
                         onPress={() => handleStyleSelection(item.screen)}
-                    ></AppCard>
+                    >
+                        <Image style={styles.image} source={item.icon}></Image>
+                        <Text style={styles.label}>{translate(item.name)}</Text>
+                    </Pressable>
                 )}
             ></FlatList>
         </Screen>
@@ -45,18 +72,37 @@ function LearningStyleScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
     list: {
-        display: 'flex',
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
         flexWrap: 'wrap',
-        gap: 24,
-        margin: 24,
+        gap: 16,
     },
     cardContainer: {
-        width: 120,
-        height: 105,
-        borderRadius: 6,
+        width: '98%',
+        margin: 'auto',
+        borderRadius: 24,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 48,
+        paddingVertical: 18,
+        paddingHorizontal: 18,
+        backgroundColor: COLORS.eggWhite,
+    },
+    shadow: {
+        shadowColor: COLORS.primary,
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.8,
+        shadowRadius: 10,
+    },
+    image: {
+        objectFit: 'contain',
+    },
+    label: {
+        fontSize: TEXT.size.smallHeadline,
+        fontWeight: 700,
     },
 });
 

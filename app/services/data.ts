@@ -12,7 +12,7 @@ export const getSubjects = (): Subject[] => {
         {
             id: 1,
             name: 'paycheck',
-            icon: require('../../assets/icons/paycheck.png'),
+            icon: require('@assets/icons/paycheck.png'),
         },
         {
             id: 2,

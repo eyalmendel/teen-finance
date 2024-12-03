@@ -6,6 +6,7 @@ export const STRINGS = {
     investments: 'השקעות',
     'employment rights': 'זכויות עובד',
     subjectsScreenTitle: 'אז במה מתמקדים היום?',
+    learningStylesScreenTitle: 'באיזו דרך?',
     read: 'לקרוא',
     watch: 'לצפות',
     listen: 'להקשיב',

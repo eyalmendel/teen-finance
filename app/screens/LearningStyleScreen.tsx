@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
         gap: 16,
     },
     cardContainer: {
-        width: '98%',
+        width: '100%',
         margin: 'auto',
         borderRadius: 24,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         gap: 48,
-        paddingVertical: 18,
-        paddingHorizontal: 18,
+        paddingVertical: '6%',
+        paddingHorizontal: '12%',
         backgroundColor: COLORS.eggWhite,
     },
     shadow: {
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
     },
     image: {
+        width: '35%',
         objectFit: 'contain',
     },
     label: {

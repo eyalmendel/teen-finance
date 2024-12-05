@@ -1,5 +1,5 @@
 export const STRINGS = {
-    paycheck: 'משכורת',
+    paycheck: 'תלוש שכר',
     'opening a bank account': 'פתיחת חשבון בנק',
     'making income': 'יצירת הכנסות',
     saving: 'חיסכון',
@@ -7,6 +7,7 @@ export const STRINGS = {
     'employment rights': 'זכויות עובד',
     subjectsScreenTitle: 'אז במה מתמקדים היום?',
     learningStylesScreenTitle: 'באיזו דרך?',
+    readingStyleScreenTitle: 'לקרוא על {0}',
     read: 'לקרוא',
     watch: 'לצפות',
     listen: 'להקשיב',

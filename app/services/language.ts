@@ -1,6 +1,9 @@
 import { StringKey, STRINGS } from 'app/config/strings';
 
-export const translate = (key: StringKey | null): string => {
+export const translate = (
+    key: StringKey | null,
+    params: StringKey[] | null = null,
+): string => {
     if (key === null) {
         return '';
     }
@@ -10,5 +13,10 @@ export const translate = (key: StringKey | null): string => {
         return key;
     }
 
-    return translated;
+    return params !== null ? fillParams(translated, params) : translated;
 };
+
+const fillParams = (template: string, values: StringKey[]): string =>
+    template.replace(/\{(\d+)\}/g, (match, key) =>
+        values[key] !== undefined ? STRINGS[values[key]] : match,
+    );

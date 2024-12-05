@@ -56,31 +56,31 @@ function SubjectsScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
     list: {
-        width: '100%',
+        width: '95%',
         justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     cardContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: '40%',
-        height: 120,
+        width: '48%',
+        // maxHeight: 120,
         borderRadius: 6,
-        margin: 16,
-        paddingHorizontal: 12,
-        paddingVertical: 12,
-        gap: 4,
+        margin: '2%',
+        paddingHorizontal: '8%',
+        paddingVertical: '8%',
+        gap: '3%',
         backgroundColor: COLORS.purple,
     },
     image: {
-        width: '25%',
-        height: '25%',
+        width: '30%',
         objectFit: 'contain',
     },
     label: {
-        fontSize: 14,
-        fontWeight: '700',
+        fontSize: TEXT.size.default,
+        fontWeight: 700,
         textAlign: 'right',
     },
 });

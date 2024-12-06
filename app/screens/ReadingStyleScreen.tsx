@@ -11,6 +11,7 @@ import ScreenTitle from '@components/ScreenTitle';
 import { COLORS } from '@config/colors';
 import { TEXT } from '@config/text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { STYLES } from '@config/styles';
 
 function ReadingStyleScreen() {
     const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
@@ -51,12 +52,12 @@ function ReadingStyleScreen() {
                     data={learningUnits}
                     keyExtractor={(learningUnit) => learningUnit.id.toString()}
                     renderItem={({ item }) => (
-                        <View style={styles.cardContainer}>
+                        <View style={[styles.cardContainer, styles.boxShadow]}>
                             <View style={styles.details}>
                                 <Text
                                     style={[
                                         styles.title,
-                                        styles.rightAlignedText,
+                                        STYLES.rightAlignedText,
                                     ]}
                                 >
                                     {translate(item.title)}
@@ -65,7 +66,7 @@ function ReadingStyleScreen() {
                                     <Text
                                         style={[
                                             styles.description,
-                                            styles.rightAlignedText,
+                                            STYLES.rightAlignedText,
                                         ]}
                                     >
                                         {translate(item.description)}
@@ -92,14 +93,6 @@ function ReadingStyleScreen() {
 }
 
 const styles = StyleSheet.create({
-    list: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '6%',
-        margin: '2%',
-        overflow: 'hidden',
-    },
     cardContainer: {
         width: '100%',
         margin: 'auto',
@@ -136,8 +129,11 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.primary,
         borderRadius: 5,
     },
-    rightAlignedText: {
-        textAlign: 'right',
+    boxShadow: {
+        elevation: 4,
+        shadowColor: COLORS.primary,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 10,
     },
 });
 

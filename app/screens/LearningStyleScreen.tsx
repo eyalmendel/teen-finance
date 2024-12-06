@@ -58,7 +58,7 @@ function LearningStyleScreen({ navigation }: Props) {
                 contentContainerStyle={styles.list}
                 renderItem={({ item }) => (
                     <Pressable
-                        style={[styles.cardContainer, styles.shadow]}
+                        style={[styles.cardContainer, styles.boxShadow]}
                         onPress={() => handleStyleSelection(item.screen)}
                     >
                         <Image style={styles.image} source={item.icon}></Image>
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: '12%',
         backgroundColor: COLORS.eggWhite,
     },
-    shadow: {
+    boxShadow: {
+        elevation: 4,
         shadowColor: COLORS.primary,
-        shadowOffset: { width: 4, height: 4 },
-        shadowOpacity: 0.8,
-        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 10,
     },
     image: {
         width: '35%',

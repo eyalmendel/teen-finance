@@ -10,4 +10,4 @@ export const TEXT = {
         bold: 700,
         regular: 400,
     },
-};
+} as const;

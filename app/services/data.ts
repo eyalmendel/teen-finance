@@ -41,8 +41,18 @@ export const getGameUnitsBySubjectName = (
     subjectName: StringKey | null,
 ): LearningUnit[] => {
     return [
-        { id: 0, subject: 'paycheck', name: "What's Missing?" },
-        { id: 1, subject: 'paycheck', name: 'Find the Error' },
+        {
+            id: 0,
+            subject: 'paycheck',
+            title: "What's Missing?",
+            thumbnailUrl: '@assets/icons/playing-style.png',
+        },
+        {
+            id: 1,
+            subject: 'paycheck',
+            title: 'Find the Error',
+            thumbnailUrl: '@assets/icons/playing-style.png',
+        },
     ];
 };
 
@@ -50,16 +60,37 @@ export const getReadingUnitsBySubjectName = (
     subjectName: StringKey | null,
 ): LearningUnit[] => {
     return [
-        { id: 0, subject: 'paycheck', name: 'Paycheck Structure Explanation' },
+        {
+            id: 0,
+            subject: 'paycheck',
+            title: 'Paycheck Structure Explanation',
+            description: 'The meaning of each section',
+            estimatedTime: 8,
+            thumbnailUrl: '@assets/icons/reading-style.png',
+        },
         {
             id: 1,
             subject: 'paycheck',
-            name: "Paycheck Day Arrived. What's next?",
+            title: "Paycheck Day Arrived. What's next?",
+            description: '10 tips for quick review',
+            estimatedTime: 8,
+            thumbnailUrl: '@assets/icons/reading-style.png',
         },
         {
             id: 2,
             subject: 'paycheck',
-            name: 'What to do if the Paycheck is Broken?',
+            title: 'What to do if the Paycheck is Broken?',
+            description: 'Issues in the paycheck and how to handle it',
+            estimatedTime: 8,
+            thumbnailUrl: '@assets/icons/reading-style.png',
+        },
+        {
+            id: 3,
+            subject: 'paycheck',
+            title: 'What to do if the Paycheck is Broken?',
+            description: 'Issues in the paycheck and how to handle it',
+            estimatedTime: 8,
+            thumbnailUrl: '@assets/icons/reading-style.png',
         },
     ];
 };
@@ -71,23 +102,26 @@ export const getVideoUnitsBySubjectName = (
         {
             id: 0,
             subject: 'paycheck',
-            name: 'Paycheck Structure Explanation',
+            title: 'Paycheck Structure Explanation',
             description: 'Paycheck Structure Explanation',
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            thumbnailUrl: '@assets/icons/watching-style.png',
         },
         {
             id: 1,
             subject: 'paycheck',
-            name: "Paycheck Day Arrived. What's next?",
+            title: "Paycheck Day Arrived. What's next?",
             description: "Paycheck Day Arrived. What's next?",
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            thumbnailUrl: '@assets/icons/watching-style.png',
         },
         {
             id: 2,
             subject: 'paycheck',
-            name: 'What to do if the Paycheck is Broken?',
+            title: 'What to do if the Paycheck is Broken?',
             description: 'What to do if the Paycheck is Broken?',
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            thumbnailUrl: '@assets/icons/watching-style.png',
         },
     ];
 };
@@ -99,23 +133,26 @@ export const getAudioUnitsBySubjectName = (
         {
             id: 0,
             subject: 'paycheck',
-            name: 'Paycheck Structure Explanation',
+            title: 'Paycheck Structure Explanation',
             description: 'Paycheck Structure Explanation',
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            thumbnailUrl: '@assets/icons/listening-style.png',
         },
         {
             id: 1,
             subject: 'paycheck',
-            name: "Paycheck Day Arrived. What's next?",
+            title: "Paycheck Day Arrived. What's next?",
             description: "Paycheck Day Arrived. What's next?",
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            thumbnailUrl: '@assets/icons/listening-style.png',
         },
         {
             id: 2,
             subject: 'paycheck',
-            name: 'What to do if the Paycheck is Broken?',
+            title: 'What to do if the Paycheck is Broken?',
             description: 'What to do if the Paycheck is Broken?',
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            thumbnailUrl: '@assets/icons/listening-style.png',
         },
     ];
 };

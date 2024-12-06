@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: TEXT.size.mediumHeadline,
         textAlign: 'center',
-        fontWeight: 800,
+        fontWeight: TEXT.weight.extraBold,
         color: COLORS.primary,
         marginBottom: 32,
     },

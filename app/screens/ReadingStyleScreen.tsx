@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 import Screen from '@components/Screen';
 import { StringKey } from '@config/strings';
@@ -7,6 +7,10 @@ import { LearningUnit } from '@models/learning-unit';
 import { getReadingUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { getSelectedSubjectName } from '@services/state';
+import ScreenTitle from '@components/ScreenTitle';
+import { COLORS } from '@config/colors';
+import { TEXT } from '@config/text';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 function ReadingStyleScreen() {
     const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
@@ -27,40 +31,113 @@ function ReadingStyleScreen() {
         setLearningUnits(units);
     };
 
+    const getTitleParamValue = (): StringKey[] => {
+        const selectedSubjectName = getSelectedSubjectName();
+        return selectedSubjectName !== null ? [selectedSubjectName] : [];
+    };
+
     return (
         <Screen>
-            {/* {learningUnits?.length === 0 ? (
-                <Text>No Units For Now</Text>
+            <ScreenTitle
+                text={translate(
+                    'readingStyleScreenTitle',
+                    getTitleParamValue(),
+                )}
+            ></ScreenTitle>
+            {learningUnits?.length === 0 ? (
+                <Text>{translate('No Units For Now')}</Text>
             ) : (
                 <FlatList
                     data={learningUnits}
                     keyExtractor={(learningUnit) => learningUnit.id.toString()}
-                    contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
-                        <AppCard
-                            label={translate(item.name as StringKey)}
-                            style={styles.cardContainer}
-                        ></AppCard>
+                        <View style={styles.cardContainer}>
+                            <View style={styles.details}>
+                                <Text
+                                    style={[
+                                        styles.title,
+                                        styles.rightAlignedText,
+                                    ]}
+                                >
+                                    {translate(item.title)}
+                                </Text>
+                                {item.description && (
+                                    <Text
+                                        style={[
+                                            styles.description,
+                                            styles.rightAlignedText,
+                                        ]}
+                                    >
+                                        {translate(item.description)}
+                                    </Text>
+                                )}
+                                <View style={styles.estimatedTimeContainer}>
+                                    <Text>{`${item.estimatedTime} ${translate(
+                                        'minutes',
+                                    )}`}</Text>
+                                    <MaterialCommunityIcons
+                                        style={styles.icon}
+                                        name="clock-outline"
+                                        color={COLORS.primary}
+                                    />
+                                </View>
+                            </View>
+                            <View style={styles.thumbnail}></View>
+                        </View>
                     )}
                 ></FlatList>
-            )} */}
+            )}
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
     list: {
-        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         flexWrap: 'wrap',
-        gap: 24,
-        margin: 24,
+        gap: '6%',
+        margin: '2%',
+        overflow: 'hidden',
     },
     cardContainer: {
-        width: 120,
-        height: 105,
-        borderRadius: 6,
+        width: '100%',
+        margin: 'auto',
+        borderRadius: '5%',
+        flexDirection: 'row',
+        gap: '4%',
+        paddingVertical: '6%',
+        paddingHorizontal: '5%',
+        backgroundColor: COLORS.eggWhite,
+    },
+    details: {
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        width: '70%',
+        gap: '4%',
+    },
+    title: {
+        fontSize: TEXT.size.smallHeadline,
+        fontWeight: TEXT.weight.bold,
+    },
+    description: {
+        fontSize: TEXT.size.default,
+    },
+    estimatedTimeContainer: {
+        flexDirection: 'row',
+        alignContent: 'center',
+        gap: 4,
+    },
+    icon: {
+        alignSelf: 'center',
+    },
+    thumbnail: {
+        width: '28%',
+        backgroundColor: COLORS.primary,
+        borderRadius: 5,
+    },
+    rightAlignedText: {
+        textAlign: 'right',
     },
 });
 

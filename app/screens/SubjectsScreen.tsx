@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: TEXT.size.default,
-        fontWeight: 700,
+        fontWeight: TEXT.weight.bold,
         textAlign: 'right',
     },
 });

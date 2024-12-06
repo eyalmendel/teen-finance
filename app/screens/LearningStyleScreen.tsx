@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: TEXT.size.smallHeadline,
-        fontWeight: 700,
+        fontWeight: TEXT.weight.bold,
     },
 });
 

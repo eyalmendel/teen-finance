@@ -44,13 +44,22 @@ export const getGameUnitsBySubjectName = (
         {
             id: 0,
             subject: 'paycheck',
-            title: "What's Missing?",
+            title: 'The Big Riddle',
+            description: '10 trivia questions about your paycheck',
             thumbnailUrl: '@assets/icons/playing-style.png',
         },
         {
             id: 1,
             subject: 'paycheck',
             title: 'Find the Error',
+            description: 'Not here.. in the paycheck!',
+            thumbnailUrl: '@assets/icons/playing-style.png',
+        },
+        {
+            id: 2,
+            subject: 'paycheck',
+            title: "What's Missing?",
+            description: 'Except your employee bonus',
             thumbnailUrl: '@assets/icons/playing-style.png',
         },
     ];

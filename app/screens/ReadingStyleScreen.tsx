@@ -13,6 +13,7 @@ import { TEXT } from '@config/text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { STYLES } from '@config/styles';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import EmptyState from '@components/EmptyState';
 
 function ReadingStyleScreen() {
     const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
@@ -47,7 +48,7 @@ function ReadingStyleScreen() {
                 )}
             ></ScreenTitle>
             {learningUnits?.length === 0 ? (
-                <Text>{translate('No Units For Now')}</Text>
+                <EmptyState />
             ) : (
                 <FlatList
                     data={learningUnits}

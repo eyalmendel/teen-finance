@@ -12,6 +12,7 @@ import { setSelectedSubjectName } from '@services/state';
 import { TEXT } from '@config/text';
 import ScreenTitle from '@components/ScreenTitle';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import EmptyState from '@components/EmptyState';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -35,22 +36,30 @@ function SubjectsScreen({ navigation }: Props) {
     return (
         <Screen>
             <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
-
-            <FlatList
-                data={subjects}
-                keyExtractor={(subject) => subject.id.toString()}
-                contentContainerStyle={styles.list}
-                numColumns={2}
-                renderItem={({ item }) => (
-                    <Pressable
-                        style={styles.cardContainer}
-                        onPress={() => handleSubjectSelection(item)}
-                    >
-                        <Image style={styles.image} source={item.icon}></Image>
-                        <Text style={styles.label}>{translate(item.name)}</Text>
-                    </Pressable>
-                )}
-            ></FlatList>
+            {subjects?.length === 0 ? (
+                <EmptyState />
+            ) : (
+                <FlatList
+                    data={subjects}
+                    keyExtractor={(subject) => subject.id.toString()}
+                    contentContainerStyle={styles.list}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <Pressable
+                            style={styles.cardContainer}
+                            onPress={() => handleSubjectSelection(item)}
+                        >
+                            <Image
+                                style={styles.image}
+                                source={item.icon}
+                            ></Image>
+                            <Text style={styles.label}>
+                                {translate(item.name)}
+                            </Text>
+                        </Pressable>
+                    )}
+                ></FlatList>
+            )}
         </Screen>
     );
 }

@@ -14,6 +14,7 @@ import { STYLES } from '@config/styles';
 import ScreenTitle from '@components/ScreenTitle';
 import { StringKey } from '@config/strings';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import EmptyState from '@components/EmptyState';
 
 function VideoStyleScreen() {
     const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
@@ -47,47 +48,55 @@ function VideoStyleScreen() {
                     getTitleParamValue(),
                 )}
             ></ScreenTitle>
-            <FlatList
-                data={videoUnits}
-                keyExtractor={(video) => video.id.toString()}
-                contentContainerStyle={styles.list}
-                renderItem={({ item }) => (
-                    <View style={[styles.cardContainer, styles.boxShadow]}>
-                        <View style={styles.details}>
-                            <Text
-                                style={[styles.title, STYLES.rightAlignedText]}
-                            >
-                                {translate(item.title)}
-                            </Text>
-                            {item.description && (
+
+            {videoUnits?.length === 0 ? (
+                <EmptyState />
+            ) : (
+                <FlatList
+                    data={videoUnits}
+                    keyExtractor={(video) => video.id.toString()}
+                    contentContainerStyle={styles.list}
+                    renderItem={({ item }) => (
+                        <View style={[styles.cardContainer, styles.boxShadow]}>
+                            <View style={styles.details}>
                                 <Text
                                     style={[
-                                        styles.description,
+                                        styles.title,
                                         STYLES.rightAlignedText,
                                     ]}
                                 >
-                                    {translate(item.description)}
+                                    {translate(item.title)}
                                 </Text>
-                            )}
-                            <View style={styles.estimatedTimeContainer}>
-                                <Text>{`${item.estimatedTime} ${translate(
-                                    'minutes',
-                                )}`}</Text>
-                                <MaterialCommunityIcons
-                                    style={styles.icon}
-                                    name="clock-outline"
-                                    color={COLORS.primary}
-                                />
+                                {item.description && (
+                                    <Text
+                                        style={[
+                                            styles.description,
+                                            STYLES.rightAlignedText,
+                                        ]}
+                                    >
+                                        {translate(item.description)}
+                                    </Text>
+                                )}
+                                <View style={styles.estimatedTimeContainer}>
+                                    <Text>{`${item.estimatedTime} ${translate(
+                                        'minutes',
+                                    )}`}</Text>
+                                    <MaterialCommunityIcons
+                                        style={styles.icon}
+                                        name="clock-outline"
+                                        color={COLORS.primary}
+                                    />
+                                </View>
+                            </View>
+                            <View style={styles.videoPlayerContainer}>
+                                <AppVideoPlayer
+                                    sourceUri={item.sourceUrl}
+                                ></AppVideoPlayer>
                             </View>
                         </View>
-                        <View style={styles.videoPlayerContainer}>
-                            <AppVideoPlayer
-                                sourceUri={item.sourceUrl}
-                            ></AppVideoPlayer>
-                        </View>
-                    </View>
-                )}
-            ></FlatList>
+                    )}
+                ></FlatList>
+            )}
         </Screen>
     );
 }

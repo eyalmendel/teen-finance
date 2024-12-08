@@ -15,6 +15,7 @@ export const STRINGS = {
     listen: 'להקשיב',
     play: 'להתנסות',
     minutes: "דק'",
+    missingDataErrorMessage: 'משהו השתבש...',
     'No Units For Now': 'אין יחידות לימוד להציג',
     "What's Missing?": 'מה חסר?',
     'Find the Error': 'חפש את התעות',

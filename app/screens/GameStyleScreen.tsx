@@ -12,6 +12,7 @@ import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import EmptyState from '@components/EmptyState';
 
 function GameStyleScreen() {
     const [games, setGames] = useState<LearningUnit[]>([]);
@@ -41,33 +42,40 @@ function GameStyleScreen() {
             <ScreenTitle
                 text={translate('gamingStyleScreenTitle', getTitleParamValue())}
             ></ScreenTitle>
-            <FlatList
-                data={games}
-                keyExtractor={(game) => game.id.toString()}
-                contentContainerStyle={styles.list}
-                renderItem={({ item }) => (
-                    <View style={[styles.cardContainer, styles.boxShadow]}>
-                        <View style={styles.thumbnail}></View>
-                        <View style={styles.details}>
-                            <Text
-                                style={[styles.title, STYLES.rightAlignedText]}
-                            >
-                                {translate(item.title)}
-                            </Text>
-                            {item.description && (
+            {games?.length === 0 ? (
+                <EmptyState />
+            ) : (
+                <FlatList
+                    data={games}
+                    keyExtractor={(game) => game.id.toString()}
+                    contentContainerStyle={styles.list}
+                    renderItem={({ item }) => (
+                        <View style={[styles.cardContainer, styles.boxShadow]}>
+                            <View style={styles.thumbnail}></View>
+                            <View style={styles.details}>
                                 <Text
                                     style={[
-                                        styles.description,
+                                        styles.title,
                                         STYLES.rightAlignedText,
                                     ]}
                                 >
-                                    {translate(item.description)}
+                                    {translate(item.title)}
                                 </Text>
-                            )}
+                                {item.description && (
+                                    <Text
+                                        style={[
+                                            styles.description,
+                                            STYLES.rightAlignedText,
+                                        ]}
+                                    >
+                                        {translate(item.description)}
+                                    </Text>
+                                )}
+                            </View>
                         </View>
-                    </View>
-                )}
-            ></FlatList>
+                    )}
+                ></FlatList>
+            )}
         </Screen>
     );
 }

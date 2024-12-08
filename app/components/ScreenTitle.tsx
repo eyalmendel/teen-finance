@@ -1,5 +1,6 @@
 import { COLORS } from '@config/colors';
 import { TEXT } from '@config/text';
+import { moderateScale, verticalScale } from '@services/scale';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
@@ -13,11 +14,11 @@ function ScreenTitle({ text }: Props) {
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: TEXT.size.mediumHeadline,
+        fontSize: moderateScale(TEXT.size.mediumHeadline),
         textAlign: 'center',
         fontWeight: TEXT.weight.extraBold,
         color: COLORS.primary,
-        marginBottom: 32,
+        marginBottom: verticalScale(32),
     },
 });
 

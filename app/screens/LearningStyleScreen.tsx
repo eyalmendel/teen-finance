@@ -9,6 +9,7 @@ import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { TEXT } from '@config/text';
 import { COLORS } from '@config/colors';
 import ScreenTitle from '@components/ScreenTitle';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -72,29 +73,28 @@ function LearningStyleScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
     list: {
-        flex: 1,
-        width: '100%',
         justifyContent: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 16,
+        gap: moderateScale(16),
+        paddingVertical: verticalScale(24),
     },
     cardContainer: {
         width: '100%',
         margin: 'auto',
-        borderRadius: '5%',
+        borderRadius: moderateScale(24),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 48,
-        paddingVertical: '6%',
-        paddingHorizontal: '12%',
+        gap: moderateScale(48),
+        paddingVertical: verticalScale(24),
+        paddingHorizontal: horizontalScale(24),
         backgroundColor: COLORS.eggWhite,
     },
     boxShadow: {
-        elevation: 4,
+        elevation: verticalScale(4),
         shadowColor: COLORS.primary,
-        shadowOffset: { width: 0, height: 4 },
+        shadowOffset: { width: 0, height: verticalScale(4) },
         shadowOpacity: 10,
     },
     image: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         objectFit: 'contain',
     },
     label: {
-        fontSize: TEXT.size.smallHeadline,
+        fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
     },
 });

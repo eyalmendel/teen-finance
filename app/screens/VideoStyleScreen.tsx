@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { STYLES } from '@config/styles';
 import ScreenTitle from '@components/ScreenTitle';
 import { StringKey } from '@config/strings';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 
 function VideoStyleScreen() {
     const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
@@ -49,7 +50,7 @@ function VideoStyleScreen() {
             <FlatList
                 data={videoUnits}
                 keyExtractor={(video) => video.id.toString()}
-                contentContainerStyle={{ gap: '3%' }}
+                contentContainerStyle={styles.list}
                 renderItem={({ item }) => (
                     <View style={[styles.cardContainer, styles.boxShadow]}>
                         <View style={styles.details}>
@@ -92,43 +93,46 @@ function VideoStyleScreen() {
 }
 
 const styles = StyleSheet.create({
+    list: {
+        gap: moderateScale(16),
+        paddingVertical: verticalScale(24),
+    },
     cardContainer: {
-        width: '100%',
-        height: 200,
+        width: '98%',
         margin: 'auto',
-        borderRadius: '5%',
         flexDirection: 'row',
-        gap: '4%',
-        paddingVertical: '5%',
-        paddingHorizontal: '1%',
+        borderRadius: moderateScale(24),
+        gap: horizontalScale(16),
+        paddingVertical: verticalScale(16),
+        paddingHorizontal: horizontalScale(16),
         backgroundColor: COLORS.eggWhite,
     },
     details: {
         justifyContent: 'space-between',
         alignItems: 'flex-end',
         width: '45%',
-        gap: '4%',
+        gap: verticalScale(4),
     },
     title: {
-        fontSize: TEXT.size.smallHeadline,
+        fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
     },
     description: {
-        fontSize: TEXT.size.default,
+        fontSize: moderateScale(TEXT.size.default),
     },
     estimatedTimeContainer: {
         flexDirection: 'row',
         alignContent: 'center',
-        gap: 4,
+        gap: horizontalScale(4),
     },
     icon: {
         alignSelf: 'center',
     },
     videoPlayerContainer: {
-        width: '45%',
-        height: '100%',
+        width: '50%',
+        aspectRatio: 1,
         backgroundColor: COLORS.primary,
-        borderRadius: 6,
+        borderRadius: moderateScale(8),
         overflow: 'hidden',
     },
     boxShadow: {

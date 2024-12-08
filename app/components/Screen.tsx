@@ -1,4 +1,5 @@
 import { COLORS } from '@config/colors';
+import { horizontalScale, verticalScale } from '@services/scale';
 import Constants from 'expo-constants';
 import { PropsWithChildren } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
@@ -13,9 +14,9 @@ function Screen({ children }: PropsWithChildren) {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingTop: 24 + Constants.statusBarHeight,
-        paddingBottom: 24,
-        paddingHorizontal: 20,
+        paddingTop: verticalScale(24) + Constants.statusBarHeight,
+        paddingBottom: verticalScale(24),
+        paddingHorizontal: horizontalScale(20),
         flex: 1,
         backgroundColor: COLORS.mainBackground,
     },

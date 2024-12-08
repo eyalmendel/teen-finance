@@ -11,6 +11,7 @@ import { translate } from '@services/language';
 import { setSelectedSubjectName } from '@services/state';
 import { TEXT } from '@config/text';
 import ScreenTitle from '@components/ScreenTitle';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -56,7 +57,7 @@ function SubjectsScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
     list: {
-        width: '95%',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
@@ -65,8 +66,9 @@ const styles = StyleSheet.create({
     cardContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: '48%',
-        borderRadius: '10%',
+        width: horizontalScale(160),
+        height: verticalScale(144),
+        borderRadius: moderateScale(8),
         margin: '2%',
         paddingHorizontal: '8%',
         paddingVertical: '8%',
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
         objectFit: 'contain',
     },
     label: {
-        fontSize: TEXT.size.default,
+        fontSize: moderateScale(TEXT.size.default),
         fontWeight: TEXT.weight.bold,
         textAlign: 'right',
     },

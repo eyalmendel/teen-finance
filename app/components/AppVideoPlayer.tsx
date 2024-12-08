@@ -1,5 +1,4 @@
 import { translate } from '@services/language';
-import { useEvent } from 'expo';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';

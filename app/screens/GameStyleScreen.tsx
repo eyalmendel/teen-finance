@@ -11,6 +11,7 @@ import { StringKey } from '@config/strings';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 
 function GameStyleScreen() {
     const [games, setGames] = useState<LearningUnit[]>([]);
@@ -43,6 +44,7 @@ function GameStyleScreen() {
             <FlatList
                 data={games}
                 keyExtractor={(game) => game.id.toString()}
+                contentContainerStyle={styles.list}
                 renderItem={({ item }) => (
                     <View style={[styles.cardContainer, styles.boxShadow]}>
                         <View style={styles.thumbnail}></View>
@@ -71,34 +73,37 @@ function GameStyleScreen() {
 }
 
 const styles = StyleSheet.create({
+    list: {
+        gap: moderateScale(16),
+        paddingVertical: verticalScale(24),
+    },
     cardContainer: {
-        width: '100%',
+        width: '98%',
         margin: 'auto',
-        borderRadius: '5%',
-        gap: '8%',
-        paddingVertical: '4%',
-        paddingHorizontal: '5%',
+        borderRadius: moderateScale(24),
+        gap: verticalScale(16),
+        paddingVertical: verticalScale(16),
+        paddingHorizontal: horizontalScale(16),
         backgroundColor: COLORS.eggWhite,
     },
     details: {
-        height: '30%',
-        gap: '8%',
+        gap: verticalScale(8),
         justifyContent: 'space-between',
     },
     title: {
-        fontSize: TEXT.size.smallHeadline,
+        fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
     },
     description: {
-        fontSize: TEXT.size.default,
+        fontSize: moderateScale(TEXT.size.default),
         fontWeight: TEXT.weight.regular,
         color: COLORS.primary,
     },
     thumbnail: {
-        height: '45%',
+        height: verticalScale(96),
         backgroundColor: COLORS.primary,
-        borderRadius: 5,
+        borderRadius: moderateScale(8),
     },
     boxShadow: {
         elevation: 4,

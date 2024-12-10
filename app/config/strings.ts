@@ -10,6 +10,7 @@ export const STRINGS = {
     readingStyleScreenTitle: 'לקרוא על {0}',
     gamingStyleScreenTitle: 'להתנסות ב{0}',
     watchingStyleScreenTitle: 'לצפות ב{0}',
+    listeningStyleScreenTitle: 'להקשיב ל{0}',
     read: 'לקרוא',
     watch: 'לצפות',
     listen: 'להקשיב',

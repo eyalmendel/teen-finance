@@ -1,11 +1,11 @@
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AudioStyleScreen from '@screens/AudioStyleScreen';
-import GameStyleScreen from '@screens/GameStyleScreen';
+import ListeningStyleScreen from '@screens/ListeningStyleScreen';
+import GamingStyleScreen from '@screens/GamingStyleScreen';
 import LearningStyleScreen from '@screens/LearningStyleScreen';
 import ReadingStyleScreen from '@screens/ReadingStyleScreen';
 import SubjectsScreen from '@screens/SubjectsScreen';
-import VideoStyleScreen from '@screens/VideoStyleScreen';
+import WatchingStyleScreen from '@screens/WatchingStyleScreen';
 import React from 'react';
 
 const Stack = createNativeStackNavigator<AppRoutesParamList>();
@@ -30,17 +30,17 @@ function AppNavigator() {
             ></Stack.Screen>
             <Stack.Screen
                 name={RouteNames.GAMING}
-                component={GameStyleScreen}
+                component={GamingStyleScreen}
                 options={{ headerShown: false }}
             ></Stack.Screen>
             <Stack.Screen
                 name={RouteNames.VIDEO}
-                component={VideoStyleScreen}
+                component={WatchingStyleScreen}
                 options={{ headerShown: false }}
             ></Stack.Screen>
             <Stack.Screen
                 name={RouteNames.AUDIO}
-                component={AudioStyleScreen}
+                component={ListeningStyleScreen}
                 options={{ headerShown: false }}
             ></Stack.Screen>
         </Stack.Navigator>

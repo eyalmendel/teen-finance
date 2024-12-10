@@ -14,7 +14,7 @@ import { TEXT } from '@config/text';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import EmptyState from '@components/EmptyState';
 
-function GameStyleScreen() {
+function GamingStyleScreen() {
     const [games, setGames] = useState<LearningUnit[]>([]);
 
     useEffect(() => {
@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default GameStyleScreen;
+export default GamingStyleScreen;

@@ -16,7 +16,7 @@ import { StringKey } from '@config/strings';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import EmptyState from '@components/EmptyState';
 
-function VideoStyleScreen() {
+function WatchingStyleScreen() {
     const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
 
     useEffect(() => {
@@ -152,4 +152,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default VideoStyleScreen;
+export default WatchingStyleScreen;

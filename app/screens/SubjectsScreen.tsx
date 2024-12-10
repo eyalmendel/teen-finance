@@ -1,14 +1,18 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
 
-import AppCard from '@components/AppCard';
 import Screen from '@components/Screen';
+import { COLORS } from '@config/colors';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { setSelectedSubjectName } from '@services/state';
+import { TEXT } from '@config/text';
+import ScreenTitle from '@components/ScreenTitle';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import EmptyState from '@components/EmptyState';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -31,42 +35,63 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <Text style={styles.title}>{translate('subjectsScreenTitle')}</Text>
-
-            <FlatList
-                data={subjects}
-                keyExtractor={(subject) => subject.id.toString()}
-                contentContainerStyle={styles.list}
-                renderItem={({ item }) => (
-                    <AppCard
-                        style={styles.cardContainer}
-                        label={translate(item.name)}
-                        onPress={() => handleSubjectSelection(item)}
-                    ></AppCard>
-                )}
-            ></FlatList>
+            <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
+            {subjects?.length === 0 ? (
+                <EmptyState />
+            ) : (
+                <FlatList
+                    data={subjects}
+                    keyExtractor={(subject) => subject.id.toString()}
+                    contentContainerStyle={styles.list}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <Pressable
+                            style={styles.cardContainer}
+                            onPress={() => handleSubjectSelection(item)}
+                        >
+                            <Image
+                                style={styles.image}
+                                source={item.icon}
+                            ></Image>
+                            <Text style={styles.label}>
+                                {translate(item.name)}
+                            </Text>
+                        </Pressable>
+                    )}
+                ></FlatList>
+            )}
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 18,
-        textAlign: 'center',
-    },
     list: {
-        display: 'flex',
-        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 24,
-        margin: 24,
     },
     cardContainer: {
-        width: 120,
-        height: 105,
-        borderRadius: 6,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: horizontalScale(160),
+        height: verticalScale(144),
+        borderRadius: moderateScale(8),
+        margin: '2%',
+        paddingHorizontal: '8%',
+        paddingVertical: '8%',
+        gap: '3%',
+        backgroundColor: COLORS.purple,
+    },
+    image: {
+        width: '30%',
+        objectFit: 'contain',
+    },
+    label: {
+        fontSize: moderateScale(TEXT.size.default),
+        fontWeight: TEXT.weight.bold,
+        textAlign: 'right',
     },
 });
 

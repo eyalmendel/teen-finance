@@ -1,37 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
+import AppVideoPlayer from '@components/AppVideoPlayer';
+import { MediaLearningUnit } from '@models/learning-unit';
+import { getVideoUnitsBySubjectName } from '@services/data';
 import Screen from '@components/Screen';
-import { StringKey } from '@config/strings';
-import { LearningUnit } from '@models/learning-unit';
-import { getReadingUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { getSelectedSubjectName } from '@services/state';
-import ScreenTitle from '@components/ScreenTitle';
 import { COLORS } from '@config/colors';
 import { TEXT } from '@config/text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { STYLES } from '@config/styles';
+import ScreenTitle from '@components/ScreenTitle';
+import { StringKey } from '@config/strings';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import EmptyState from '@components/EmptyState';
 
-function ReadingStyleScreen() {
-    const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
+function WatchingStyleScreen() {
+    const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
 
     useEffect(() => {
-        setUnits();
+        setVideoLearningUnits();
     }, []);
 
-    const setUnits = async (): Promise<void> => {
+    const setVideoLearningUnits = async (): Promise<void> => {
         const selectedSubjectName = getSelectedSubjectName();
 
         if (selectedSubjectName === null) {
             return;
         }
 
-        const units = getReadingUnitsBySubjectName(selectedSubjectName);
+        const videoUnits = getVideoUnitsBySubjectName(selectedSubjectName);
 
-        setLearningUnits(units);
+        setVideoUnits(videoUnits);
     };
 
     const getTitleParamValue = (): StringKey[] => {
@@ -43,16 +44,17 @@ function ReadingStyleScreen() {
         <Screen>
             <ScreenTitle
                 text={translate(
-                    'readingStyleScreenTitle',
+                    'watchingStyleScreenTitle',
                     getTitleParamValue(),
                 )}
             ></ScreenTitle>
-            {learningUnits?.length === 0 ? (
+
+            {videoUnits?.length === 0 ? (
                 <EmptyState />
             ) : (
                 <FlatList
-                    data={learningUnits}
-                    keyExtractor={(learningUnit) => learningUnit.id.toString()}
+                    data={videoUnits}
+                    keyExtractor={(video) => video.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
                         <View style={[styles.cardContainer, styles.boxShadow]}>
@@ -86,7 +88,11 @@ function ReadingStyleScreen() {
                                     />
                                 </View>
                             </View>
-                            <View style={styles.thumbnail}></View>
+                            <View style={styles.videoPlayerContainer}>
+                                <AppVideoPlayer
+                                    sourceUri={item.sourceUrl}
+                                ></AppVideoPlayer>
+                            </View>
                         </View>
                     )}
                 ></FlatList>
@@ -101,21 +107,20 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(24),
     },
     cardContainer: {
-        width: '90%',
+        width: '98%',
         margin: 'auto',
         flexDirection: 'row',
-        alignItems: 'center',
-        gap: horizontalScale(16),
         borderRadius: moderateScale(24),
-        paddingVertical: horizontalScale(16),
+        gap: horizontalScale(16),
+        paddingVertical: verticalScale(16),
         paddingHorizontal: horizontalScale(16),
         backgroundColor: COLORS.eggWhite,
     },
     details: {
         justifyContent: 'space-between',
         alignItems: 'flex-end',
-        width: '65%',
-        gap: verticalScale(8),
+        width: '45%',
+        gap: verticalScale(4),
     },
     title: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
@@ -132,11 +137,12 @@ const styles = StyleSheet.create({
     icon: {
         alignSelf: 'center',
     },
-    thumbnail: {
-        width: '30%',
+    videoPlayerContainer: {
+        width: '50%',
+        aspectRatio: 1,
         backgroundColor: COLORS.primary,
         borderRadius: moderateScale(8),
-        aspectRatio: 96 / 128,
+        overflow: 'hidden',
     },
     boxShadow: {
         elevation: 4,
@@ -146,4 +152,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ReadingStyleScreen;
+export default WatchingStyleScreen;

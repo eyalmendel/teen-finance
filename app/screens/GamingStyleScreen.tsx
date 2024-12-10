@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import Screen from '@components/Screen';
-import { StringKey } from '@config/strings';
 import { LearningUnit } from '@models/learning-unit';
-import { getReadingUnitsBySubjectName } from '@services/data';
+import { getGameUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { getSelectedSubjectName } from '@services/state';
 import ScreenTitle from '@components/ScreenTitle';
+import { StringKey } from '@config/strings';
 import { COLORS } from '@config/colors';
-import { TEXT } from '@config/text';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { STYLES } from '@config/styles';
+import { TEXT } from '@config/text';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import EmptyState from '@components/EmptyState';
 
-function ReadingStyleScreen() {
-    const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
+function GamingStyleScreen() {
+    const [games, setGames] = useState<LearningUnit[]>([]);
 
     useEffect(() => {
-        setUnits();
+        setLearningGames();
     }, []);
 
-    const setUnits = async (): Promise<void> => {
+    const setLearningGames = async (): Promise<void> => {
         const selectedSubjectName = getSelectedSubjectName();
 
         if (selectedSubjectName === null) {
             return;
         }
 
-        const units = getReadingUnitsBySubjectName(selectedSubjectName);
-
-        setLearningUnits(units);
+        const games = getGameUnitsBySubjectName(selectedSubjectName);
+        setGames(games);
     };
 
     const getTitleParamValue = (): StringKey[] => {
@@ -42,20 +40,18 @@ function ReadingStyleScreen() {
     return (
         <Screen>
             <ScreenTitle
-                text={translate(
-                    'readingStyleScreenTitle',
-                    getTitleParamValue(),
-                )}
+                text={translate('gamingStyleScreenTitle', getTitleParamValue())}
             ></ScreenTitle>
-            {learningUnits?.length === 0 ? (
+            {games?.length === 0 ? (
                 <EmptyState />
             ) : (
                 <FlatList
-                    data={learningUnits}
-                    keyExtractor={(learningUnit) => learningUnit.id.toString()}
+                    data={games}
+                    keyExtractor={(game) => game.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
                         <View style={[styles.cardContainer, styles.boxShadow]}>
+                            <View style={styles.thumbnail}></View>
                             <View style={styles.details}>
                                 <Text
                                     style={[
@@ -75,18 +71,7 @@ function ReadingStyleScreen() {
                                         {translate(item.description)}
                                     </Text>
                                 )}
-                                <View style={styles.estimatedTimeContainer}>
-                                    <Text>{`${item.estimatedTime} ${translate(
-                                        'minutes',
-                                    )}`}</Text>
-                                    <MaterialCommunityIcons
-                                        style={styles.icon}
-                                        name="clock-outline"
-                                        color={COLORS.primary}
-                                    />
-                                </View>
                             </View>
-                            <View style={styles.thumbnail}></View>
                         </View>
                     )}
                 ></FlatList>
@@ -101,42 +86,32 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(24),
     },
     cardContainer: {
-        width: '90%',
+        width: '98%',
         margin: 'auto',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: horizontalScale(16),
         borderRadius: moderateScale(24),
-        paddingVertical: horizontalScale(16),
+        gap: verticalScale(16),
+        paddingVertical: verticalScale(16),
         paddingHorizontal: horizontalScale(16),
         backgroundColor: COLORS.eggWhite,
     },
     details: {
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        width: '65%',
         gap: verticalScale(8),
+        justifyContent: 'space-between',
     },
     title: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
+        color: COLORS.primary,
     },
     description: {
         fontSize: moderateScale(TEXT.size.default),
-    },
-    estimatedTimeContainer: {
-        flexDirection: 'row',
-        alignContent: 'center',
-        gap: horizontalScale(4),
-    },
-    icon: {
-        alignSelf: 'center',
+        fontWeight: TEXT.weight.regular,
+        color: COLORS.primary,
     },
     thumbnail: {
-        width: '30%',
+        height: verticalScale(96),
         backgroundColor: COLORS.primary,
         borderRadius: moderateScale(8),
-        aspectRatio: 96 / 128,
     },
     boxShadow: {
         elevation: 4,
@@ -146,4 +121,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ReadingStyleScreen;
+export default GamingStyleScreen;

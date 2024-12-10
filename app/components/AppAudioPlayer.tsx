@@ -1,7 +1,10 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
-import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, View, ViewStyle } from 'react-native';
+
+import { COLORS } from '@config/colors';
+import { horizontalScale } from '@services/scale';
 
 type Props = {
     sourceUri: string;
@@ -9,53 +12,59 @@ type Props = {
 };
 
 function AppAudioPlayer({ sourceUri, style }: Props) {
-    const [audio, setAudio] = useState<Audio.Sound | null>(null);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const { current: sound } = useRef(new Audio.Sound());
 
     useEffect(() => {
-        let cleanupCallback;
+        loadTrack();
+        return () => {
+            sound ? sound.unloadAsync() : null;
+        };
+    }, []);
 
-        if (audio !== null) {
-            cleanupCallback = () => {
-                audio.unloadAsync();
-            };
+    const loadTrack = async (): Promise<void> => {
+        await sound.loadAsync({ uri: sourceUri });
+    };
+
+    async function handlePress() {
+        if (isPlaying) {
+            await sound.pauseAsync();
+        } else {
+            await sound.playAsync();
         }
-        return cleanupCallback;
-    }, [audio]);
 
-    const play = async (): Promise<void> => {};
+        setIsPlaying(!isPlaying);
+    }
 
-    const pause = async (): Promise<void> => {};
+    useEffect(() => {
+        return sound
+            ? () => {
+                  sound.unloadAsync();
+              }
+            : undefined;
+    }, [sound]);
 
     return (
-        <View style={[styles.container, style]}>
-            <Pressable style={styles.button} onPress={play}>
-                <MaterialIcons
-                    name="play-arrow"
-                    size={24}
-                    maxFontSizeMultiplier={2}
-                    allowFontScaling
-                    adjustsFontSizeToFit
-                ></MaterialIcons>
-            </Pressable>
-        </View>
+        <Pressable style={[styles.container, style]} onPress={handlePress}>
+            <MaterialIcons
+                name={isPlaying ? 'pause' : 'play-arrow'}
+                size={horizontalScale(30)}
+                color={COLORS.white}
+                style={styles.playIcon}
+            ></MaterialIcons>
+        </Pressable>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        width: '100%',
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderRadius: 6,
+        backgroundColor: COLORS.primary,
     },
-
-    button: {
-        width: '25%',
-        height: '25%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+    playIcon: {},
 });
 
 export default AppAudioPlayer;

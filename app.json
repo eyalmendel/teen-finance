@@ -19,24 +19,18 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {
-    //   "adaptiveIcon": {
-    //     "foregroundImage": "./assets/icons/logo.png",
-    //     "backgroundColor": "#ff0000"
-    //   }
-    },
+    "android": {},
     "web": {
       "favicon": "./assets/icons/logo.png"
     },
-    
     "plugins": [
-        [
-            "expo-video",
-            {
-              "supportsBackgroundPlayback": false,
-              "supportsPictureInPicture": true
-            }
-        ]
+      [
+        "expo-video",
+        {
+          "supportsBackgroundPlayback": false,
+          "supportsPictureInPicture": true
+        }
+      ]
     ]
   }
 }

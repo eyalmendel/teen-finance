@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 import AppAudioPlayer from '@components/AppAudioPlayer';
-import Screen from '@components/Screen';
-import { MediaLearningUnit } from '@models/learning-unit';
-import { getAudioUnitsBySubjectName } from '@services/data';
-import { translate } from '@services/language';
-import { getSelectedSubjectName } from '@services/state';
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import ScreenTitle from '@components/ScreenTitle';
-import { StringKey } from '@config/strings';
 import EmptyState from '@components/EmptyState';
+import Screen from '@components/Screen';
+import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MediaLearningUnit } from '@models/learning-unit';
+import { getAudioUnitsBySubjectName } from '@services/data';
+import { translate } from '@services/language';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { getSelectedSubjectName } from '@services/state';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
@@ -34,19 +33,9 @@ function ListeningStyleScreen() {
         setAudioUnits(audioUnits);
     };
 
-    const getTitleParamValue = (): StringKey[] => {
-        const selectedSubjectName = getSelectedSubjectName();
-        return selectedSubjectName !== null ? [selectedSubjectName] : [];
-    };
-
     return (
         <Screen>
-            <ScreenTitle
-                text={translate(
-                    'listeningStyleScreenTitle',
-                    getTitleParamValue(),
-                )}
-            ></ScreenTitle>
+            <SubjectScreenTitle template="listeningStyleScreenTitle" />
 
             {audioUnits?.length === 0 ? (
                 <EmptyState />

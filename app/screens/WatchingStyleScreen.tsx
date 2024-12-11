@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import AppVideoPlayer from '@components/AppVideoPlayer';
-import { MediaLearningUnit } from '@models/learning-unit';
-import { getVideoUnitsBySubjectName } from '@services/data';
+import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
-import { translate } from '@services/language';
-import { getSelectedSubjectName } from '@services/state';
+import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
+import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { STYLES } from '@config/styles';
-import ScreenTitle from '@components/ScreenTitle';
-import { StringKey } from '@config/strings';
+import { MediaLearningUnit } from '@models/learning-unit';
+import { getVideoUnitsBySubjectName } from '@services/data';
+import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import EmptyState from '@components/EmptyState';
+import { getSelectedSubjectName } from '@services/state';
 
 function WatchingStyleScreen() {
     const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
@@ -35,20 +34,9 @@ function WatchingStyleScreen() {
         setVideoUnits(videoUnits);
     };
 
-    const getTitleParamValue = (): StringKey[] => {
-        const selectedSubjectName = getSelectedSubjectName();
-        return selectedSubjectName !== null ? [selectedSubjectName] : [];
-    };
-
     return (
         <Screen>
-            <ScreenTitle
-                text={translate(
-                    'watchingStyleScreenTitle',
-                    getTitleParamValue(),
-                )}
-            ></ScreenTitle>
-
+            <SubjectScreenTitle template="watchingStyleScreenTitle" />
             {videoUnits?.length === 0 ? (
                 <EmptyState />
             ) : (

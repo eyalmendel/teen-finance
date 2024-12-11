@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
+import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
-import { StringKey } from '@config/strings';
+import SubjectScreenTitle from '@components/SubjectScreenTitle';
+import { COLORS } from '@config/colors';
+import { STYLES } from '@config/styles';
+import { TEXT } from '@config/text';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LearningUnit } from '@models/learning-unit';
 import { getReadingUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
-import { getSelectedSubjectName } from '@services/state';
-import ScreenTitle from '@components/ScreenTitle';
-import { COLORS } from '@config/colors';
-import { TEXT } from '@config/text';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { STYLES } from '@config/styles';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import EmptyState from '@components/EmptyState';
+import { getSelectedSubjectName } from '@services/state';
 
 function ReadingStyleScreen() {
     const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
@@ -34,19 +33,9 @@ function ReadingStyleScreen() {
         setLearningUnits(units);
     };
 
-    const getTitleParamValue = (): StringKey[] => {
-        const selectedSubjectName = getSelectedSubjectName();
-        return selectedSubjectName !== null ? [selectedSubjectName] : [];
-    };
-
     return (
         <Screen>
-            <ScreenTitle
-                text={translate(
-                    'readingStyleScreenTitle',
-                    getTitleParamValue(),
-                )}
-            ></ScreenTitle>
+            <SubjectScreenTitle template="readingStyleScreenTitle" />
             {learningUnits?.length === 0 ? (
                 <EmptyState />
             ) : (

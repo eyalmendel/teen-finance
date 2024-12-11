@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
+import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
-import { LearningUnit } from '@models/learning-unit';
-import { getGameUnitsBySubjectName } from '@services/data';
-import { translate } from '@services/language';
-import { getSelectedSubjectName } from '@services/state';
-import ScreenTitle from '@components/ScreenTitle';
-import { StringKey } from '@config/strings';
+import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
+import { LearningUnit } from '@models/learning-unit';
+import { getGameUnitsBySubjectName } from '@services/data';
+import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import EmptyState from '@components/EmptyState';
+import { getSelectedSubjectName } from '@services/state';
 
 function GamingStyleScreen() {
     const [games, setGames] = useState<LearningUnit[]>([]);
@@ -32,16 +31,9 @@ function GamingStyleScreen() {
         setGames(games);
     };
 
-    const getTitleParamValue = (): StringKey[] => {
-        const selectedSubjectName = getSelectedSubjectName();
-        return selectedSubjectName !== null ? [selectedSubjectName] : [];
-    };
-
     return (
         <Screen>
-            <ScreenTitle
-                text={translate('gamingStyleScreenTitle', getTitleParamValue())}
-            ></ScreenTitle>
+            <SubjectScreenTitle template="gamingStyleScreenTitle" />
             {games?.length === 0 ? (
                 <EmptyState />
             ) : (

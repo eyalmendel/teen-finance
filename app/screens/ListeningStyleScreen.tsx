@@ -57,17 +57,12 @@ function ListeningStyleScreen() {
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
                         <View style={[styles.cardContainer, styles.boxShadow]}>
-                            <View style={styles.titleContainer}>
-                                <Text
-                                    style={[
-                                        styles.title,
-                                        STYLES.rightAlignedText,
-                                    ]}
-                                >
-                                    {translate(item.title)}
-                                </Text>
-                                <Image style={styles.thumbnail} />
-                            </View>
+                            <Text
+                                style={[styles.title, STYLES.rightAlignedText]}
+                            >
+                                {translate(item.title)}
+                            </Text>
+
                             {item.description && (
                                 <Text
                                     style={[
@@ -121,22 +116,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 10,
     },
-    titleContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'baseline',
-        gap: moderateScale(8),
-        marginBlockEnd: verticalScale(8),
-    },
     title: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
-    },
-    thumbnail: {
-        width: horizontalScale(40),
-        height: verticalScale(40),
-        borderRadius: moderateScale(8),
-        backgroundColor: COLORS.primary,
+        marginBlockEnd: verticalScale(8),
     },
     description: {
         fontSize: moderateScale(TEXT.size.default),

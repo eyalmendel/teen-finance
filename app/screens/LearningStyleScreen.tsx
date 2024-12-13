@@ -1,15 +1,16 @@
 import React from 'react';
-import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
+import { FlatList, Image, StyleSheet, Text } from 'react-native';
 
-import { LearningStyle } from '@models/learning-style';
-import { translate } from '@services/language';
+import AppCard from '@components/AppCard';
 import Screen from '@components/Screen';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import ScreenTitle from '@components/ScreenTitle';
+import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { TEXT } from '@config/text';
-import { COLORS } from '@config/colors';
-import ScreenTitle from '@components/ScreenTitle';
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { LearningStyle } from '@models/learning-style';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { translate } from '@services/language';
+import { moderateScale, verticalScale } from '@services/scale';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -58,13 +59,20 @@ function LearningStyleScreen({ navigation }: Props) {
                 keyExtractor={(style) => style.id.toString()}
                 contentContainerStyle={styles.list}
                 renderItem={({ item }) => (
-                    <Pressable
-                        style={[styles.cardContainer, styles.boxShadow]}
+                    <AppCard
+                        style={styles.cardContainer}
                         onPress={() => handleStyleSelection(item.screen)}
                     >
-                        <Image style={styles.image} source={item.icon}></Image>
-                        <Text style={styles.label}>{translate(item.name)}</Text>
-                    </Pressable>
+                        <>
+                            <Image
+                                style={styles.image}
+                                source={item.icon}
+                            ></Image>
+                            <Text style={styles.label}>
+                                {translate(item.name)}
+                            </Text>
+                        </>
+                    </AppCard>
                 )}
             ></FlatList>
         </Screen>
@@ -80,16 +88,10 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(24),
     },
     cardContainer: {
-        width: '100%',
-        margin: 'auto',
-        borderRadius: moderateScale(24),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         gap: moderateScale(48),
-        paddingVertical: verticalScale(24),
-        paddingHorizontal: horizontalScale(24),
-        backgroundColor: COLORS.eggWhite,
     },
     boxShadow: {
         elevation: verticalScale(4),

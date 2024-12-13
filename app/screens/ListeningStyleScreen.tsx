@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import AppAudioPlayer from '@components/AppAudioPlayer';
+import AppCard from '@components/AppCard';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
@@ -45,40 +46,45 @@ function ListeningStyleScreen() {
                     keyExtractor={(audio) => audio.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
-                        <View style={[styles.cardContainer, styles.boxShadow]}>
-                            <Text
-                                style={[styles.title, STYLES.rightAlignedText]}
-                            >
-                                {translate(item.title)}
-                            </Text>
-
-                            {item.description && (
+                        <AppCard style={styles.cardContainer}>
+                            <>
                                 <Text
                                     style={[
-                                        styles.description,
+                                        styles.title,
                                         STYLES.rightAlignedText,
                                     ]}
                                 >
-                                    {translate(item.description)}
+                                    {translate(item.title)}
                                 </Text>
-                            )}
-                            <View style={styles.estimatedTimeContainer}>
-                                <Text>{`${item.estimatedTime} ${translate(
-                                    'minutes',
-                                )}`}</Text>
-                                <MaterialCommunityIcons
-                                    style={styles.icon}
-                                    name="clock-outline"
-                                    color={COLORS.primary}
-                                />
-                            </View>
-                            <View style={styles.controlsContainer}>
-                                <AppAudioPlayer
-                                    sourceUri={item.sourceUrl}
-                                    style={styles.playerContainer}
-                                ></AppAudioPlayer>
-                            </View>
-                        </View>
+
+                                {item.description && (
+                                    <Text
+                                        style={[
+                                            styles.description,
+                                            STYLES.rightAlignedText,
+                                        ]}
+                                    >
+                                        {translate(item.description)}
+                                    </Text>
+                                )}
+                                <View style={styles.estimatedTimeContainer}>
+                                    <Text>{`${item.estimatedTime} ${translate(
+                                        'minutes',
+                                    )}`}</Text>
+                                    <MaterialCommunityIcons
+                                        style={styles.icon}
+                                        name="clock-outline"
+                                        color={COLORS.primary}
+                                    />
+                                </View>
+                                <View style={styles.controlsContainer}>
+                                    <AppAudioPlayer
+                                        sourceUri={item.sourceUrl}
+                                        style={styles.playerContainer}
+                                    ></AppAudioPlayer>
+                                </View>
+                            </>
+                        </AppCard>
                     )}
                 ></FlatList>
             )}
@@ -93,11 +99,6 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         width: '98%',
-        margin: 'auto',
-        borderRadius: moderateScale(24),
-        paddingVertical: verticalScale(16),
-        paddingHorizontal: horizontalScale(16),
-        backgroundColor: COLORS.eggWhite,
     },
     boxShadow: {
         elevation: 4,

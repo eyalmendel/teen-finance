@@ -12,6 +12,7 @@ import { getGameUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import AppCard from '@components/AppCard';
 
 function GamingStyleScreen() {
     const [games, setGames] = useState<LearningUnit[]>([]);
@@ -42,29 +43,31 @@ function GamingStyleScreen() {
                     keyExtractor={(game) => game.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
-                        <View style={[styles.cardContainer, styles.boxShadow]}>
-                            <View style={styles.thumbnail}></View>
-                            <View style={styles.details}>
-                                <Text
-                                    style={[
-                                        styles.title,
-                                        STYLES.rightAlignedText,
-                                    ]}
-                                >
-                                    {translate(item.title)}
-                                </Text>
-                                {item.description && (
+                        <AppCard style={styles.cardContainer}>
+                            <>
+                                <View style={styles.thumbnail}></View>
+                                <View style={styles.details}>
                                     <Text
                                         style={[
-                                            styles.description,
+                                            styles.title,
                                             STYLES.rightAlignedText,
                                         ]}
                                     >
-                                        {translate(item.description)}
+                                        {translate(item.title)}
                                     </Text>
-                                )}
-                            </View>
-                        </View>
+                                    {item.description && (
+                                        <Text
+                                            style={[
+                                                styles.description,
+                                                STYLES.rightAlignedText,
+                                            ]}
+                                        >
+                                            {translate(item.description)}
+                                        </Text>
+                                    )}
+                                </View>
+                            </>
+                        </AppCard>
                     )}
                 ></FlatList>
             )}
@@ -79,12 +82,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         width: '98%',
-        margin: 'auto',
-        borderRadius: moderateScale(24),
         gap: verticalScale(16),
-        paddingVertical: verticalScale(16),
-        paddingHorizontal: horizontalScale(16),
-        backgroundColor: COLORS.eggWhite,
     },
     details: {
         gap: verticalScale(8),

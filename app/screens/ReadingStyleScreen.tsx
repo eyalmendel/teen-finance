@@ -13,6 +13,7 @@ import { getReadingUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import AppCard from '@components/AppCard';
 
 function ReadingStyleScreen() {
     const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
@@ -44,39 +45,41 @@ function ReadingStyleScreen() {
                     keyExtractor={(learningUnit) => learningUnit.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
-                        <View style={[styles.cardContainer, styles.boxShadow]}>
-                            <View style={styles.details}>
-                                <Text
-                                    style={[
-                                        styles.title,
-                                        STYLES.rightAlignedText,
-                                    ]}
-                                >
-                                    {translate(item.title)}
-                                </Text>
-                                {item.description && (
+                        <AppCard style={styles.cardContainer}>
+                            <>
+                                <View style={styles.details}>
                                     <Text
                                         style={[
-                                            styles.description,
+                                            styles.title,
                                             STYLES.rightAlignedText,
                                         ]}
                                     >
-                                        {translate(item.description)}
+                                        {translate(item.title)}
                                     </Text>
-                                )}
-                                <View style={styles.estimatedTimeContainer}>
-                                    <Text>{`${item.estimatedTime} ${translate(
-                                        'minutes',
-                                    )}`}</Text>
-                                    <MaterialCommunityIcons
-                                        style={styles.icon}
-                                        name="clock-outline"
-                                        color={COLORS.primary}
-                                    />
+                                    {item.description && (
+                                        <Text
+                                            style={[
+                                                styles.description,
+                                                STYLES.rightAlignedText,
+                                            ]}
+                                        >
+                                            {translate(item.description)}
+                                        </Text>
+                                    )}
+                                    <View style={styles.estimatedTimeContainer}>
+                                        <Text>{`${
+                                            item.estimatedTime
+                                        } ${translate('minutes')}`}</Text>
+                                        <MaterialCommunityIcons
+                                            style={styles.icon}
+                                            name="clock-outline"
+                                            color={COLORS.primary}
+                                        />
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.thumbnail}></View>
-                        </View>
+                                <View style={styles.thumbnail}></View>
+                            </>
+                        </AppCard>
                     )}
                 ></FlatList>
             )}
@@ -90,15 +93,10 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(24),
     },
     cardContainer: {
-        width: '90%',
-        margin: 'auto',
+        width: '95%',
         flexDirection: 'row',
         alignItems: 'center',
         gap: horizontalScale(16),
-        borderRadius: moderateScale(24),
-        paddingVertical: horizontalScale(16),
-        paddingHorizontal: horizontalScale(16),
-        backgroundColor: COLORS.eggWhite,
     },
     details: {
         justifyContent: 'space-between',

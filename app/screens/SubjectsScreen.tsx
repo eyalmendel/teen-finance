@@ -1,18 +1,25 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
+import {
+    FlatList,
+    Image,
+    ImageBackground,
+    Pressable,
+    StyleSheet,
+    Text,
+} from 'react-native';
 
+import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
+import ScreenTitle from '@components/ScreenTitle';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
+import { TEXT } from '@config/text';
 import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
-import { setSelectedSubjectName } from '@services/state';
-import { TEXT } from '@config/text';
-import ScreenTitle from '@components/ScreenTitle';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import EmptyState from '@components/EmptyState';
+import { setSelectedSubjectName } from '@services/state';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -46,7 +53,10 @@ function SubjectsScreen({ navigation }: Props) {
                     numColumns={2}
                     renderItem={({ item }) => (
                         <Pressable
-                            style={styles.cardContainer}
+                            style={[
+                                styles.cardContainer,
+                                !item.isAvailable ? styles.unavailable : '',
+                            ]}
                             onPress={() => handleSubjectSelection(item)}
                         >
                             <Image
@@ -83,6 +93,14 @@ const styles = StyleSheet.create({
         paddingVertical: '8%',
         gap: '3%',
         backgroundColor: COLORS.purple,
+    },
+    unavailable: {
+        opacity: 0.5,
+        pointerEvents: 'none',
+    },
+    unavailableBackground: {
+        width: '100%',
+        height: '100%',
     },
     image: {
         width: '30%',

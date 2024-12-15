@@ -1,5 +1,7 @@
 import { StringKey } from '@config/strings';
+import { Article } from '@models/article';
 import { LearningUnit, MediaLearningUnit } from '@models/learning-unit';
+import { ARTICLE_CONTENT } from 'app/mocks/article-content';
 import { Subject } from 'app/models/subject';
 
 export const getSubjects = (): Subject[] => {
@@ -71,9 +73,9 @@ export const getGameUnitsBySubjectName = (
     ];
 };
 
-export const getReadingUnitsBySubjectName = (
+export const getArticlesBySubjectName = (
     subjectName: StringKey | null,
-): LearningUnit[] => {
+): Article[] => {
     return [
         {
             id: 0,
@@ -82,6 +84,15 @@ export const getReadingUnitsBySubjectName = (
             description: 'The meaning of each section',
             estimatedTime: 8,
             thumbnailUrl: '@assets/icons/reading-style.png',
+            author: {
+                name: 'מערכת',
+                icon: require('@assets/icons/logo.png'),
+            },
+            lastUpdated: new Date().toLocaleString('default', {
+                month: 'short',
+                year: 'numeric',
+            }),
+            content: ARTICLE_CONTENT,
         },
         {
             id: 1,
@@ -90,6 +101,15 @@ export const getReadingUnitsBySubjectName = (
             description: '10 tips for quick review',
             estimatedTime: 8,
             thumbnailUrl: '@assets/icons/reading-style.png',
+            author: {
+                name: 'מערכת',
+                icon: require('@assets/icons/logo.png'),
+            },
+            lastUpdated: new Date().toLocaleString('default', {
+                month: 'short',
+                year: 'numeric',
+            }),
+            content: ARTICLE_CONTENT,
         },
         {
             id: 2,
@@ -98,6 +118,15 @@ export const getReadingUnitsBySubjectName = (
             description: 'Issues in the paycheck and how to handle it',
             estimatedTime: 8,
             thumbnailUrl: '@assets/icons/reading-style.png',
+            author: {
+                name: 'מערכת',
+                icon: require('@assets/icons/logo.png'),
+            },
+            lastUpdated: new Date().toLocaleString('default', {
+                month: 'short',
+                year: 'numeric',
+            }),
+            content: ARTICLE_CONTENT,
         },
         {
             id: 3,
@@ -106,6 +135,15 @@ export const getReadingUnitsBySubjectName = (
             description: 'Issues in the paycheck and how to handle it',
             estimatedTime: 8,
             thumbnailUrl: '@assets/icons/reading-style.png',
+            author: {
+                name: 'מערכת',
+                icon: require('@assets/icons/logo.png'),
+            },
+            lastUpdated: new Date().toLocaleString('default', {
+                month: 'short',
+                year: 'numeric',
+            }),
+            content: ARTICLE_CONTENT,
         },
     ];
 };

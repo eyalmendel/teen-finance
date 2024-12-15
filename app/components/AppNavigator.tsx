@@ -7,6 +7,7 @@ import ReadingStyleScreen from '@screens/ReadingStyleScreen';
 import SubjectsScreen from '@screens/SubjectsScreen';
 import WatchingStyleScreen from '@screens/WatchingStyleScreen';
 import React from 'react';
+import ArticleScreen from '@screens/ArticleScreen';
 
 const Stack = createNativeStackNavigator<AppRoutesParamList>();
 
@@ -41,6 +42,11 @@ function AppNavigator() {
             <Stack.Screen
                 name={RouteNames.AUDIO}
                 component={ListeningStyleScreen}
+                options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+                name={RouteNames.ARTICLE}
+                component={ArticleScreen}
                 options={{ headerShown: false }}
             ></Stack.Screen>
         </Stack.Navigator>

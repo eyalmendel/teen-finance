@@ -3,12 +3,12 @@ import {
     GestureResponderEvent,
     Pressable,
     StyleSheet,
-    View,
     ViewStyle,
 } from 'react-native';
 
 import { COLORS } from '@config/colors';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { STYLES } from '@config/styles';
 
 export type Props = {
     style: ViewStyle;
@@ -19,7 +19,7 @@ export type Props = {
 function AppCard({ style, children, onPress }: Props) {
     return (
         <Pressable
-            style={[styles.container, styles.boxShadow, style]}
+            style={[styles.container, STYLES.boxShadow, style]}
             onPress={onPress}
         >
             {children}
@@ -35,12 +35,6 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(16),
         paddingHorizontal: horizontalScale(16),
         backgroundColor: COLORS.eggWhite,
-    },
-    boxShadow: {
-        elevation: 4,
-        shadowColor: COLORS.primary,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 10,
     },
 });
 

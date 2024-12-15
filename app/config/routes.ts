@@ -1,3 +1,5 @@
+import { Article } from '@models/article';
+
 export enum RouteNames {
     SUBJECTS = 'Subjects',
     LEARNING_STYLE = 'Learning Style',
@@ -5,6 +7,7 @@ export enum RouteNames {
     GAMING = 'Gaming',
     AUDIO = 'Audio',
     VIDEO = 'Video',
+    ARTICLE = 'Article',
 }
 
 export type AppRoutesParamList = {
@@ -14,4 +17,7 @@ export type AppRoutesParamList = {
     [RouteNames.GAMING]: undefined;
     [RouteNames.AUDIO]: undefined;
     [RouteNames.VIDEO]: undefined;
+    [RouteNames.ARTICLE]: {
+        article: Article;
+    };
 };

@@ -2,14 +2,15 @@ import { COLORS } from '@config/colors';
 import { TEXT } from '@config/text';
 import { moderateScale, verticalScale } from '@services/scale';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TextStyle } from 'react-native';
 
 export type Props = {
     text: string;
+    style?: TextStyle;
 };
 
-function ScreenTitle({ text }: Props) {
-    return <Text style={styles.text}>{text}</Text>;
+function ScreenTitle({ text, style }: Props) {
+    return <Text style={[styles.text, style]}>{text}</Text>;
 }
 
 const styles = StyleSheet.create({

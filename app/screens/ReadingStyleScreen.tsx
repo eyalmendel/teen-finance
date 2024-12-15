@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
+import AppCard from '@components/AppCard';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
@@ -8,44 +9,54 @@ import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { LearningUnit } from '@models/learning-unit';
-import { getReadingUnitsBySubjectName } from '@services/data';
+import { Article } from '@models/article';
+import { getArticlesBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import AppCard from '@components/AppCard';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
 
-function ReadingStyleScreen() {
-    const [learningUnits, setLearningUnits] = useState<LearningUnit[]>([]);
+type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.READING>;
+
+function ReadingStyleScreen({ navigation }: Props) {
+    const [articles, setArticles] = useState<Article[]>([]);
 
     useEffect(() => {
-        setUnits();
+        loadArticles();
     }, []);
 
-    const setUnits = async (): Promise<void> => {
+    const loadArticles = async (): Promise<void> => {
         const selectedSubjectName = getSelectedSubjectName();
 
         if (selectedSubjectName === null) {
             return;
         }
 
-        const units = getReadingUnitsBySubjectName(selectedSubjectName);
+        const articles = getArticlesBySubjectName(selectedSubjectName);
 
-        setLearningUnits(units);
+        setArticles(articles);
     };
 
     return (
         <Screen>
             <SubjectScreenTitle template="readingStyleScreenTitle" />
-            {learningUnits?.length === 0 ? (
+            {articles?.length === 0 ? (
                 <EmptyState />
             ) : (
                 <FlatList
-                    data={learningUnits}
+                    data={articles}
                     keyExtractor={(learningUnit) => learningUnit.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
-                        <AppCard style={styles.cardContainer}>
+                        <AppCard
+                            style={styles.cardContainer}
+                            onPress={() =>
+                                navigation.navigate(RouteNames.ARTICLE, {
+                                    article: item,
+                                })
+                            }
+                        >
                             <>
                                 <View style={styles.details}>
                                     <Text

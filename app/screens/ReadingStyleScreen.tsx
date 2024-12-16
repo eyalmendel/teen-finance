@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 import AppCard from '@components/AppCard';
 import EmptyState from '@components/EmptyState';
@@ -88,7 +88,11 @@ function ReadingStyleScreen({ navigation }: Props) {
                                         />
                                     </View>
                                 </View>
-                                <View style={styles.thumbnail}></View>
+                                <Image
+                                    style={styles.thumbnail}
+                                    source={item.thumbnail}
+                                    resizeMode="contain"
+                                />
                             </>
                         </AppCard>
                     )}
@@ -132,7 +136,6 @@ const styles = StyleSheet.create({
     },
     thumbnail: {
         width: '30%',
-        backgroundColor: COLORS.primary,
         borderRadius: moderateScale(8),
         aspectRatio: 96 / 128,
     },

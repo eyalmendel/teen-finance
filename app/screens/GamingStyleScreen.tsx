@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
@@ -45,7 +45,11 @@ function GamingStyleScreen() {
                     renderItem={({ item }) => (
                         <AppCard style={styles.cardContainer}>
                             <>
-                                <View style={styles.thumbnail}></View>
+                                <Image
+                                    style={styles.thumbnail}
+                                    source={item.thumbnail}
+                                    resizeMode="contain"
+                                />
                                 <View style={styles.details}>
                                     <Text
                                         style={[
@@ -100,8 +104,9 @@ const styles = StyleSheet.create({
     },
     thumbnail: {
         height: verticalScale(96),
-        backgroundColor: COLORS.primary,
+        width: '100%',
         borderRadius: moderateScale(8),
+        overflow: 'hidden',
     },
     boxShadow: {
         elevation: 4,

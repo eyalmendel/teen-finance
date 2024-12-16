@@ -1,10 +1,11 @@
 import { StringKey } from '@config/strings';
+import { ImageSourcePropType } from 'react-native';
 
 export type LearningUnit = {
     id: number;
     subject: StringKey;
     title: StringKey;
-    thumbnailUrl: string;
+    thumbnail: ImageSourcePropType;
     estimatedTime?: number;
     description?: StringKey;
 };

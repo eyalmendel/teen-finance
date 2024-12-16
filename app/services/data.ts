@@ -54,21 +54,21 @@ export const getGameUnitsBySubjectName = (
             subject: 'paycheck',
             title: 'The Big Riddle',
             description: '10 trivia questions about your paycheck',
-            thumbnailUrl: '@assets/icons/playing-style.png',
+            thumbnail: require('@assets/icons/playing-style.png'),
         },
         {
             id: 1,
             subject: 'paycheck',
             title: 'Find the Error',
             description: 'Not here.. in the paycheck!',
-            thumbnailUrl: '@assets/icons/playing-style.png',
+            thumbnail: require('@assets/icons/playing-style.png'),
         },
         {
             id: 2,
             subject: 'paycheck',
             title: "What's Missing?",
             description: 'Except your employee bonus',
-            thumbnailUrl: '@assets/icons/playing-style.png',
+            thumbnail: require('@assets/icons/playing-style.png'),
         },
     ];
 };
@@ -83,7 +83,7 @@ export const getArticlesBySubjectName = (
             title: 'Paycheck Structure Explanation',
             description: 'The meaning of each section',
             estimatedTime: 8,
-            thumbnailUrl: '@assets/icons/reading-style.png',
+            thumbnail: require('@assets/icons/reading-style.png'),
             author: {
                 name: 'מערכת',
                 icon: require('@assets/icons/logo.png'),
@@ -100,7 +100,7 @@ export const getArticlesBySubjectName = (
             title: "Paycheck Day Arrived. What's next?",
             description: '10 tips for quick review',
             estimatedTime: 8,
-            thumbnailUrl: '@assets/icons/reading-style.png',
+            thumbnail: require('@assets/icons/reading-style.png'),
             author: {
                 name: 'מערכת',
                 icon: require('@assets/icons/logo.png'),
@@ -117,7 +117,7 @@ export const getArticlesBySubjectName = (
             title: 'What to do if the Paycheck is Broken?',
             description: 'Issues in the paycheck and how to handle it',
             estimatedTime: 8,
-            thumbnailUrl: '@assets/icons/reading-style.png',
+            thumbnail: require('@assets/icons/reading-style.png'),
             author: {
                 name: 'מערכת',
                 icon: require('@assets/icons/logo.png'),
@@ -134,7 +134,7 @@ export const getArticlesBySubjectName = (
             title: 'What to do if the Paycheck is Broken?',
             description: 'Issues in the paycheck and how to handle it',
             estimatedTime: 8,
-            thumbnailUrl: '@assets/icons/reading-style.png',
+            thumbnail: require('@assets/icons/reading-style.png'),
             author: {
                 name: 'מערכת',
                 icon: require('@assets/icons/logo.png'),
@@ -159,7 +159,7 @@ export const getVideoUnitsBySubjectName = (
             description: 'Paycheck Structure Explanation',
             estimatedTime: 8,
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-            thumbnailUrl: '@assets/icons/watching-style.png',
+            thumbnail: require('@assets/icons/watching-style.png'),
         },
         {
             id: 1,
@@ -168,7 +168,7 @@ export const getVideoUnitsBySubjectName = (
             description: "Paycheck Day Arrived. What's next?",
             estimatedTime: 8,
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-            thumbnailUrl: '@assets/icons/watching-style.png',
+            thumbnail: require('@assets/icons/watching-style.png'),
         },
         {
             id: 2,
@@ -177,7 +177,7 @@ export const getVideoUnitsBySubjectName = (
             description: 'What to do if the Paycheck is Broken?',
             estimatedTime: 8,
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-            thumbnailUrl: '@assets/icons/watching-style.png',
+            thumbnail: require('@assets/icons/watching-style.png'),
         },
     ];
 };
@@ -193,7 +193,7 @@ export const getAudioUnitsBySubjectName = (
             description: 'Paycheck Structure Explanation',
             estimatedTime: 8,
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-            thumbnailUrl: '@assets/icons/listening-style.png',
+            thumbnail: require('@assets/icons/listening-style.png'),
         },
         {
             id: 1,
@@ -202,7 +202,7 @@ export const getAudioUnitsBySubjectName = (
             description: "Paycheck Day Arrived. What's next?",
             estimatedTime: 8,
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-            thumbnailUrl: '@assets/icons/listening-style.png',
+            thumbnail: require('@assets/icons/listening-style.png'),
         },
         {
             id: 2,
@@ -211,7 +211,7 @@ export const getAudioUnitsBySubjectName = (
             description: 'What to do if the Paycheck is Broken?',
             estimatedTime: 8,
             sourceUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-            thumbnailUrl: '@assets/icons/listening-style.png',
+            thumbnail: require('@assets/icons/listening-style.png'),
         },
     ];
 };

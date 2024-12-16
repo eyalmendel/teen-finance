@@ -15,6 +15,7 @@ import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import EstimatedTime from '@components/EstimatedTime';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
@@ -67,16 +68,7 @@ function ListeningStyleScreen() {
                                         {translate(item.description)}
                                     </Text>
                                 )}
-                                <View style={styles.estimatedTimeContainer}>
-                                    <Text style={styles.estimatedTimeLabel}>{`${
-                                        item.estimatedTime
-                                    } ${translate('minutes')}`}</Text>
-                                    <MaterialCommunityIcons
-                                        style={styles.icon}
-                                        name="clock-outline"
-                                        color={COLORS.primary}
-                                    />
-                                </View>
+                                <EstimatedTime time={item.estimatedTime} />
                                 <View style={styles.controlsContainer}>
                                     <AppAudioPlayer
                                         sourceUri={item.sourceUrl}
@@ -111,19 +103,6 @@ const styles = StyleSheet.create({
         fontWeight: TEXT.weight.bold,
         marginBlockEnd: verticalScale(8),
         color: COLORS.primary,
-    },
-    estimatedTimeContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignContent: 'center',
-        gap: horizontalScale(4),
-    },
-    estimatedTimeLabel: {
-        fontSize: TEXT.size.small,
-        color: COLORS.primary,
-    },
-    icon: {
-        alignSelf: 'center',
     },
     controlsContainer: {
         flexDirection: 'row-reverse',

@@ -15,6 +15,7 @@ import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
 import AppCard from '@components/AppCard';
+import EstimatedTime from '@components/EstimatedTime';
 
 function WatchingStyleScreen() {
     const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
@@ -67,18 +68,7 @@ function WatchingStyleScreen() {
                                             {translate(item.description)}
                                         </Text>
                                     )}
-                                    <View style={styles.estimatedTimeContainer}>
-                                        <Text
-                                            style={styles.estimatedTimeLabel}
-                                        >{`${item.estimatedTime} ${translate(
-                                            'minutes',
-                                        )}`}</Text>
-                                        <MaterialCommunityIcons
-                                            style={styles.icon}
-                                            name="clock-outline"
-                                            color={COLORS.primary}
-                                        />
-                                    </View>
+                                    <EstimatedTime time={item.estimatedTime} />
                                 </View>
                                 <View style={styles.videoPlayerContainer}>
                                     <AppVideoPlayer
@@ -114,18 +104,6 @@ const styles = StyleSheet.create({
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
-    },
-    estimatedTimeContainer: {
-        flexDirection: 'row',
-        alignContent: 'center',
-        gap: horizontalScale(4),
-    },
-    estimatedTimeLabel: {
-        fontSize: TEXT.size.small,
-        color: COLORS.primary,
-    },
-    icon: {
-        alignSelf: 'center',
     },
     videoPlayerContainer: {
         width: '50%',

@@ -16,6 +16,7 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
+import EstimatedTime from '@components/EstimatedTime';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.READING>;
 
@@ -77,18 +78,7 @@ function ReadingStyleScreen({ navigation }: Props) {
                                             {translate(item.description)}
                                         </Text>
                                     )}
-                                    <View style={styles.estimatedTimeContainer}>
-                                        <Text
-                                            style={styles.estimatedTimeLabel}
-                                        >{`${item.estimatedTime} ${translate(
-                                            'minutes',
-                                        )}`}</Text>
-                                        <MaterialCommunityIcons
-                                            style={styles.icon}
-                                            name="clock-outline"
-                                            color={COLORS.primary}
-                                        />
-                                    </View>
+                                    <EstimatedTime time={item.estimatedTime} />
                                 </View>
                                 <Image
                                     style={styles.thumbnail}
@@ -126,18 +116,7 @@ const styles = StyleSheet.create({
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
     },
-    estimatedTimeContainer: {
-        flexDirection: 'row',
-        alignContent: 'center',
-        gap: horizontalScale(4),
-    },
-    estimatedTimeLabel: {
-        fontSize: TEXT.size.small,
-        color: COLORS.primary,
-    },
-    icon: {
-        alignSelf: 'center',
-    },
+
     thumbnail: {
         width: '30%',
         borderRadius: moderateScale(8),

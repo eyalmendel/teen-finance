@@ -45,6 +45,19 @@ export const getSubjects = (): Subject[] => {
     ];
 };
 
+type Question = {
+    id: number;
+    title: string;
+    possibleAnswers: string[];
+    correctAnswer: string;
+}
+
+type Quiz = {
+    id: number;
+    subject: string;
+    questions: Question[];
+}
+
 export const getGameUnitsBySubjectName = (
     subjectName: StringKey | null,
 ): LearningUnit[] => {

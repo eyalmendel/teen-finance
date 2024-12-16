@@ -11,6 +11,7 @@ import { LearningStyle } from '@models/learning-style';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
 import { moderateScale, verticalScale } from '@services/scale';
+import { STYLES } from '@config/styles';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
     label: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
+        color: COLORS.primary,
     },
 });
 

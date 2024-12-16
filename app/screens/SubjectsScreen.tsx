@@ -20,6 +20,7 @@ import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
+import { STYLES } from '@config/styles';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -63,7 +64,9 @@ function SubjectsScreen({ navigation }: Props) {
                                 style={styles.image}
                                 source={item.icon}
                             ></Image>
-                            <Text style={styles.label}>
+                            <Text
+                                style={[STYLES.rightAlignedText, styles.label]}
+                            >
                                 {translate(item.name)}
                             </Text>
                         </Pressable>
@@ -107,9 +110,9 @@ const styles = StyleSheet.create({
         objectFit: 'contain',
     },
     label: {
-        fontSize: moderateScale(TEXT.size.default),
+        fontSize: TEXT.size.default,
         fontWeight: TEXT.weight.bold,
-        textAlign: 'right',
+        color: COLORS.primary,
     },
 });
 

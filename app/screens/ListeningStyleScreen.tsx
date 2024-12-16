@@ -60,7 +60,7 @@ function ListeningStyleScreen() {
                                 {item.description && (
                                     <Text
                                         style={[
-                                            styles.description,
+                                            STYLES.defaultText,
                                             STYLES.rightAlignedText,
                                         ]}
                                     >
@@ -68,9 +68,9 @@ function ListeningStyleScreen() {
                                     </Text>
                                 )}
                                 <View style={styles.estimatedTimeContainer}>
-                                    <Text>{`${item.estimatedTime} ${translate(
-                                        'minutes',
-                                    )}`}</Text>
+                                    <Text style={styles.estimatedTimeLabel}>{`${
+                                        item.estimatedTime
+                                    } ${translate('minutes')}`}</Text>
                                     <MaterialCommunityIcons
                                         style={styles.icon}
                                         name="clock-outline"
@@ -110,15 +110,17 @@ const styles = StyleSheet.create({
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
         marginBlockEnd: verticalScale(8),
-    },
-    description: {
-        fontSize: moderateScale(TEXT.size.default),
+        color: COLORS.primary,
     },
     estimatedTimeContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignContent: 'center',
         gap: horizontalScale(4),
+    },
+    estimatedTimeLabel: {
+        fontSize: TEXT.size.small,
+        color: COLORS.primary,
     },
     icon: {
         alignSelf: 'center',

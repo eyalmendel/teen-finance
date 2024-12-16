@@ -70,7 +70,7 @@ function ReadingStyleScreen({ navigation }: Props) {
                                     {item.description && (
                                         <Text
                                             style={[
-                                                styles.description,
+                                                STYLES.defaultText,
                                                 STYLES.rightAlignedText,
                                             ]}
                                         >
@@ -78,9 +78,11 @@ function ReadingStyleScreen({ navigation }: Props) {
                                         </Text>
                                     )}
                                     <View style={styles.estimatedTimeContainer}>
-                                        <Text>{`${
-                                            item.estimatedTime
-                                        } ${translate('minutes')}`}</Text>
+                                        <Text
+                                            style={styles.estimatedTimeLabel}
+                                        >{`${item.estimatedTime} ${translate(
+                                            'minutes',
+                                        )}`}</Text>
                                         <MaterialCommunityIcons
                                             style={styles.icon}
                                             name="clock-outline"
@@ -122,14 +124,16 @@ const styles = StyleSheet.create({
     title: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
-    },
-    description: {
-        fontSize: moderateScale(TEXT.size.default),
+        color: COLORS.primary,
     },
     estimatedTimeContainer: {
         flexDirection: 'row',
         alignContent: 'center',
         gap: horizontalScale(4),
+    },
+    estimatedTimeLabel: {
+        fontSize: TEXT.size.small,
+        color: COLORS.primary,
     },
     icon: {
         alignSelf: 'center',

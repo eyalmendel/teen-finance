@@ -62,7 +62,7 @@ function GamingStyleScreen() {
                                     {item.description && (
                                         <Text
                                             style={[
-                                                styles.description,
+                                                STYLES.defaultText,
                                                 STYLES.rightAlignedText,
                                             ]}
                                         >
@@ -95,11 +95,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
         fontWeight: TEXT.weight.bold,
-        color: COLORS.primary,
-    },
-    description: {
-        fontSize: moderateScale(TEXT.size.default),
-        fontWeight: TEXT.weight.regular,
         color: COLORS.primary,
     },
     thumbnail: {

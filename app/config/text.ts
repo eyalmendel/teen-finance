@@ -4,6 +4,7 @@ export const TEXT = {
         mediumHeadline: 32,
         smallHeadline: 24,
         default: 16,
+        small: 12,
     },
     weight: {
         extraBold: 800,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
+import AppCard from '@components/AppCard';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
@@ -10,11 +11,14 @@ import { TEXT } from '@config/text';
 import { LearningUnit } from '@models/learning-unit';
 import { getGameUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import AppCard from '@components/AppCard';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
 
-function GamingStyleScreen() {
+type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.GAMING>;
+
+function GamingStyleScreen({ navigation }: Props) {
     const [games, setGames] = useState<LearningUnit[]>([]);
 
     useEffect(() => {
@@ -43,7 +47,10 @@ function GamingStyleScreen() {
                     keyExtractor={(game) => game.id.toString()}
                     contentContainerStyle={styles.list}
                     renderItem={({ item }) => (
-                        <AppCard style={styles.cardContainer}>
+                        <AppCard
+                            style={styles.cardContainer}
+                            onPress={() => navigation.navigate(RouteNames.QUIZ)}
+                        >
                             <>
                                 <Image
                                     style={styles.thumbnail}

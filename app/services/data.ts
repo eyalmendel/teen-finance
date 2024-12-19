@@ -1,7 +1,9 @@
 import { StringKey } from '@config/strings';
 import { Article } from '@models/article';
 import { LearningUnit, MediaLearningUnit } from '@models/learning-unit';
+import { Quiz } from '@models/quiz';
 import { ARTICLE_CONTENT } from 'app/mocks/article-content';
+import { QUIZ_CONTENT } from 'app/mocks/quiz-content';
 import { Subject } from 'app/models/subject';
 
 export const getSubjects = (): Subject[] => {
@@ -45,19 +47,6 @@ export const getSubjects = (): Subject[] => {
     ];
 };
 
-type Question = {
-    id: number;
-    title: string;
-    possibleAnswers: string[];
-    correctAnswer: string;
-}
-
-type Quiz = {
-    id: number;
-    subject: string;
-    questions: Question[];
-}
-
 export const getGameUnitsBySubjectName = (
     subjectName: StringKey | null,
 ): LearningUnit[] => {
@@ -65,7 +54,7 @@ export const getGameUnitsBySubjectName = (
         {
             id: 0,
             subject: 'paycheck',
-            title: 'The Big Riddle',
+            title: 'The Big Quiz',
             description: '10 trivia questions about your paycheck',
             thumbnail: require('@assets/icons/playing-style.png'),
         },
@@ -84,6 +73,10 @@ export const getGameUnitsBySubjectName = (
             thumbnail: require('@assets/icons/playing-style.png'),
         },
     ];
+};
+
+export const getQuizBySubjectName = (subjectName: StringKey | null): Quiz => {
+    return QUIZ_CONTENT;
 };
 
 export const getArticlesBySubjectName = (

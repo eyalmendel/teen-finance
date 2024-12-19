@@ -8,6 +8,7 @@ export enum RouteNames {
     AUDIO = 'Audio',
     VIDEO = 'Video',
     ARTICLE = 'Article',
+    QUIZ = 'Quiz',
 }
 
 export type AppRoutesParamList = {
@@ -17,6 +18,7 @@ export type AppRoutesParamList = {
     [RouteNames.GAMING]: undefined;
     [RouteNames.AUDIO]: undefined;
     [RouteNames.VIDEO]: undefined;
+    [RouteNames.QUIZ]: undefined;
     [RouteNames.ARTICLE]: {
         article: Article;
     };

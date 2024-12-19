@@ -3,20 +3,19 @@ import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
 import AppCard from '@components/AppCard';
 import EmptyState from '@components/EmptyState';
+import EstimatedTime from '@components/EstimatedTime';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Article } from '@models/article';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { getArticlesBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AppRoutesParamList, RouteNames } from '@config/routes';
-import EstimatedTime from '@components/EstimatedTime';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.READING>;
 

@@ -18,4 +18,8 @@ export const STYLES = StyleSheet.create({
         fontWeight: TEXT.weight.regular,
         color: COLORS.primary,
     },
+    disabled: {
+        opacity: 0.5,
+        pointerEvents: 'none',
+    },
 });

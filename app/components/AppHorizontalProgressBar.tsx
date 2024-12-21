@@ -5,15 +5,16 @@ import { Animated, StyleSheet, View } from 'react-native';
 
 type Props = {
     progress: number;
+    duration?: number;
 };
 
-function AppHorizontalProgressBar({ progress }: Props) {
+function AppHorizontalProgressBar({ progress, duration }: Props) {
     const [width, setWidth] = useState(new Animated.Value(0));
 
     useEffect(() => {
         Animated.timing(width, {
             toValue: progress * 100,
-            duration: 500,
+            duration: duration ? 1000 * duration : 500,
             useNativeDriver: false,
         }).start();
     }, [progress]);

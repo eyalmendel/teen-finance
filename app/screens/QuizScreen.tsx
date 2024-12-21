@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+    Pressable,
+    StyleSheet,
+    Text,
+    TextStyle,
+    View,
+    ViewStyle,
+} from 'react-native';
 
 import AppStepCounter from '@components/AppStepCounter';
 import Screen from '@components/Screen';
@@ -12,6 +19,9 @@ import { getQuizBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
+
+const COUNTDOWN_TOTAL_SECONDS = 5;
 
 const BUTTON_TITLES = ['next', 'finish'] as const;
 type ButtonTitle = (typeof BUTTON_TITLES)[number];
@@ -22,16 +32,52 @@ function QuizScreen() {
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<
         number | null
     >(null);
+    const [areAnswersDisabled, setAreAnswersDisabled] =
+        useState<boolean>(false);
     const [buttonTitle, setButtonTitle] = useState<ButtonTitle>('next');
+    const [countdownInterval, setCountdownInterval] =
+        useState<NodeJS.Timeout | null>(null);
+    const [countdownTimeLeft, setCountdownTimeLeft] = useState<number>(
+        COUNTDOWN_TOTAL_SECONDS,
+    );
+    const [progress, setProgress] = useState<number>(0);
+
+    useEffect(() => {
+        getQuiz();
+
+        return () => {
+            if (countdownInterval === null) {
+                return;
+            }
+
+            clearInterval(countdownInterval);
+            setCountdownInterval(null);
+        };
+    }, []);
+
+    const setNextQuestion = (): void => {
+        if (quiz === null) {
+            return;
+        }
+
+        const { questions } = quiz;
+
+        if (currentQuestionIndex === questions.length - 2) {
+            setButtonTitle('finish');
+        }
+
+        clearCountdown();
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+    };
+
+    const finishQuiz = (): void => {
+        alert('you finished!');
+    };
 
     const submitButtonHandlers: Record<ButtonTitle, Function> = {
         next: setNextQuestion,
         finish: finishQuiz,
     };
-
-    useEffect(() => {
-        getQuiz();
-    }, []);
 
     const getQuiz = async () => {
         const selectedSubjectName = getSelectedSubjectName();
@@ -44,17 +90,14 @@ function QuizScreen() {
         setQuiz(quiz);
     };
 
-    const setPreviousQuestion = (): void => {
-        if (quiz === null || currentQuestionIndex === 0) {
-            return;
-        }
-
-        setCurrentQuestionIndex(currentQuestionIndex - 1);
-    };
-
     const selectAnswer = (index: number): void => {
         setSelectedAnswerIndex(index);
-        if (index === quiz?.questions[currentQuestionIndex].correctAnswerId) {
+        if (isSelectedAnswerCorrect(index)) {
+            setAreAnswersDisabled(true);
+            startCountdown();
+        } else {
+            // display try-again message
+            //
         }
     };
 
@@ -62,22 +105,40 @@ function QuizScreen() {
         return index === quiz?.questions[currentQuestionIndex].correctAnswerId;
     };
 
-    function setNextQuestion(): void {
-        if (quiz === null) {
-            return;
+    const getAnswerStyle = <T extends ViewStyle = ViewStyle>(
+        index: number,
+        success: T,
+        failure: T,
+    ): T | null => {
+        return selectedAnswerIndex === index
+            ? isSelectedAnswerCorrect(index)
+                ? success
+                : failure
+            : null;
+    };
+
+    const startCountdown = (): void => {
+        const interval = setInterval(() => {
+            setCountdownTimeLeft((countdownTimeLeft) => countdownTimeLeft - 1);
+            setProgress(countdownTimeLeft / COUNTDOWN_TOTAL_SECONDS);
+        }, 1000);
+
+        setCountdownInterval(interval);
+    };
+
+    const clearCountdown = (): void => {
+        console.log('countdownInterval: ', countdownInterval);
+        if (countdownInterval !== null) {
+            clearInterval(countdownInterval);
+            setCountdownInterval(null);
         }
 
-        const { questions } = quiz;
-
-        if (currentQuestionIndex === questions.length - 1) {
-            console.log('Finished');
-        } else {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setSelectedAnswerIndex(null);
-        }
-    }
-
-    function finishQuiz(): void {}
+        setSelectedAnswerIndex(null);
+        setAreAnswersDisabled(false);
+        setCountdownTimeLeft(COUNTDOWN_TOTAL_SECONDS);
+        setProgress(0);
+        console.log('progress: ', progress, 'countdown: ', countdownTimeLeft);
+    };
 
     return (
         <Screen>
@@ -110,11 +171,13 @@ function QuizScreen() {
                                         key={index}
                                         style={[
                                             styles.answerContainer,
-                                            selectedAnswerIndex === index
-                                                ? isSelectedAnswerCorrect(index)
-                                                    ? styles.correctAnswerContainer
-                                                    : styles.wrongAnswerContainer
-                                                : null,
+                                            areAnswersDisabled &&
+                                                STYLES.disabled,
+                                            getAnswerStyle(
+                                                index,
+                                                styles.correctAnswerContainer,
+                                                styles.wrongAnswerContainer,
+                                            ),
                                         ]}
                                         onPress={() => selectAnswer(index)}
                                     >
@@ -122,13 +185,11 @@ function QuizScreen() {
                                             style={[
                                                 STYLES.rightAlignedText,
                                                 styles.answer,
-                                                selectedAnswerIndex === index
-                                                    ? isSelectedAnswerCorrect(
-                                                          index,
-                                                      )
-                                                        ? styles.correctAnswer
-                                                        : styles.wrongAnswer
-                                                    : null,
+                                                getAnswerStyle<TextStyle>(
+                                                    index,
+                                                    styles.correctAnswer,
+                                                    styles.wrongAnswer,
+                                                ),
                                             ]}
                                         >
                                             {answer}
@@ -149,6 +210,12 @@ function QuizScreen() {
                             {translate(buttonTitle)}
                         </Text>
                     </Pressable>
+                    {countdownInterval !== null && (
+                        <AppHorizontalProgressBar
+                            progress={progress}
+                            duration={COUNTDOWN_TOTAL_SECONDS}
+                        />
+                    )}
                 </View>
             ) : null}
         </Screen>

@@ -20,6 +20,7 @@ import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
 import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
+import { StringKey } from '@config/strings';
 
 const COUNTDOWN_TOTAL_SECONDS = 5;
 
@@ -41,6 +42,8 @@ function QuizScreen() {
         COUNTDOWN_TOTAL_SECONDS,
     );
     const [progress, setProgress] = useState<number>(0);
+
+    const [errorMessage, setErrorMessage] = useState<StringKey | null>(null);
 
     useEffect(() => {
         getQuiz();
@@ -93,11 +96,11 @@ function QuizScreen() {
     const selectAnswer = (index: number): void => {
         setSelectedAnswerIndex(index);
         if (isSelectedAnswerCorrect(index)) {
+            setErrorMessage(null);
             setAreAnswersDisabled(true);
             startCountdown();
         } else {
-            // display try-again message
-            //
+            setErrorMessage('Try again');
         }
     };
 
@@ -127,7 +130,6 @@ function QuizScreen() {
     };
 
     const clearCountdown = (): void => {
-        console.log('countdownInterval: ', countdownInterval);
         if (countdownInterval !== null) {
             clearInterval(countdownInterval);
             setCountdownInterval(null);
@@ -137,7 +139,6 @@ function QuizScreen() {
         setAreAnswersDisabled(false);
         setCountdownTimeLeft(COUNTDOWN_TOTAL_SECONDS);
         setProgress(0);
-        console.log('progress: ', progress, 'countdown: ', countdownTimeLeft);
     };
 
     return (
@@ -198,6 +199,16 @@ function QuizScreen() {
                                 ),
                             )}
                         </View>
+                        {errorMessage !== null && (
+                            <Text
+                                style={[
+                                    STYLES.rightAlignedText,
+                                    styles.errorMessage,
+                                ]}
+                            >
+                                {translate(errorMessage)}
+                            </Text>
+                        )}
                     </View>
                     <Pressable
                         style={[
@@ -225,7 +236,6 @@ function QuizScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
     },
     content: {
         flex: 1,
@@ -269,6 +279,12 @@ const styles = StyleSheet.create({
     answer: {
         fontSize: TEXT.size.default,
         fontWeight: 600,
+    },
+    errorMessage: {
+        fontSize: TEXT.size.default,
+        fontWeight: TEXT.weight.bold,
+        color: COLORS.primary,
+        paddingVertical: verticalScale(16),
     },
     submitButton: {
         width: '100%',

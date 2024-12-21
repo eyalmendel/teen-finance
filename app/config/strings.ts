@@ -35,6 +35,7 @@ export const STRINGS = {
     '10 trivia questions about your paycheck': '10 שאלות טריוויה על תלוש שכר',
     'Not here.. in the paycheck!': 'לא כאן.. בתלוש!',
     'Except your employee bonus': 'חוץ מהבונוס שלך לעובד/ת החודש',
+    'Try again': 'נסה שוב 😬',
 } as const;
 
 export type StringKey = keyof typeof STRINGS;

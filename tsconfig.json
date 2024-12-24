@@ -11,6 +11,8 @@
       "@enums/*": ["app/enums/*"],
       "@services/*": ["app/services/*"],
       "@utils/*": ["app/utils/*"],
+      "@context/*": ["app/context/*"],
+      "@hooks/*": ["app/hooks/*"],
       "@assets/*": ["assets/*"]
     }
   }

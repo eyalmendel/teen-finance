@@ -21,6 +21,8 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
 import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
 import { StringKey } from '@config/strings';
+import { useModal } from '@hooks/useModal';
+import AppModal from '@components/AppModal';
 
 const COUNTDOWN_TOTAL_SECONDS = 5;
 
@@ -44,6 +46,8 @@ function QuizScreen() {
     const [progress, setProgress] = useState<number>(0);
 
     const [errorMessage, setErrorMessage] = useState<StringKey | null>(null);
+
+    const { showModal } = useModal();
 
     useEffect(() => {
         getQuiz();
@@ -74,7 +78,7 @@ function QuizScreen() {
     };
 
     const finishQuiz = (): void => {
-        alert('you finished!');
+        showModal(<Text>you are done!</Text>);
     };
 
     const submitButtonHandlers: Record<ButtonTitle, Function> = {
@@ -227,6 +231,7 @@ function QuizScreen() {
                             duration={COUNTDOWN_TOTAL_SECONDS}
                         />
                     )}
+                    <AppModal />
                 </View>
             ) : null}
         </Screen>

@@ -1,14 +1,17 @@
 import { COLORS } from '@config/colors';
 import { horizontalScale, verticalScale } from '@services/scale';
+import ModalProvider from 'app/providers/ModalProvider';
 import Constants from 'expo-constants';
 import { PropsWithChildren } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 function Screen({ children }: PropsWithChildren) {
     return (
-        <SafeAreaView style={styles.screen}>
-            <View style={styles.view}>{children}</View>
-        </SafeAreaView>
+        <ModalProvider>
+            <SafeAreaView style={styles.screen}>
+                <View style={styles.view}>{children}</View>
+            </SafeAreaView>
+        </ModalProvider>
     );
 }
 

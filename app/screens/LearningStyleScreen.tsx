@@ -11,7 +11,6 @@ import { LearningStyle } from '@models/learning-style';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
 import { moderateScale, verticalScale } from '@services/scale';
-import { STYLES } from '@config/styles';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,

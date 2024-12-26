@@ -23,29 +23,32 @@ import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
 import { StringKey } from '@config/strings';
 import { useModal } from '@hooks/useModal';
 import AppModal from '@components/AppModal';
+import QuizCompletedModal from '@components/QuizCompletedModal';
 
 const COUNTDOWN_TOTAL_SECONDS = 5;
 
-const BUTTON_TITLES = ['next', 'finish'] as const;
+const BUTTON_TITLES = ['check', 'next', 'finish'] as const;
 type ButtonTitle = (typeof BUTTON_TITLES)[number];
 
 function QuizScreen() {
     const [quiz, setQuiz] = useState<Quiz | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+    const [correctAnswerIndices, setCorrectAnswerIndices] = useState<number[]>(
+        [],
+    );
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<
         number | null
     >(null);
-    const [areAnswersDisabled, setAreAnswersDisabled] =
-        useState<boolean>(false);
-    const [buttonTitle, setButtonTitle] = useState<ButtonTitle>('next');
+    const [shouldMarkAnswers, setShouldMarkAnswers] = useState<boolean>(false);
+    const [buttonTitle, setButtonTitle] = useState<ButtonTitle>('check');
     const [countdownInterval, setCountdownInterval] =
         useState<NodeJS.Timeout | null>(null);
     const [countdownTimeLeft, setCountdownTimeLeft] = useState<number>(
         COUNTDOWN_TOTAL_SECONDS,
     );
     const [progress, setProgress] = useState<number>(0);
-
     const [errorMessage, setErrorMessage] = useState<StringKey | null>(null);
+    const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
 
     const { showModal } = useModal();
 
@@ -62,26 +65,55 @@ function QuizScreen() {
         };
     }, []);
 
+    const handleInitialCheck = (): void => {
+        checkIfCorrect();
+
+        const { questions } = quiz!;
+        if (currentQuestionIndex === questions.length - 1) {
+            setButtonTitle('finish');
+        } else {
+            setButtonTitle('next');
+        }
+        setShouldMarkAnswers(true);
+    };
+
     const setNextQuestion = (): void => {
         if (quiz === null) {
             return;
         }
 
-        const { questions } = quiz;
-
-        if (currentQuestionIndex === questions.length - 2) {
-            setButtonTitle('finish');
-        }
-
         clearCountdown();
         setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setErrorMessage(null);
+        setButtonTitle('check');
+        setShouldMarkAnswers(false);
     };
 
     const finishQuiz = (): void => {
-        showModal(<Text>you are done!</Text>);
+        showModal(
+            <QuizCompletedModal
+                correctAnswersCount={correctAnswersCount}
+                totalCount={quiz?.questions.length ?? 0}
+            />,
+            false,
+        );
+        clearCountdown();
+    };
+
+    const checkIfCorrect = (): void => {
+        if (isAnswerCorrect()) {
+            setErrorMessage(null);
+            setCorrectAnswersCount(
+                (correctAnswersCount) => correctAnswersCount + 1,
+            );
+            startCountdown();
+        } else {
+            setErrorMessage('Try again');
+        }
     };
 
     const submitButtonHandlers: Record<ButtonTitle, Function> = {
+        check: handleInitialCheck,
         next: setNextQuestion,
         finish: finishQuiz,
     };
@@ -95,21 +127,21 @@ function QuizScreen() {
 
         const quiz = getQuizBySubjectName(selectedSubjectName);
         setQuiz(quiz);
+        setCorrectAnswerIndices(
+            quiz.questions.map((question) => question.correctAnswerId),
+        );
     };
 
     const selectAnswer = (index: number): void => {
-        setSelectedAnswerIndex(index);
-        if (isSelectedAnswerCorrect(index)) {
-            setErrorMessage(null);
-            setAreAnswersDisabled(true);
-            startCountdown();
-        } else {
-            setErrorMessage('Try again');
+        setSelectedAnswerIndex((selectedAnswerIndex) => selectedAnswerIndex);
+        if (shouldMarkAnswers) {
+            checkIfCorrect();
         }
     };
 
-    const isSelectedAnswerCorrect = (index: number): boolean => {
-        return index === quiz?.questions[currentQuestionIndex].correctAnswerId;
+    const isAnswerCorrect = (index: number | null = null): boolean => {
+        const indexToCheck = index !== null ? index : selectedAnswerIndex;
+        return indexToCheck === correctAnswerIndices[currentQuestionIndex];
     };
 
     const getAnswerStyle = <T extends ViewStyle = ViewStyle>(
@@ -118,7 +150,7 @@ function QuizScreen() {
         failure: T,
     ): T | null => {
         return selectedAnswerIndex === index
-            ? isSelectedAnswerCorrect(index)
+            ? isAnswerCorrect(index)
                 ? success
                 : failure
             : null;
@@ -140,7 +172,6 @@ function QuizScreen() {
         }
 
         setSelectedAnswerIndex(null);
-        setAreAnswersDisabled(false);
         setCountdownTimeLeft(COUNTDOWN_TOTAL_SECONDS);
         setProgress(0);
     };
@@ -176,13 +207,20 @@ function QuizScreen() {
                                         key={index}
                                         style={[
                                             styles.answerContainer,
-                                            areAnswersDisabled &&
-                                                STYLES.disabled,
-                                            getAnswerStyle(
-                                                index,
-                                                styles.correctAnswerContainer,
-                                                styles.wrongAnswerContainer,
-                                            ),
+                                            selectedAnswerIndex === index &&
+                                                styles.selectedAnswer,
+                                            shouldMarkAnswers &&
+                                                getAnswerStyle(
+                                                    index,
+                                                    styles.correctAnswerContainer,
+                                                    styles.wrongAnswerContainer,
+                                                ),
+                                            // isAnswerChecked &&
+                                            //     index !==
+                                            //         correctAnswerIndices[
+                                            //             currentQuestionIndex
+                                            //         ] &&
+                                            //     STYLES.disabled,
                                         ]}
                                         onPress={() => selectAnswer(index)}
                                     >
@@ -190,11 +228,12 @@ function QuizScreen() {
                                             style={[
                                                 STYLES.rightAlignedText,
                                                 styles.answer,
-                                                getAnswerStyle<TextStyle>(
-                                                    index,
-                                                    styles.correctAnswer,
-                                                    styles.wrongAnswer,
-                                                ),
+                                                shouldMarkAnswers &&
+                                                    getAnswerStyle<TextStyle>(
+                                                        index,
+                                                        styles.correctAnswer,
+                                                        styles.wrongAnswer,
+                                                    ),
                                             ]}
                                         >
                                             {answer}
@@ -269,14 +308,19 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: COLORS.mainBackground,
     },
+    selectedAnswer: {
+        borderColor: COLORS.primary,
+    },
     correctAnswerContainer: {
         backgroundColor: COLORS.correctBackground,
+        borderColor: COLORS.correctBackground,
     },
     correctAnswer: {
         color: COLORS.correctText,
     },
     wrongAnswerContainer: {
         backgroundColor: COLORS.wrongBackground,
+        borderColor: COLORS.wrongBackground,
     },
     wrongAnswer: {
         color: COLORS.wrongText,

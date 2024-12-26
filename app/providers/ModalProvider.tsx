@@ -8,10 +8,15 @@ type ModalProviderProps = {
 
 export default function ModalProvider({ children }: ModalProviderProps) {
     const [isShown, setIsShown] = useState<boolean>(false);
+    const [isCloseable, setIsCloseable] = useState<boolean>(true);
     const [content, setContent] = useState<JSX.Element | null>(null);
 
-    const showModal = (content: JSX.Element): void => {
+    const showModal = (
+        content: JSX.Element,
+        isCloseable: boolean = true,
+    ): void => {
         setIsShown(true);
+        setIsCloseable(isCloseable);
         setContent(content);
     };
 
@@ -24,6 +29,7 @@ export default function ModalProvider({ children }: ModalProviderProps) {
         isShown,
         showModal,
         hideModal,
+        isCloseable,
         content,
     };
 

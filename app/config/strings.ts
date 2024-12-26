@@ -18,9 +18,10 @@ export const STRINGS = {
     play: 'להתנסות',
     minutes: "דק'",
     missingDataErrorMessage: 'משהו השתבש...',
-    test: 'בדיקה',
+    check: 'בדיקה',
     next: 'הבא',
     finish: 'סיים',
+    quizCompletedTitle: 'אליפות!',
     'No Units For Now': 'אין יחידות לימוד להציג',
     "What's Missing?": 'מה חסר?',
     'Find the Error': 'חפש את התעות',
@@ -36,6 +37,7 @@ export const STRINGS = {
     'Not here.. in the paycheck!': 'לא כאן.. בתלוש!',
     'Except your employee bonus': 'חוץ מהבונוס שלך לעובד/ת החודש',
     'Try again': 'נסה שוב 😬',
+    'review quiz answers': 'מעבר על התשובות',
 } as const;
 
 export type StringKey = keyof typeof STRINGS;

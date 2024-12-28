@@ -44,10 +44,10 @@ export default function QuizCompletedModal({
                     </Pressable>
                     <View style={styles.roundButtonsContainer}>
                         <Pressable style={styles.roundButton}>
-                            {/* <Image
+                            <Image
                                 style={styles.roundButtonIcon}
                                 source={require('@assets/icons/repeat.png')}
-                            /> */}
+                            />
                         </Pressable>
                         <Pressable style={styles.roundButton}>
                             <Image

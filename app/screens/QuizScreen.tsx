@@ -36,10 +36,6 @@ function QuizScreen() {
     const [correctAnswerIndices, setCorrectAnswerIndices] = useState<number[]>(
         [],
     );
-    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<
-        number | null
-    >(null);
-    const [shouldMarkAnswers, setShouldMarkAnswers] = useState<boolean>(false);
     const [buttonTitle, setButtonTitle] = useState<ButtonTitle>('check');
     const [countdownInterval, setCountdownInterval] =
         useState<NodeJS.Timeout | null>(null);
@@ -47,6 +43,11 @@ function QuizScreen() {
         COUNTDOWN_TOTAL_SECONDS,
     );
     const [progress, setProgress] = useState<number>(0);
+
+    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<
+        number | null
+    >(null);
+    const [isChecking, setIsChecking] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<StringKey | null>(null);
     const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
 
@@ -65,8 +66,22 @@ function QuizScreen() {
         };
     }, []);
 
+    const getQuiz = async () => {
+        const selectedSubjectName = getSelectedSubjectName();
+
+        if (selectedSubjectName === null) {
+            return;
+        }
+
+        const quiz = getQuizBySubjectName(selectedSubjectName);
+        setQuiz(quiz);
+        setCorrectAnswerIndices(
+            quiz.questions.map((question) => question.correctAnswerId),
+        );
+    };
+
     const handleInitialCheck = (): void => {
-        checkIfCorrect();
+        checkIfCorrect(selectedAnswerIndex!);
 
         const { questions } = quiz!;
         if (currentQuestionIndex === questions.length - 1) {
@@ -74,7 +89,7 @@ function QuizScreen() {
         } else {
             setButtonTitle('next');
         }
-        setShouldMarkAnswers(true);
+        setIsChecking(true);
     };
 
     const setNextQuestion = (): void => {
@@ -86,7 +101,7 @@ function QuizScreen() {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setErrorMessage(null);
         setButtonTitle('check');
-        setShouldMarkAnswers(false);
+        setIsChecking(false);
     };
 
     const finishQuiz = (): void => {
@@ -100,8 +115,10 @@ function QuizScreen() {
         clearCountdown();
     };
 
-    const checkIfCorrect = (): void => {
-        if (isAnswerCorrect()) {
+    const checkIfCorrect = (index: number): void => {
+        if (isAnswerCorrect(index)) {
+            console.log('correct');
+
             setErrorMessage(null);
             setCorrectAnswersCount(
                 (correctAnswersCount) => correctAnswersCount + 1,
@@ -118,24 +135,10 @@ function QuizScreen() {
         finish: finishQuiz,
     };
 
-    const getQuiz = async () => {
-        const selectedSubjectName = getSelectedSubjectName();
-
-        if (selectedSubjectName === null) {
-            return;
-        }
-
-        const quiz = getQuizBySubjectName(selectedSubjectName);
-        setQuiz(quiz);
-        setCorrectAnswerIndices(
-            quiz.questions.map((question) => question.correctAnswerId),
-        );
-    };
-
     const selectAnswer = (index: number): void => {
-        setSelectedAnswerIndex((selectedAnswerIndex) => selectedAnswerIndex);
-        if (shouldMarkAnswers) {
-            checkIfCorrect();
+        setSelectedAnswerIndex(index);
+        if (isChecking) {
+            checkIfCorrect(index);
         }
     };
 
@@ -209,7 +212,7 @@ function QuizScreen() {
                                             styles.answerContainer,
                                             selectedAnswerIndex === index &&
                                                 styles.selectedAnswer,
-                                            shouldMarkAnswers &&
+                                            isChecking &&
                                                 getAnswerStyle(
                                                     index,
                                                     styles.correctAnswerContainer,
@@ -228,7 +231,7 @@ function QuizScreen() {
                                             style={[
                                                 STYLES.rightAlignedText,
                                                 styles.answer,
-                                                shouldMarkAnswers &&
+                                                isChecking &&
                                                     getAnswerStyle<TextStyle>(
                                                         index,
                                                         styles.correctAnswer,

@@ -117,8 +117,6 @@ function QuizScreen() {
 
     const checkIfCorrect = (index: number): void => {
         if (isAnswerCorrect(index)) {
-            console.log('correct');
-
             setErrorMessage(null);
             setCorrectAnswersCount(
                 (correctAnswersCount) => correctAnswersCount + 1,

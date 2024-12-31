@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Pressable,
-    StyleSheet,
-    Text,
-    TextStyle,
-    View,
-    ViewStyle,
-} from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import AppStepCounter from '@components/AppStepCounter';
 import Screen from '@components/Screen';
@@ -140,21 +133,8 @@ function QuizScreen() {
         }
     };
 
-    const isAnswerCorrect = (index: number | null = null): boolean => {
-        const indexToCheck = index !== null ? index : selectedAnswerIndex;
-        return indexToCheck === correctAnswerIndices[currentQuestionIndex];
-    };
-
-    const getAnswerStyle = <T extends ViewStyle = ViewStyle>(
-        index: number,
-        success: T,
-        failure: T,
-    ): T | null => {
-        return selectedAnswerIndex === index
-            ? isAnswerCorrect(index)
-                ? success
-                : failure
-            : null;
+    const isAnswerCorrect = (index: number): boolean => {
+        return index === correctAnswerIndices[currentQuestionIndex];
     };
 
     const startCountdown = (): void => {
@@ -204,42 +184,16 @@ function QuizScreen() {
                                 currentQuestionIndex
                             ].possibleAnswers.map(
                                 (answer: string, index: number) => (
-                                    <Pressable
+                                    <QuizAnswer
                                         key={index}
-                                        style={[
-                                            styles.answerContainer,
-                                            selectedAnswerIndex === index &&
-                                                styles.selectedAnswer,
-                                            isChecking &&
-                                                getAnswerStyle(
-                                                    index,
-                                                    styles.correctAnswerContainer,
-                                                    styles.wrongAnswerContainer,
-                                                ),
-                                            // isAnswerChecked &&
-                                            //     index !==
-                                            //         correctAnswerIndices[
-                                            //             currentQuestionIndex
-                                            //         ] &&
-                                            //     STYLES.disabled,
-                                        ]}
-                                        onPress={() => selectAnswer(index)}
-                                    >
-                                        <Text
-                                            style={[
-                                                STYLES.rightAlignedText,
-                                                styles.answer,
-                                                isChecking &&
-                                                    getAnswerStyle<TextStyle>(
-                                                        index,
-                                                        styles.correctAnswer,
-                                                        styles.wrongAnswer,
-                                                    ),
-                                            ]}
-                                        >
-                                            {answer}
-                                        </Text>
-                                    </Pressable>
+                                        text={answer}
+                                        shouldMark={isChecking}
+                                        isSelected={
+                                            selectedAnswerIndex === index
+                                        }
+                                        isCorrect={isAnswerCorrect(index)}
+                                        onSelection={() => selectAnswer(index)}
+                                    />
                                 ),
                             )}
                         </View>
@@ -300,35 +254,6 @@ const styles = StyleSheet.create({
     },
     answerList: {
         gap: verticalScale(16),
-    },
-    answerContainer: {
-        paddingBlock: verticalScale(16),
-        paddingInline: horizontalScale(16),
-        borderRadius: moderateScale(20),
-        backgroundColor: COLORS.eggWhite,
-        borderWidth: 0.5,
-        borderColor: COLORS.mainBackground,
-    },
-    selectedAnswer: {
-        borderColor: COLORS.primary,
-    },
-    correctAnswerContainer: {
-        backgroundColor: COLORS.correctBackground,
-        borderColor: COLORS.correctBackground,
-    },
-    correctAnswer: {
-        color: COLORS.correctText,
-    },
-    wrongAnswerContainer: {
-        backgroundColor: COLORS.wrongBackground,
-        borderColor: COLORS.wrongBackground,
-    },
-    wrongAnswer: {
-        color: COLORS.wrongText,
-    },
-    answer: {
-        fontSize: TEXT.size.default,
-        fontWeight: 600,
     },
     errorMessage: {
         fontSize: TEXT.size.default,

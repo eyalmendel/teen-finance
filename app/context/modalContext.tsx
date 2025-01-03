@@ -1,5 +1,8 @@
 import { createContext } from 'react';
 
+export const MODAL_ACTIONS = ['repeat', 'home', 'next'] as const;
+export type ModalAction = (typeof MODAL_ACTIONS)[number];
+
 export type ModalContextType = {
     isShown: boolean;
     showModal: (content: JSX.Element, isCloseable: boolean) => void;

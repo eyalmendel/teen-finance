@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
+import AppModal from '@components/AppModal';
 import AppStepCounter from '@components/AppStepCounter';
+import QuizAnswer from '@components/QuizAnswer';
+import QuizCompletedModal from '@components/QuizCompletedModal';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
+import { StringKey } from '@config/strings';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
+import { ModalAction } from '@context/modalContext';
+import { useModal } from '@hooks/useModal';
 import { Quiz } from '@models/quiz';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { getQuizBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
-import { StringKey } from '@config/strings';
-import { useModal } from '@hooks/useModal';
-import AppModal from '@components/AppModal';
-import QuizCompletedModal from '@components/QuizCompletedModal';
 
 const COUNTDOWN_TOTAL_SECONDS = 5;
 
 const BUTTON_TITLES = ['check', 'next', 'finish'] as const;
 type ButtonTitle = (typeof BUTTON_TITLES)[number];
 
-function QuizScreen() {
+type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.QUIZ>;
+
+function QuizScreen({ navigation }: Props) {
     const [quiz, setQuiz] = useState<Quiz | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [correctAnswerIndices, setCorrectAnswerIndices] = useState<number[]>(
@@ -44,12 +50,14 @@ function QuizScreen() {
     const [errorMessage, setErrorMessage] = useState<StringKey | null>(null);
     const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
 
-    const { showModal } = useModal();
+    const { showModal, hideModal } = useModal();
 
     useEffect(() => {
         getQuiz();
 
         return () => {
+            restart();
+
             if (countdownInterval === null) {
                 return;
             }
@@ -102,10 +110,31 @@ function QuizScreen() {
             <QuizCompletedModal
                 correctAnswersCount={correctAnswersCount}
                 totalCount={quiz?.questions.length ?? 0}
+                onAction={handleCompleteModalAction}
             />,
-            false,
+            true,
         );
         clearCountdown();
+    };
+
+    const handleCompleteModalAction = (action: ModalAction): void => {
+        switch (action) {
+            case 'repeat':
+                restart();
+                break;
+            case 'next':
+                navigation.navigate(RouteNames.QUIZ_ANSWER_SUMMARY, {
+                    summary: quiz!.questions.map(
+                        ({ title, correctAnswerId, possibleAnswers }) => ({
+                            question: title,
+                            correctAnswer: possibleAnswers[correctAnswerId],
+                        }),
+                    ),
+                });
+                break;
+        }
+
+        hideModal();
     };
 
     const checkIfCorrect = (index: number): void => {
@@ -155,6 +184,14 @@ function QuizScreen() {
         setSelectedAnswerIndex(null);
         setCountdownTimeLeft(COUNTDOWN_TOTAL_SECONDS);
         setProgress(0);
+    };
+
+    const restart = (): void => {
+        setCurrentQuestionIndex(0);
+        setButtonTitle('check');
+        setCorrectAnswersCount(0);
+        setIsChecking(false);
+        setErrorMessage(null);
     };
 
     return (
@@ -222,7 +259,7 @@ function QuizScreen() {
                     {countdownInterval !== null && (
                         <AppHorizontalProgressBar
                             progress={progress}
-                            duration={COUNTDOWN_TOTAL_SECONDS}
+                            durationInSeconds={COUNTDOWN_TOTAL_SECONDS}
                         />
                     )}
                     <AppModal />

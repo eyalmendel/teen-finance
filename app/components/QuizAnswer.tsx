@@ -19,7 +19,7 @@ type StyleTuple = {
 
 type Props = {
     text: string;
-    onSelection: () => void;
+    onSelection?: () => void;
     shouldMark?: boolean;
     isSelected?: boolean;
     isCorrect?: boolean;

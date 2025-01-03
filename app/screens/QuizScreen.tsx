@@ -56,8 +56,6 @@ function QuizScreen({ navigation }: Props) {
         getQuiz();
 
         return () => {
-            restart();
-
             if (countdownInterval === null) {
                 return;
             }
@@ -131,6 +129,7 @@ function QuizScreen({ navigation }: Props) {
                         }),
                     ),
                 });
+                restart();
                 break;
         }
 

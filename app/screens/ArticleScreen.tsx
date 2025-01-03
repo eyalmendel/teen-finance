@@ -64,6 +64,7 @@ function ArticleScreen({ route }: Props) {
                     style={styles.scrollView}
                     onScroll={(event) => scroll(event.nativeEvent)}
                     scrollEventThrottle={16}
+                    showsVerticalScrollIndicator={false}
                 >
                     <ScreenTitle
                         text={translate(article.title)}

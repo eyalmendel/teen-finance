@@ -1,11 +1,12 @@
 export const TEXT = {
     size: {
-        headline: 48,
-        mediumHeadline: 32,
-        smallHeadline: 24,
-        medium: 18,
-        default: 16,
         small: 12,
+        default: 16,
+        medium: 18,
+        large: 20,
+        smallHeadline: 24,
+        mediumHeadline: 32,
+        headline: 48,
     },
     weight: {
         extraBold: 800,

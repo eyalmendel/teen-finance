@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { COLORS } from '@config/colors';
@@ -9,6 +9,8 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { ModalAction } from '@context/modalContext';
 import AppHomeButton from './AppHomeButton';
 import AppRepeatButton from './AppRepeatButton';
+import { StringKey } from '@config/strings';
+import { STYLES } from '@config/styles';
 
 type Props = {
     correctAnswersCount: number;
@@ -21,6 +23,27 @@ export default function QuizCompletedModal({
     totalCount,
     onAction,
 }: Props) {
+    const [titleText, setTitleText] = useState<StringKey | null>(null);
+
+    useEffect(() => {
+        setTitleBySuccessRate();
+    }, []);
+
+    const setTitleBySuccessRate = (): void => {
+        let text: StringKey;
+        const successRate = correctAnswersCount / totalCount;
+
+        if (successRate > 0.8) {
+            text = 'quizGreatCompletion';
+        } else if (successRate >= 0.5) {
+            text = 'quizGoodCompletion';
+        } else {
+            text = 'quizBadCompletion';
+        }
+
+        setTitleText(text);
+    };
+
     return (
         <View style={styles.container}>
             <Image
@@ -30,11 +53,9 @@ export default function QuizCompletedModal({
             <View style={styles.content}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>
-                        {translate('quizCompletedTitle')}
-                    </Text>
-                    <Text style={styles.titleText}>
                         {correctAnswersCount}/{totalCount}
                     </Text>
+                    <Text style={styles.titleText}>{translate(titleText)}</Text>
                 </View>
                 <View style={styles.actionsContainer}>
                     <Pressable
@@ -75,15 +96,13 @@ const styles = StyleSheet.create({
         gap: moderateScale(32),
     },
     titleContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        gap: moderateScale(16),
+        gap: moderateScale(4),
     },
     titleText: {
-        fontSize: TEXT.size.mediumHeadline,
-        fontWeight: TEXT.weight.extraBold,
+        fontSize: TEXT.size.large,
+        fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
+        ...STYLES.rightAlignedText,
     },
     actionsContainer: {
         flexDirection: 'row',

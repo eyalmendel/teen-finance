@@ -1,5 +1,10 @@
 import { StringKey } from '@config/strings';
 
+export type QuestionAnswerTuple = {
+    question: string;
+    correctAnswer: string;
+};
+
 export type Question = {
     id: number;
     title: string;

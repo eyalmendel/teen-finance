@@ -1,4 +1,5 @@
 import { Article } from '@models/article';
+import { QuestionAnswerTuple } from '@models/quiz';
 
 export enum RouteNames {
     SUBJECTS = 'Subjects',
@@ -9,6 +10,7 @@ export enum RouteNames {
     VIDEO = 'Video',
     ARTICLE = 'Article',
     QUIZ = 'Quiz',
+    QUIZ_ANSWER_SUMMARY = 'Quiz Answer Summary',
 }
 
 export type AppRoutesParamList = {
@@ -21,5 +23,8 @@ export type AppRoutesParamList = {
     [RouteNames.QUIZ]: undefined;
     [RouteNames.ARTICLE]: {
         article: Article;
+    };
+    [RouteNames.QUIZ_ANSWER_SUMMARY]: {
+        summary: QuestionAnswerTuple[];
     };
 };

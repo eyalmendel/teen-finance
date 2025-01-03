@@ -1,20 +1,25 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { translate } from '@services/language';
-import { TEXT } from '@config/text';
 import { COLORS } from '@config/colors';
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { TEXT } from '@config/text';
 import { AntDesign } from '@expo/vector-icons';
+import { translate } from '@services/language';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { ModalAction } from '@context/modalContext';
+import AppHomeButton from './AppHomeButton';
+import AppRepeatButton from './AppRepeatButton';
 
 type Props = {
     correctAnswersCount: number;
     totalCount: number;
+    onAction: (action: ModalAction) => void;
 };
 
 export default function QuizCompletedModal({
     correctAnswersCount,
     totalCount,
+    onAction,
 }: Props) {
     return (
         <View style={styles.container}>
@@ -32,7 +37,10 @@ export default function QuizCompletedModal({
                     </Text>
                 </View>
                 <View style={styles.actionsContainer}>
-                    <Pressable style={styles.reviewButton}>
+                    <Pressable
+                        style={styles.reviewButton}
+                        onPress={() => onAction('next')}
+                    >
                         <AntDesign
                             name="arrowleft"
                             size={12}
@@ -43,18 +51,8 @@ export default function QuizCompletedModal({
                         </Text>
                     </Pressable>
                     <View style={styles.roundButtonsContainer}>
-                        <Pressable style={styles.roundButton}>
-                            <Image
-                                style={styles.roundButtonIcon}
-                                source={require('@assets/icons/repeat.png')}
-                            />
-                        </Pressable>
-                        <Pressable style={styles.roundButton}>
-                            <Image
-                                style={styles.roundButtonIcon}
-                                source={require('@assets/icons/home.png')}
-                            />
-                        </Pressable>
+                        <AppRepeatButton onPress={() => onAction('repeat')} />
+                        <AppHomeButton onPress={() => onAction('home')} />
                     </View>
                 </View>
             </View>
@@ -111,17 +109,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: moderateScale(4),
-    },
-    roundButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 26,
-        height: 26,
-        borderRadius: 26,
-        backgroundColor: COLORS.primary,
-    },
-    roundButtonIcon: {
-        width: horizontalScale(16),
-        height: verticalScale(16),
     },
 });

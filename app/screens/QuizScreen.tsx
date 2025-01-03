@@ -253,16 +253,19 @@ function QuizScreen({ navigation }: Props) {
                         ]}
                         onPress={() => submitButtonHandlers[buttonTitle]()}
                     >
+                        {countdownInterval !== null && (
+                            <View style={styles.progressBarContainer}>
+                                <AppHorizontalProgressBar
+                                    progress={progress}
+                                    durationInSeconds={COUNTDOWN_TOTAL_SECONDS}
+                                    height={'100%'}
+                                />
+                            </View>
+                        )}
                         <Text style={styles.submitButtonText}>
                             {translate(buttonTitle)}
                         </Text>
                     </Pressable>
-                    {countdownInterval !== null && (
-                        <AppHorizontalProgressBar
-                            progress={progress}
-                            durationInSeconds={COUNTDOWN_TOTAL_SECONDS}
-                        />
-                    )}
                     <AppModal />
                 </View>
             ) : null}
@@ -301,11 +304,18 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         width: '100%',
+        height: verticalScale(60),
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLORS.primary,
-        paddingBlock: verticalScale(16),
         borderRadius: moderateScale(20),
+        position: 'relative',
+        overflow: 'hidden',
+    },
+    progressBarContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
     },
     submitButtonText: {
         fontSize: TEXT.size.smallHeadline,

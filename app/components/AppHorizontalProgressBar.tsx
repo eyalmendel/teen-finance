@@ -1,20 +1,21 @@
-import { COLORS } from '@config/colors';
-import { moderateScale, verticalScale } from '@services/scale';
 import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
+import { COLORS } from '@config/colors';
+import { moderateScale, verticalScale } from '@services/scale';
+
 type Props = {
     progress: number;
-    duration?: number;
+    durationInSeconds?: number;
 };
 
-function AppHorizontalProgressBar({ progress, duration }: Props) {
+function AppHorizontalProgressBar({ progress, durationInSeconds }: Props) {
     const [width, setWidth] = useState(new Animated.Value(0));
 
     useEffect(() => {
         Animated.timing(width, {
             toValue: progress * 100,
-            duration: duration ? 1000 * duration : 500,
+            duration: durationInSeconds ? 1000 * durationInSeconds : 500,
             useNativeDriver: false,
         }).start();
     }, [progress]);

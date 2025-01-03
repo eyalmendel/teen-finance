@@ -60,18 +60,14 @@ export default function QuizAnswer({
         return style;
     }, [isSelected, isCorrect, isDisabled, shouldMark]);
 
+    const { container: containerStyle, text: textStyle } = getStyle();
+
     return (
         <Pressable
-            style={[styles.answerContainer, getStyle().container]}
+            style={[styles.answerContainer, containerStyle]}
             onPress={onSelection}
         >
-            <Text
-                style={[
-                    styles.answer,
-                    STYLES.rightAlignedText,
-                    getStyle().text,
-                ]}
-            >
+            <Text style={[styles.answer, STYLES.rightAlignedText, textStyle]}>
                 {text}
             </Text>
         </Pressable>
@@ -97,6 +93,7 @@ const styles = StyleSheet.create({
     correctAnswerContainer: {
         backgroundColor: COLORS.correctBackground,
         borderColor: COLORS.correctBackground,
+        pointerEvents: 'none',
     },
     correctAnswer: {
         color: COLORS.correctText,

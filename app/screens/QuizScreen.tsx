@@ -49,6 +49,8 @@ function QuizScreen({ navigation }: Props) {
     const [isChecking, setIsChecking] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<StringKey | null>(null);
     const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
+    const [areAnswersDisabled, setAreAnswersDisabled] =
+        useState<boolean>(false);
 
     const { showModal, hideModal } = useModal();
 
@@ -92,15 +94,12 @@ function QuizScreen({ navigation }: Props) {
     };
 
     const setNextQuestion = (): void => {
-        if (quiz === null) {
-            return;
-        }
-
         clearCountdown();
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setErrorMessage(null);
         setButtonTitle('check');
         setIsChecking(false);
+        setAreAnswersDisabled(false);
     };
 
     const finishQuiz = (): void => {
@@ -142,6 +141,7 @@ function QuizScreen({ navigation }: Props) {
             setCorrectAnswersCount(
                 (correctAnswersCount) => correctAnswersCount + 1,
             );
+            setAreAnswersDisabled(true);
             startCountdown();
         } else {
             setErrorMessage('Try again');
@@ -191,6 +191,7 @@ function QuizScreen({ navigation }: Props) {
         setCorrectAnswersCount(0);
         setIsChecking(false);
         setErrorMessage(null);
+        setAreAnswersDisabled(false);
     };
 
     return (
@@ -227,6 +228,7 @@ function QuizScreen({ navigation }: Props) {
                                         isSelected={
                                             selectedAnswerIndex === index
                                         }
+                                        isDisabled={areAnswersDisabled}
                                         isCorrect={isAnswerCorrect(index)}
                                         onSelection={() => selectAnswer(index)}
                                     />

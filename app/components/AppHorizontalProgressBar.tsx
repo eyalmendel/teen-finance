@@ -8,12 +8,14 @@ type Props = {
     progress: number;
     durationInSeconds?: number;
     height?: number | `${number}%` | null;
+    onFinish?: () => void;
 };
 
 function AppHorizontalProgressBar({
     progress,
     durationInSeconds,
     height,
+    onFinish,
 }: Props) {
     const [width, setWidth] = useState(new Animated.Value(0));
 
@@ -22,13 +24,19 @@ function AppHorizontalProgressBar({
             toValue: progress * 100,
             duration: durationInSeconds ? 1000 * durationInSeconds : 500,
             useNativeDriver: false,
-        }).start();
+        }).start(onAnimationEnd);
     }, [progress]);
 
     const interpolatedWidth = width.interpolate({
         inputRange: [0, 100],
         outputRange: ['0%', '100%'],
     });
+
+    const onAnimationEnd = (event: { finished: boolean }): void => {
+        if (event.finished && onFinish) {
+            onFinish();
+        }
+    };
 
     return (
         <View style={[styles.container, { height }]}>

@@ -259,6 +259,9 @@ function QuizScreen({ navigation }: Props) {
                                     progress={progress}
                                     durationInSeconds={COUNTDOWN_TOTAL_SECONDS}
                                     height={'100%'}
+                                    onFinish={() =>
+                                        submitButtonHandlers[buttonTitle]()
+                                    }
                                 />
                             </View>
                         )}

@@ -1,26 +1,19 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import {
-    FlatList,
-    Image,
-    ImageBackground,
-    Pressable,
-    StyleSheet,
-    Text,
-} from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
 
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import ScreenTitle from '@components/ScreenTitle';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
+import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
-import { STYLES } from '@config/styles';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 

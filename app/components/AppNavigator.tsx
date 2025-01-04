@@ -8,6 +8,8 @@ import SubjectsScreen from '@screens/SubjectsScreen';
 import WatchingStyleScreen from '@screens/WatchingStyleScreen';
 import React from 'react';
 import ArticleScreen from '@screens/ArticleScreen';
+import QuizScreen from '@screens/QuizScreen';
+import QuizAnswerSummaryScreen from '@screens/QuizAnswerSummaryScreen';
 
 const Stack = createNativeStackNavigator<AppRoutesParamList>();
 
@@ -47,6 +49,16 @@ function AppNavigator() {
             <Stack.Screen
                 name={RouteNames.ARTICLE}
                 component={ArticleScreen}
+                options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+                name={RouteNames.QUIZ}
+                component={QuizScreen}
+                options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+                name={RouteNames.QUIZ_ANSWER_SUMMARY}
+                component={QuizAnswerSummaryScreen}
                 options={{ headerShown: false }}
             ></Stack.Screen>
         </Stack.Navigator>

@@ -8,4 +8,8 @@ export const COLORS = {
     eggWhite: '#fdfdfd',
     grey: '#909090',
     lightPurple: '#e8def8',
+    correctBackground: '#abd1c6',
+    correctText: '#004643',
+    wrongBackground: '#efbebe',
+    wrongText: '#780202',
 };

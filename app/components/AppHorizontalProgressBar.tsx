@@ -1,21 +1,30 @@
-import { COLORS } from '@config/colors';
-import { moderateScale, verticalScale } from '@services/scale';
 import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
+import { COLORS } from '@config/colors';
+import { moderateScale, verticalScale } from '@services/scale';
+
 type Props = {
     progress: number;
+    durationInSeconds?: number;
+    height?: number | `${number}%` | null;
+    onFinish?: () => void;
 };
 
-function AppHorizontalProgressBar({ progress }: Props) {
+function AppHorizontalProgressBar({
+    progress,
+    durationInSeconds,
+    height,
+    onFinish,
+}: Props) {
     const [width, setWidth] = useState(new Animated.Value(0));
 
     useEffect(() => {
         Animated.timing(width, {
             toValue: progress * 100,
-            duration: 500,
+            duration: durationInSeconds ? 1000 * durationInSeconds : 500,
             useNativeDriver: false,
-        }).start();
+        }).start(onAnimationEnd);
     }, [progress]);
 
     const interpolatedWidth = width.interpolate({
@@ -23,10 +32,20 @@ function AppHorizontalProgressBar({ progress }: Props) {
         outputRange: ['0%', '100%'],
     });
 
+    const onAnimationEnd = (event: { finished: boolean }): void => {
+        if (event.finished && onFinish) {
+            onFinish();
+        }
+    };
+
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { height }]}>
             <Animated.View
-                style={[styles.progress, { width: interpolatedWidth }]}
+                style={[
+                    styles.progress,
+                    { width: interpolatedWidth },
+                    { height },
+                ]}
             />
         </View>
     );

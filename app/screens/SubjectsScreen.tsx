@@ -53,8 +53,14 @@ function SubjectsScreen({ navigation }: Props) {
                             ]}
                             onPress={() => handleSubjectSelection(item)}
                         >
+                            {!item.isAvailable && (
+                                <Image
+                                    style={styles.comingSoon}
+                                    source={require('@assets/icons/coming-soon.png')}
+                                />
+                            )}
                             <Image
-                                style={styles.image}
+                                style={styles.icon}
                                 source={item.icon}
                             ></Image>
                             <Text
@@ -79,33 +85,36 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     cardContainer: {
+        position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
         width: horizontalScale(160),
         height: verticalScale(144),
         borderRadius: moderateScale(8),
-        margin: '2%',
-        paddingHorizontal: '8%',
-        paddingVertical: '8%',
-        gap: '3%',
+        margin: moderateScale(8),
+        paddingBlock: verticalScale(16),
+        paddingInline: horizontalScale(16),
+        gap: verticalScale(8),
         backgroundColor: COLORS.purple,
     },
-    unavailable: {
-        opacity: 0.5,
-        pointerEvents: 'none',
-    },
-    unavailableBackground: {
+    comingSoon: {
         width: '100%',
         height: '100%',
+        position: 'absolute',
+        opacity: 0.1,
     },
-    image: {
-        width: '30%',
+    unavailable: {
+        pointerEvents: 'none',
+        opacity: 0.8,
+    },
+    icon: {
         objectFit: 'contain',
     },
     label: {
         fontSize: TEXT.size.default,
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
+        textAlign: 'center',
     },
 });
 

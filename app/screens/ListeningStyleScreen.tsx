@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import AppAudioPlayer from '@components/AppAudioPlayer';
 import AppCard from '@components/AppCard';
+import AppSimpleList from '@components/AppSimpleList';
 import EmptyState from '@components/EmptyState';
+import EstimatedTime from '@components/EstimatedTime';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MediaLearningUnit } from '@models/learning-unit';
 import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import EstimatedTime from '@components/EstimatedTime';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
@@ -42,11 +42,10 @@ function ListeningStyleScreen() {
             {audioUnits?.length === 0 ? (
                 <EmptyState />
             ) : (
-                <FlatList
+                <AppSimpleList
+                    style={styles.list}
                     data={audioUnits}
-                    keyExtractor={(audio) => audio.id.toString()}
-                    contentContainerStyle={styles.list}
-                    renderItem={({ item }) => (
+                    renderItem={(item) => (
                         <AppCard style={styles.cardContainer}>
                             <>
                                 <Text
@@ -78,7 +77,7 @@ function ListeningStyleScreen() {
                             </>
                         </AppCard>
                     )}
-                ></FlatList>
+                ></AppSimpleList>
             )}
         </Screen>
     );
@@ -110,8 +109,8 @@ const styles = StyleSheet.create({
         marginBlockStart: verticalScale(16),
     },
     playerContainer: {
-        width: horizontalScale(40),
-        height: verticalScale(40),
+        width: Math.floor(horizontalScale(40)),
+        height: Math.floor(verticalScale(40)),
         borderRadius: moderateScale(24),
     },
 });

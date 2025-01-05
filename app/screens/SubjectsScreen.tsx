@@ -1,10 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
+import { Image, Pressable, StyleSheet, Text } from 'react-native';
 
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import ScreenTitle from '@components/ScreenTitle';
+import AppSimpleList from '@components/AppSimpleList';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { STYLES } from '@config/styles';
@@ -40,20 +41,19 @@ function SubjectsScreen({ navigation }: Props) {
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (
-                <FlatList
+                <AppSimpleList
+                    style={styles.list}
                     data={subjects}
-                    keyExtractor={(subject) => subject.id.toString()}
-                    contentContainerStyle={styles.list}
                     numColumns={2}
-                    renderItem={({ item }) => (
+                    renderItem={(subject) => (
                         <Pressable
                             style={[
                                 styles.cardContainer,
-                                !item.isAvailable ? styles.unavailable : '',
+                                !subject.isAvailable ? styles.unavailable : '',
                             ]}
-                            onPress={() => handleSubjectSelection(item)}
+                            onPress={() => handleSubjectSelection(subject)}
                         >
-                            {!item.isAvailable && (
+                            {!subject.isAvailable && (
                                 <Image
                                     style={styles.comingSoon}
                                     source={require('@assets/icons/coming-soon.png')}
@@ -61,16 +61,16 @@ function SubjectsScreen({ navigation }: Props) {
                             )}
                             <Image
                                 style={styles.icon}
-                                source={item.icon}
+                                source={subject.icon}
                             ></Image>
                             <Text
                                 style={[STYLES.rightAlignedText, styles.label]}
                             >
-                                {translate(item.name)}
+                                {translate(subject.name)}
                             </Text>
                         </Pressable>
                     )}
-                ></FlatList>
+                />
             )}
         </Screen>
     );
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
-        opacity: 0.1,
+        opacity: 0.3,
     },
     unavailable: {
         pointerEvents: 'none',

@@ -50,7 +50,6 @@ function AppAudioPlayer({ sourceUri, style }: Props) {
                 name={isPlaying ? 'pause' : 'play-arrow'}
                 size={horizontalScale(30)}
                 color={COLORS.white}
-                style={styles.playIcon}
             ></MaterialIcons>
         </Pressable>
     );
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: COLORS.primary,
     },
-    playIcon: {},
 });
 
 export default AppAudioPlayer;

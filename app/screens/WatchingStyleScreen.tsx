@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
+import AppCard from '@components/AppCard';
+import AppSimpleList from '@components/AppSimpleList';
 import AppVideoPlayer from '@components/AppVideoPlayer';
 import EmptyState from '@components/EmptyState';
+import EstimatedTime from '@components/EstimatedTime';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MediaLearningUnit } from '@models/learning-unit';
 import { getVideoUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import AppCard from '@components/AppCard';
-import EstimatedTime from '@components/EstimatedTime';
 
 function WatchingStyleScreen() {
     const [videoUnits, setVideoUnits] = useState<MediaLearningUnit[]>([]);
@@ -42,11 +42,10 @@ function WatchingStyleScreen() {
             {videoUnits?.length === 0 ? (
                 <EmptyState />
             ) : (
-                <FlatList
+                <AppSimpleList
+                    style={styles.list}
                     data={videoUnits}
-                    keyExtractor={(video) => video.id.toString()}
-                    contentContainerStyle={styles.list}
-                    renderItem={({ item }) => (
+                    renderItem={(item) => (
                         <AppCard style={styles.cardContainer}>
                             <>
                                 <View style={styles.details}>
@@ -78,7 +77,7 @@ function WatchingStyleScreen() {
                             </>
                         </AppCard>
                     )}
-                ></FlatList>
+                ></AppSimpleList>
             )}
         </Screen>
     );

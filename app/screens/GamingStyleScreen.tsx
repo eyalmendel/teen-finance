@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import AppCard from '@components/AppCard';
+import AppSimpleList from '@components/AppSimpleList';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
+import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { LearningUnit } from '@models/learning-unit';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { getGameUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AppRoutesParamList, RouteNames } from '@config/routes';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.GAMING>;
 
@@ -42,11 +43,10 @@ function GamingStyleScreen({ navigation }: Props) {
             {games?.length === 0 ? (
                 <EmptyState />
             ) : (
-                <FlatList
+                <AppSimpleList
+                    style={styles.list}
                     data={games}
-                    keyExtractor={(game) => game.id.toString()}
-                    contentContainerStyle={styles.list}
-                    renderItem={({ item }) => (
+                    renderItem={(item) => (
                         <AppCard
                             style={styles.cardContainer}
                             onPress={() => navigation.navigate(RouteNames.QUIZ)}
@@ -80,7 +80,7 @@ function GamingStyleScreen({ navigation }: Props) {
                             </>
                         </AppCard>
                     )}
-                ></FlatList>
+                ></AppSimpleList>
             )}
         </Screen>
     );

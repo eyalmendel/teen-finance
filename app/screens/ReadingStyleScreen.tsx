@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import AppCard from '@components/AppCard';
+import AppSimpleList from '@components/AppSimpleList';
 import EmptyState from '@components/EmptyState';
 import EstimatedTime from '@components/EstimatedTime';
 import Screen from '@components/Screen';
@@ -44,11 +45,10 @@ function ReadingStyleScreen({ navigation }: Props) {
             {articles?.length === 0 ? (
                 <EmptyState />
             ) : (
-                <FlatList
+                <AppSimpleList
+                    style={styles.list}
                     data={articles}
-                    keyExtractor={(learningUnit) => learningUnit.id.toString()}
-                    contentContainerStyle={styles.list}
-                    renderItem={({ item }) => (
+                    renderItem={(item) => (
                         <AppCard
                             style={styles.cardContainer}
                             onPress={() =>
@@ -87,7 +87,7 @@ function ReadingStyleScreen({ navigation }: Props) {
                             </>
                         </AppCard>
                     )}
-                ></FlatList>
+                />
             )}
         </Screen>
     );

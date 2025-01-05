@@ -1,16 +1,17 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text } from 'react-native';
 
 import AppCard from '@components/AppCard';
 import Screen from '@components/Screen';
 import ScreenTitle from '@components/ScreenTitle';
+import AppSimpleList from '@components/AppSimpleList';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { TEXT } from '@config/text';
 import { LearningStyle } from '@models/learning-style';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
-import { moderateScale, verticalScale } from '@services/scale';
+import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -54,11 +55,10 @@ function LearningStyleScreen({ navigation }: Props) {
             <ScreenTitle
                 text={translate('learningStylesScreenTitle')}
             ></ScreenTitle>
-            <FlatList
+            <AppSimpleList
+                style={styles.list}
                 data={LEARNING_STYLES}
-                keyExtractor={(style) => style.id.toString()}
-                contentContainerStyle={styles.list}
-                renderItem={({ item }) => (
+                renderItem={(item) => (
                     <AppCard
                         style={styles.cardContainer}
                         onPress={() => handleStyleSelection(item.screen)}
@@ -74,18 +74,16 @@ function LearningStyleScreen({ navigation }: Props) {
                         </>
                     </AppCard>
                 )}
-            ></FlatList>
+            />
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
     list: {
-        justifyContent: 'center',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: moderateScale(16),
+        paddingInline: horizontalScale(4),
         paddingVertical: verticalScale(24),
+        gap: moderateScale(16),
     },
     cardContainer: {
         flexDirection: 'row',

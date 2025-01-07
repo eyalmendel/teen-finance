@@ -15,7 +15,7 @@ function ScreenTitle({ text, style }: Props) {
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: moderateScale(TEXT.size.mediumHeadline),
+        fontSize: moderateScale(TEXT.size.smallHeadline),
         textAlign: 'center',
         fontWeight: TEXT.weight.extraBold,
         color: COLORS.primary,

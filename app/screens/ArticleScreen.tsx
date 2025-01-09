@@ -58,7 +58,7 @@ function ArticleScreen({ route }: Props) {
     return (
         <Screen>
             <View style={styles.container}>
-                <AppHorizontalProgressBar progress={progress} />
+                <AppHorizontalProgressBar progress={progress} height={4} />
                 <ScrollView
                     ref={scrollViewRef}
                     style={styles.scrollView}

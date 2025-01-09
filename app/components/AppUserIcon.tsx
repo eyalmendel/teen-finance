@@ -1,25 +1,21 @@
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { horizontalScale, moderateScale } from '@services/scale';
 import React from 'react';
-import {
-    Image,
-    ImageSourcePropType,
-    ImageStyle,
-    StyleSheet,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
+import AppImage from './AppImage';
 
 type Props = {
-    icon: ImageSourcePropType;
-    style?: ImageStyle;
+    icon: string;
 };
 
-function AppUserIcon({ icon, style }: Props) {
-    return <Image style={[styles.icon, style]} source={icon} />;
+function AppUserIcon({ icon }: Props) {
+    return <AppImage style={[styles.icon]} source={icon} />;
 }
 
 const styles = StyleSheet.create({
     icon: {
         width: horizontalScale(55),
-        height: verticalScale(55),
+        aspectRatio: 1,
+        objectFit: 'contain',
         borderRadius: moderateScale(55),
     },
 });

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import Icons from '@assets/icons';
 import { COLORS } from '@config/colors';
+import { StringKey } from '@config/strings';
+import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
+import { ModalAction } from '@context/modalContext';
 import { AntDesign } from '@expo/vector-icons';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import { ModalAction } from '@context/modalContext';
 import AppHomeButton from './AppHomeButton';
+import AppImage from './AppImage';
 import AppRepeatButton from './AppRepeatButton';
-import { StringKey } from '@config/strings';
-import { STYLES } from '@config/styles';
 
 type Props = {
     correctAnswersCount: number;
@@ -46,10 +48,7 @@ export default function QuizCompletedModal({
 
     return (
         <View style={styles.container}>
-            <Image
-                style={styles.image}
-                source={require('@assets/icons/playing-style.png')}
-            />
+            <AppImage style={styles.image} source={Icons.playingStyle} />
             <View style={styles.content}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>

@@ -1,24 +1,29 @@
 import React from 'react';
 import {
     GestureResponderEvent,
-    Image,
-    ImageSourcePropType,
+    ImageRequireSource,
     Pressable,
     StyleSheet,
 } from 'react-native';
 
 import { COLORS } from '@config/colors';
 import { horizontalScale, verticalScale } from '@services/scale';
+import AppImage from './AppImage';
 
 type Props = {
-    icon: ImageSourcePropType;
+    icon: ImageRequireSource;
     onPress: (event: GestureResponderEvent) => void;
 };
 
 export default function AppRoundButton({ icon, onPress }: Props) {
     return (
         <Pressable style={styles.container} onPress={onPress}>
-            <Image style={styles.icon} source={icon} />
+            <AppImage
+                style={styles.icon}
+                source={icon}
+                contentFit="contain"
+                contentPosition="center"
+            />
         </Pressable>
     );
 }
@@ -28,7 +33,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 26,
-        height: 26,
+        aspectRatio: 1,
         borderRadius: 26,
         backgroundColor: COLORS.primary,
     },

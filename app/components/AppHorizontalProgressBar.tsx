@@ -54,13 +54,11 @@ function AppHorizontalProgressBar({
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: verticalScale(4),
         borderRadius: moderateScale(2),
         backgroundColor: COLORS.lightPurple,
         overflow: 'hidden',
     },
     progress: {
-        height: verticalScale(4),
         backgroundColor: COLORS.primary,
         borderRadius: moderateScale(4),
     },

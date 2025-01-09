@@ -13,7 +13,9 @@
       "@utils/*": ["app/utils/*"],
       "@context/*": ["app/context/*"],
       "@hooks/*": ["app/hooks/*"],
-      "@assets/*": ["assets/*"]
+      "@providers/*": ["app/providers/*"],
+      "@mocks/*": ["app/mocks/*"],
+      "@assets/*": ["assets/*"],
     }
   }
 }

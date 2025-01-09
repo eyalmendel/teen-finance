@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import AppCard from '@components/AppCard';
+import AppImage from '@components/AppImage';
+import AppSimpleList from '@components/AppSimpleList';
 import Screen from '@components/Screen';
 import ScreenTitle from '@components/ScreenTitle';
-import AppSimpleList from '@components/AppSimpleList';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { TEXT } from '@config/text';
@@ -12,6 +13,7 @@ import { LearningStyle } from '@models/learning-style';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import Icons from '@assets/icons';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -23,25 +25,25 @@ const LEARNING_STYLES: LearningStyle[] = [
         id: 0,
         name: 'read',
         screen: RouteNames.READING,
-        icon: require('@assets/icons/reading-style.png'),
+        icon: Icons.readingStyle,
     },
     {
         id: 1,
         name: 'watch',
         screen: RouteNames.VIDEO,
-        icon: require('@assets/icons/watching-style.png'),
+        icon: Icons.watchingStyle,
     },
     {
         id: 2,
         name: 'listen',
         screen: RouteNames.AUDIO,
-        icon: require('@assets/icons/listening-style.png'),
+        icon: Icons.listeningStyle,
     },
     {
         id: 3,
         name: 'play',
         screen: RouteNames.GAMING,
-        icon: require('@assets/icons/playing-style.png'),
+        icon: Icons.playingStyle,
     },
 ];
 
@@ -64,10 +66,11 @@ function LearningStyleScreen({ navigation }: Props) {
                         onPress={() => handleStyleSelection(item.screen)}
                     >
                         <>
-                            <Image
+                            <AppImage
                                 style={styles.image}
                                 source={item.icon}
-                            ></Image>
+                                contentFit="contain"
+                            />
                             <Text style={styles.label}>
                                 {translate(item.name)}
                             </Text>
@@ -91,18 +94,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: moderateScale(48),
     },
-    boxShadow: {
-        elevation: verticalScale(4),
-        shadowColor: COLORS.primary,
-        shadowOffset: { width: 0, height: verticalScale(4) },
-        shadowOpacity: 10,
-    },
     image: {
         width: '35%',
-        objectFit: 'contain',
+        aspectRatio: 1,
     },
     label: {
-        fontSize: moderateScale(TEXT.size.smallHeadline),
+        fontSize: moderateScale(TEXT.size.large),
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
     },

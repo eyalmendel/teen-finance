@@ -1,7 +1,9 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
+import { Image } from 'expo-image';
 
+import Icons from '@assets/icons';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
 import ScreenTitle from '@components/ScreenTitle';
@@ -15,6 +17,7 @@ import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
+import AppImage from '@components/AppImage';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -54,15 +57,15 @@ function SubjectsScreen({ navigation }: Props) {
                             onPress={() => handleSubjectSelection(subject)}
                         >
                             {!subject.isAvailable && (
-                                <Image
+                                <AppImage
                                     style={styles.comingSoon}
-                                    source={require('@assets/icons/coming-soon.png')}
+                                    source={Icons.comingSoon}
                                 />
                             )}
-                            <Image
+                            <AppImage
                                 style={styles.icon}
                                 source={subject.icon}
-                            ></Image>
+                            />
                             <Text
                                 style={[STYLES.rightAlignedText, styles.label]}
                             >
@@ -101,13 +104,16 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
-        opacity: 0.3,
+        backgroundColor: COLORS.purple,
+        opacity: 0.2,
     },
     unavailable: {
         pointerEvents: 'none',
         opacity: 0.8,
     },
     icon: {
+        width: 30,
+        height: 30,
         objectFit: 'contain',
     },
     label: {

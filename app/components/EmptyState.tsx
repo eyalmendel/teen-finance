@@ -1,16 +1,16 @@
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+import Icons from '@assets/icons';
 import { TEXT } from '@config/text';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import AppImage from './AppImage';
 
 function EmptyState() {
     return (
         <View style={styles.container}>
-            <Image
-                style={styles.image}
-                source={require('@assets/icons/error.png')}
-            />
+            <AppImage style={styles.image} source={Icons.error} />
             <Text style={styles.message}>
                 {translate('missingDataErrorMessage')}
             </Text>

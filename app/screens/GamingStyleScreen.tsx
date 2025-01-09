@@ -16,6 +16,7 @@ import { getGameUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import AppImage from '@components/AppImage';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.GAMING>;
 
@@ -52,10 +53,10 @@ function GamingStyleScreen({ navigation }: Props) {
                             onPress={() => navigation.navigate(RouteNames.QUIZ)}
                         >
                             <>
-                                <Image
+                                <AppImage
                                     style={styles.thumbnail}
                                     source={item.thumbnail}
-                                    resizeMode="contain"
+                                    contentFit="contain"
                                 />
                                 <View style={styles.details}>
                                     <Text
@@ -100,13 +101,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     title: {
-        fontSize: moderateScale(TEXT.size.smallHeadline),
+        fontSize: moderateScale(TEXT.size.large),
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
     },
     thumbnail: {
-        height: verticalScale(96),
         width: '100%',
+        height: verticalScale(96),
         borderRadius: moderateScale(8),
         overflow: 'hidden',
     },

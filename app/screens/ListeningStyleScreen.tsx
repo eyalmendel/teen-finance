@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 10,
     },
     title: {
-        fontSize: moderateScale(TEXT.size.smallHeadline),
+        fontSize: moderateScale(TEXT.size.large),
         fontWeight: TEXT.weight.bold,
         marginBlockEnd: verticalScale(8),
         color: COLORS.primary,
@@ -109,9 +109,9 @@ const styles = StyleSheet.create({
         marginBlockStart: verticalScale(16),
     },
     playerContainer: {
-        width: Math.floor(horizontalScale(40)),
-        height: Math.floor(verticalScale(40)),
-        borderRadius: moderateScale(24),
+        width: horizontalScale(40),
+        aspectRatio: 1,
+        borderRadius: moderateScale(40),
     },
 });
 

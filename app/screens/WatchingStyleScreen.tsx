@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         gap: verticalScale(4),
     },
     title: {
-        fontSize: moderateScale(TEXT.size.smallHeadline),
+        fontSize: moderateScale(TEXT.size.large),
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
     },

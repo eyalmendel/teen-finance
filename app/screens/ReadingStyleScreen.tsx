@@ -17,6 +17,7 @@ import { getArticlesBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import AppImage from '@components/AppImage';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.READING>;
 
@@ -79,10 +80,9 @@ function ReadingStyleScreen({ navigation }: Props) {
                                     )}
                                     <EstimatedTime time={item.estimatedTime} />
                                 </View>
-                                <Image
+                                <AppImage
                                     style={styles.thumbnail}
                                     source={item.thumbnail}
-                                    resizeMode="contain"
                                 />
                             </>
                         </AppCard>
@@ -111,15 +111,15 @@ const styles = StyleSheet.create({
         gap: verticalScale(8),
     },
     title: {
-        fontSize: moderateScale(TEXT.size.smallHeadline),
+        fontSize: moderateScale(TEXT.size.large),
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
     },
-
     thumbnail: {
         width: '30%',
         borderRadius: moderateScale(8),
-        aspectRatio: 96 / 128,
+        aspectRatio: 1,
+        objectFit: 'contain',
     },
     boxShadow: {
         elevation: 4,

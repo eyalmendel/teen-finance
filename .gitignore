@@ -36,3 +36,6 @@ yarn-error.*
 
 #prettier
 .prettierrc.json
+
+# prebuilds
+/android

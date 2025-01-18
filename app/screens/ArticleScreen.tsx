@@ -20,6 +20,7 @@ import { TEXT } from '@config/text';
 import AppUserIcon from '@components/AppUserIcon';
 import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
 import { AntDesign } from '@expo/vector-icons';
+import AppHeadline from '@components/AppHeadline';
 
 export type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -66,7 +67,7 @@ function ArticleScreen({ route }: Props) {
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                 >
-                    <ScreenTitle
+                    <AppHeadline
                         text={translate(article.title)}
                         style={STYLES.rightAlignedText}
                     />

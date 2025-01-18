@@ -1,11 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-
 import AppCard from '@components/AppCard';
 import AppImage from '@components/AppImage';
 import AppSimpleList from '@components/AppSimpleList';
 import Screen from '@components/Screen';
-import ScreenTitle from '@components/ScreenTitle';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { TEXT } from '@config/text';
@@ -55,9 +53,6 @@ function LearningStyleScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            {/* <ScreenTitle
-                text={translate('learningStylesScreenTitle')}
-            ></ScreenTitle> */}
             <AppHeadline text={translate('learningStylesScreenTitle')} />
             <AppSimpleList
                 style={styles.list}

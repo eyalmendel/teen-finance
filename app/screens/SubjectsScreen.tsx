@@ -40,10 +40,6 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            {/* <View style={styles.headline}>
-                <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
-                <AppGoBackButton />
-            </View> */}
             <AppHeadline text={translate('subjectsScreenTitle')} showIcon={false}/>
             {subjects?.length === 0 ? (
                 <EmptyState />

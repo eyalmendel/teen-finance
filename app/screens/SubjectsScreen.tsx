@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 
 import Icons from '@assets/icons';
@@ -18,6 +18,7 @@ import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
 import AppImage from '@components/AppImage';
+import AppGoBackButton from '@components/AppGoBackButton';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -40,7 +41,10 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
+            <View style={styles.headline}>
+                <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
+                <AppGoBackButton />
+            </View>
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (
@@ -121,6 +125,16 @@ const styles = StyleSheet.create({
         fontWeight: TEXT.weight.bold,
         color: COLORS.primary,
         textAlign: 'center',
+    },
+    headline:{
+        display: 'flex',
+        flexDirection: 'row',
+        paddingVertical: 10,
+        justifyContent: 'flex-end',
+        gap: 16,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        marginBottom: verticalScale(32)
     },
 });
 

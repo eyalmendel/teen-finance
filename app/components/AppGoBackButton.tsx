@@ -1,6 +1,5 @@
 import React from 'react';
-import { GestureResponderEvent, ImageRequireSource, Pressable, StyleSheet, View } from 'react-native';
-import { COLORS } from '@config/colors';
+import { GestureResponderEvent, Pressable, StyleSheet } from 'react-native';
 import { horizontalScale, verticalScale } from '@services/scale';
 import AppImage from './AppImage';
 import Icons from '@assets/icons';

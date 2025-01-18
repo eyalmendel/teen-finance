@@ -19,6 +19,7 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
 import AppImage from '@components/AppImage';
 import AppGoBackButton from '@components/AppGoBackButton';
+import AppHeadline from '@components/AppHeadline';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -41,10 +42,11 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <View style={styles.headline}>
+            {/* <View style={styles.headline}>
                 <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
                 <AppGoBackButton />
-            </View>
+            </View> */}
+            <AppHeadline text={translate('subjectsScreenTitle')} />
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (

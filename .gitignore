@@ -34,8 +34,5 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-#prettier
-.prettierrc.json
-
 # prebuilds
 /android

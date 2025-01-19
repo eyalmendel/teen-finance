@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         gap: 16,
         alignSelf: 'stretch',
         alignItems: 'center',
-        marginBottom: verticalScale(20),
+        marginBottom: verticalScale(32),
     },
     centerTitle: {
         justifyContent: 'center',

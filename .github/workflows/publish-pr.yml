@@ -1,44 +1,33 @@
 name: Publish Pull Request
-on:
-    pull_request:
-        branches:
-            - dev
+on: pull_request
 
 jobs:
-    publish:
+    update:
+        name: EAS Update
         runs-on: ubuntu-latest
         permissions:
             contents: read
             pull-requests: write
         steps:
-            - name: Checkout
+            - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Setup Node.js
+            - name: Setup Node
               uses: actions/setup-node@v4
               with:
                   node-version: 20.x
+                  cache: yarn
 
-            - name: Setup Expo
+            - name: Setup EAS
               uses: expo/expo-github-action@v8
               with:
-                  expo-version: 6.x
-                  expo-cache: true
                   eas-version: latest
                   token: ${{ secrets.EXPO_TOKEN }}
 
-            - name: Install Dependencies
-              run: npm i
+            - name: Install dependencies
+              run: npm install
 
-            - name: Publish to Expo Go
-              run: NODE_ENV=dev expo publish --non-interactive --release-channel pr-${{ github.event.number }}
-
-            - name: Add Expo Link to PR
-              uses: mshick/add-pr-comment@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Create preview
+              uses: expo/expo-github-action/preview@v8
               with:
-                  message: |
-                      ## Check out my PR changes with Expo Go
-                      ![Expo QR](https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=exp://exp.host/@eyalmendel/teen-finance?release-channel=pr-${{ github.event.number }})
-                      **------ Build published to [Expo](https://exp.host/@eyalmendel/teen-finance?release-channel=pr-${{ github.event.number }}) ------**
+                  command: eas update --auto

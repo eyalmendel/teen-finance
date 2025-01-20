@@ -8,17 +8,16 @@ import { verticalScale } from '@services/scale';
 type Props = {
     text: string;
     showIcon?: boolean;
-    showTitle?: boolean;
     style?: TextStyle;
 };
 
-export default function AppHeadline({ text, style, showIcon = true, showTitle = true }: Props) {
+export default function AppHeadline({ text, style, showIcon = true }: Props) {
     const navigation = useNavigation();
     const titleStyle = { ...styles.title, ...style };
 
     return (
-        <View style={[styles.container, !showIcon && styles.centerTitle, !showTitle && styles.noTitle]} >
-            {showTitle && <ScreenTitle text={text} style={titleStyle} />}
+        <View style={[styles.container, !showIcon && styles.centerTitle]} >
+            <ScreenTitle text={text} style={titleStyle} />
             {showIcon && (<AppGoBackButton onPress={() => navigation.goBack()} />)}
         </View>
     );
@@ -37,13 +36,9 @@ const styles = StyleSheet.create({
     centerTitle: {
         justifyContent: 'center',
     },
+
     title: {
         flexShrink: 1,
         flexWrap: 'wrap', 
     },
-    noTitle: {
-        marginBottom: 0,
-        paddingVertical: verticalScale(10),
-    }
-
 });

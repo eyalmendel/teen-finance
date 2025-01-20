@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { StringKey } from '@config/strings';
 import { translate } from '@services/language';
 import { getSelectedSubjectName } from '@services/state';
-import ScreenTitle from '@components/ScreenTitle';
+import AppHeadline from '@components/AppHeadline';
 
 export type Props = {
     template: StringKey;
@@ -15,7 +14,7 @@ function SubjectScreenTitle({ template }: Props) {
         return selectedSubjectName !== null ? [selectedSubjectName] : [];
     };
 
-    return <ScreenTitle text={translate(template, getTitleParamValue())} />;
+    return <AppHeadline text={translate(template, getTitleParamValue())} />;
 }
 
 export default SubjectScreenTitle;

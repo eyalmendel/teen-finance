@@ -58,6 +58,7 @@ function ArticleScreen({ route }: Props) {
 
     return (
         <Screen>
+            <AppHeadline text={translate(article.title)} showTitle={false} />
             <View style={styles.container}>
                 <AppHorizontalProgressBar progress={progress} height={4} />
                 <ScrollView
@@ -67,7 +68,7 @@ function ArticleScreen({ route }: Props) {
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                 >
-                    <AppHeadline
+                    <ScreenTitle
                         text={translate(article.title)}
                         style={STYLES.rightAlignedText}
                     />

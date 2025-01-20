@@ -122,16 +122,7 @@ const styles = StyleSheet.create({
         color: COLORS.primary,
         textAlign: 'center',
     },
-    headline:{
-        display: 'flex',
-        flexDirection: 'row',
-        paddingVertical: 10,
-        justifyContent: 'flex-end',
-        gap: 16,
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        marginBottom: verticalScale(32)
-    },
+
 });
 
 export default SubjectsScreen;

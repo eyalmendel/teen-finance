@@ -30,4 +30,5 @@ jobs:
             - name: Create preview
               uses: expo/expo-github-action/preview@v8
               with:
+                  qr-target: expo-go
                   command: eas update --auto --environment preview --platform all

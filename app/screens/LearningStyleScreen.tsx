@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: moderateScale(TEXT.size.large),
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.primary,
     },
 });

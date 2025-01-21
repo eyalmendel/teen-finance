@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     },
     message: {
         fontSize: moderateScale(TEXT.size.smallHeadline),
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
     },
 });
 

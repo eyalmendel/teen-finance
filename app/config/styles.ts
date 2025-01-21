@@ -15,7 +15,7 @@ export const STYLES = StyleSheet.create({
     },
     defaultText: {
         fontSize: moderateScale(TEXT.size.default),
-        fontWeight: TEXT.weight.regular,
+        fontFamily: TEXT.font.assistantRegular,
         color: COLORS.primary,
     },
     disabled: {

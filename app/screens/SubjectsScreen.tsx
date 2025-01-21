@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: TEXT.size.default,
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.primary,
         textAlign: 'center',
     },

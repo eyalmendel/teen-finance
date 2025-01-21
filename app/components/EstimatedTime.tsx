@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     estimatedTimeLabel: {
         fontSize: TEXT.size.small,
         color: COLORS.primary,
+        fontFamily: TEXT.font.assistantRegular,
     },
     icon: {
         alignSelf: 'center',

@@ -294,14 +294,14 @@ const styles = StyleSheet.create({
     },
     question: {
         fontSize: TEXT.size.default * 1.125,
-        fontWeight: 600,
+        fontFamily: TEXT.font.assistantSemiBold,
     },
     answerList: {
         gap: verticalScale(16),
     },
     errorMessage: {
         fontSize: TEXT.size.default,
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.primary,
         paddingVertical: verticalScale(16),
     },
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
     },
     submitButtonText: {
         fontSize: TEXT.size.smallHeadline,
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.eggWhite,
     },
 });

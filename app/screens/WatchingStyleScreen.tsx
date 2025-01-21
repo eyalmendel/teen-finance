@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: moderateScale(TEXT.size.large),
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.primary,
     },
     videoPlayerContainer: {

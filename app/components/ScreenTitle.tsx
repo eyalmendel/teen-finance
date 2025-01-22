@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         fontSize: moderateScale(TEXT.size.smallHeadline),
         textAlign: 'center',
         color: COLORS.primary,
-        marginBottom: verticalScale(32),
     },
 });
 

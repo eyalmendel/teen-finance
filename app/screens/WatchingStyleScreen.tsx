@@ -52,7 +52,7 @@ function WatchingStyleScreen() {
                                     <Text
                                         style={[
                                             STYLES.rightAlignedText,
-                                            styles.title,
+                                            STYLES.cardTitle,
                                         ]}
                                     >
                                         {translate(item.title)}
@@ -98,11 +98,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         width: '45%',
         gap: verticalScale(4),
-    },
-    title: {
-        fontSize: moderateScale(TEXT.size.large),
-        fontWeight: TEXT.weight.bold,
-        color: COLORS.primary,
     },
     videoPlayerContainer: {
         width: '50%',

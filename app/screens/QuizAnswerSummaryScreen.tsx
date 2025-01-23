@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     },
     questionText: {
         fontSize: TEXT.size.medium,
-        fontWeight: TEXT.weight.semiBold,
+        fontFamily: TEXT.font.assistantSemiBold,
     },
     actionButtonsContainer: {
         flexDirection: 'row',

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: TEXT.size.large,
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.primary,
         ...STYLES.rightAlignedText,
     },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     },
     reviewButtonText: {
         fontSize: TEXT.size.small,
-        fontWeight: TEXT.weight.bold,
+        fontFamily: TEXT.font.assistantBold,
         color: COLORS.eggWhite,
     },
     roundButtonsContainer: {

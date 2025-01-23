@@ -14,4 +14,10 @@ export const TEXT = {
         semiBold: 600,
         regular: 400,
     },
+    font: {
+        assistantRegular: 'Assistant-Regular',
+        assistantExtraBold: 'Assistant-ExtraBold',
+        assistantBold: 'Assistant-Bold',
+        assistantSemiBold: 'Assistant-SemiBold',
+    },
 } as const;

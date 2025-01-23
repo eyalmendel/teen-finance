@@ -15,11 +15,10 @@ function ScreenTitle({ text, style }: Props) {
 
 const styles = StyleSheet.create({
     text: {
+        fontFamily: TEXT.font.assistantExtraBold,
         fontSize: moderateScale(TEXT.size.smallHeadline),
         textAlign: 'center',
-        fontWeight: TEXT.weight.extraBold,
         color: COLORS.primary,
-        marginBottom: verticalScale(32),
     },
 });
 

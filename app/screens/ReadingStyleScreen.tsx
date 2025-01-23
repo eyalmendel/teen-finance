@@ -62,7 +62,7 @@ function ReadingStyleScreen({ navigation }: Props) {
                                 <View style={styles.details}>
                                     <Text
                                         style={[
-                                            styles.title,
+                                            STYLES.cardTitle,
                                             STYLES.rightAlignedText,
                                         ]}
                                     >
@@ -109,11 +109,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         width: '65%',
         gap: verticalScale(8),
-    },
-    title: {
-        fontSize: moderateScale(TEXT.size.large),
-        fontWeight: TEXT.weight.bold,
-        color: COLORS.primary,
     },
     thumbnail: {
         width: '30%',

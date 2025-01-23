@@ -17,9 +17,12 @@
       
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.teenfinance.app"
     },
-    "android": {},
+    "android": {
+      "package": "com.teenfinance.app"
+    },
     "web": {
       "favicon": "./assets/icons/logo.png"
     },
@@ -30,7 +33,13 @@
           "supportsBackgroundPlayback": false,
           "supportsPictureInPicture": true
         }
-      ]
-    ]
+      ],
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7a90ad14-92c7-4841-8e4a-489ffef01f4e"
+      }
+    }
   }
 }

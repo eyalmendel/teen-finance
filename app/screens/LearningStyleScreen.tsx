@@ -12,11 +12,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import Icons from '@assets/icons';
-<<<<<<< HEAD
 import { STYLES } from '@config/styles';
-=======
 import AppHeadline from '@components/AppHeadline';
->>>>>>> d1d61b971772686bdee52edea5d976080816660a
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,

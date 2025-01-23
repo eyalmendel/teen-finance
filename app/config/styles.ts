@@ -15,11 +15,21 @@ export const STYLES = StyleSheet.create({
     },
     defaultText: {
         fontSize: moderateScale(TEXT.size.default),
-        fontWeight: TEXT.weight.regular,
+        fontFamily: TEXT.font.assistantRegular,
         color: COLORS.primary,
     },
     disabled: {
         opacity: 0.5,
         pointerEvents: 'none',
+    },
+    cardTitle: {
+        fontSize: moderateScale(TEXT.size.large),
+        fontFamily: TEXT.font.assistantBold,
+        color: COLORS.primary,
+    },
+    label: {
+        fontSize: TEXT.size.default,
+        fontFamily: TEXT.font.assistantBold,
+        color: COLORS.primary,
     },
 });

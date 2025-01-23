@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     },
     answer: {
         fontSize: TEXT.size.default,
-        fontWeight: 600,
+        fontFamily: TEXT.font.assistantSemiBold,
     },
     selectedAnswer: {
         borderColor: COLORS.primary,

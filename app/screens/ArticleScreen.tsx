@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
         gap: moderateScale(8),
     },
     creditsText: {
+        fontFamily: TEXT.font.assistantRegular,
         fontSize: TEXT.size.default,
         color: COLORS.grey,
     },

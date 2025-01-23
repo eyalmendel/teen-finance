@@ -61,7 +61,7 @@ function GamingStyleScreen({ navigation }: Props) {
                                 <View style={styles.details}>
                                     <Text
                                         style={[
-                                            styles.title,
+                                            STYLES.cardTitle,
                                             STYLES.rightAlignedText,
                                         ]}
                                     >
@@ -99,11 +99,6 @@ const styles = StyleSheet.create({
     details: {
         gap: verticalScale(8),
         justifyContent: 'space-between',
-    },
-    title: {
-        fontSize: moderateScale(TEXT.size.large),
-        fontWeight: TEXT.weight.bold,
-        color: COLORS.primary,
     },
     thumbnail: {
         width: '100%',

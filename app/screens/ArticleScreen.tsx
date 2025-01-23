@@ -20,6 +20,8 @@ import { TEXT } from '@config/text';
 import AppUserIcon from '@components/AppUserIcon';
 import AppHorizontalProgressBar from '@components/AppHorizontalProgressBar';
 import { AntDesign } from '@expo/vector-icons';
+import AppGoBackButton from '@components/AppGoBackButton';
+import { useNavigation } from '@react-navigation/native';
 
 export type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -30,6 +32,7 @@ function ArticleScreen({ route }: Props) {
     const [progress, setProgress] = useState<number>(0);
     const scrollViewRef = useRef<ScrollView>(null);
     const { article } = route.params;
+    const navigation = useNavigation();
 
     const scroll = ({
         contentSize,
@@ -57,6 +60,9 @@ function ArticleScreen({ route }: Props) {
 
     return (
         <Screen>
+             <View style={styles.backArrow}>
+                <AppGoBackButton onPress={() => navigation.goBack()} />
+            </View>
             <View style={styles.container}>
                 <AppHorizontalProgressBar progress={progress} height={4} />
                 <ScrollView
@@ -99,6 +105,15 @@ function ArticleScreen({ route }: Props) {
 }
 
 const styles = StyleSheet.create({
+    backArrow: {
+        display: 'flex',
+        flexDirection: 'column',
+        paddingVertical: verticalScale(10),
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        gap: 16,
+        alignSelf: 'stretch',
+    },
     container: {
         flex: 1,
         paddingVertical: verticalScale(8),

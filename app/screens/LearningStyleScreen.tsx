@@ -1,11 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-
 import AppCard from '@components/AppCard';
 import AppImage from '@components/AppImage';
 import AppSimpleList from '@components/AppSimpleList';
 import Screen from '@components/Screen';
-import ScreenTitle from '@components/ScreenTitle';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { TEXT } from '@config/text';
@@ -14,7 +12,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import Icons from '@assets/icons';
+<<<<<<< HEAD
 import { STYLES } from '@config/styles';
+=======
+import AppHeadline from '@components/AppHeadline';
+>>>>>>> d1d61b971772686bdee52edea5d976080816660a
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -55,9 +57,7 @@ function LearningStyleScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <ScreenTitle
-                text={translate('learningStylesScreenTitle')}
-            ></ScreenTitle>
+            <AppHeadline text={translate('learningStylesScreenTitle')} />
             <AppSimpleList
                 style={styles.list}
                 data={LEARNING_STYLES}

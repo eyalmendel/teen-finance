@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { Image } from 'expo-image';
-
 import Icons from '@assets/icons';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
@@ -18,6 +17,7 @@ import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
 import AppImage from '@components/AppImage';
+import AppHeadline from '@components/AppHeadline';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -40,7 +40,7 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <ScreenTitle text={translate('subjectsScreenTitle')}></ScreenTitle>
+            <AppHeadline text={translate('subjectsScreenTitle')} showIcon={false}/>
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
         ...STYLES.label,
         textAlign: 'center',
     },
+
 });
 
 export default SubjectsScreen;

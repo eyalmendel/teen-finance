@@ -14,6 +14,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import Icons from '@assets/icons';
+import { STYLES } from '@config/styles';
 
 type Props = NativeStackScreenProps<
     AppRoutesParamList,
@@ -71,7 +72,7 @@ function LearningStyleScreen({ navigation }: Props) {
                                 source={item.icon}
                                 contentFit="contain"
                             />
-                            <Text style={styles.label}>
+                            <Text style={STYLES.cardTitle}>
                                 {translate(item.name)}
                             </Text>
                         </>
@@ -97,11 +98,6 @@ const styles = StyleSheet.create({
     image: {
         width: '35%',
         aspectRatio: 1,
-    },
-    label: {
-        fontSize: moderateScale(TEXT.size.large),
-        fontFamily: TEXT.font.assistantBold,
-        color: COLORS.primary,
     },
 });
 

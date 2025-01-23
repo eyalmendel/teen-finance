@@ -22,4 +22,14 @@ export const STYLES = StyleSheet.create({
         opacity: 0.5,
         pointerEvents: 'none',
     },
+    cardTitle: {
+        fontSize: moderateScale(TEXT.size.large),
+        fontFamily: TEXT.font.assistantBold,
+        color: COLORS.primary,
+    },
+    label: {
+        fontSize: TEXT.size.default,
+        fontFamily: TEXT.font.assistantBold,
+        color: COLORS.primary,
+    },
 });

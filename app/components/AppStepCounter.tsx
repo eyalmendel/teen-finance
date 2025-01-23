@@ -2,6 +2,7 @@ import { COLORS } from '@config/colors';
 import { TEXT } from '@config/text';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { STYLES } from '@config/styles';
 
 type Props = {
     step: number;
@@ -11,7 +12,7 @@ type Props = {
 function AppStepCounter({ step, total }: Props) {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>
+            <Text style={STYLES.label}>
                 {step}/{total}
             </Text>
         </View>
@@ -21,11 +22,6 @@ function AppStepCounter({ step, total }: Props) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-    },
-    text: {
-        fontSize: TEXT.size.default,
-        fontFamily: TEXT.font.assistantBold,
-        color: COLORS.primary,
     },
 });
 

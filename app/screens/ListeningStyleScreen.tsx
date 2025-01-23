@@ -98,10 +98,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 10,
     },
     title: {
-        fontSize: moderateScale(TEXT.size.large),
-        fontFamily: TEXT.font.assistantBold,
-        marginBlockEnd: verticalScale(8),
-        color: COLORS.primary,
+        ...STYLES.cardTitle,
+        marginBlockEnd: verticalScale(8),   
     },
     controlsContainer: {
         flexDirection: 'row-reverse',

@@ -117,9 +117,7 @@ const styles = StyleSheet.create({
         objectFit: 'contain',
     },
     label: {
-        fontSize: TEXT.size.default,
-        fontFamily: TEXT.font.assistantBold,
-        color: COLORS.primary,
+        ...STYLES.label,
         textAlign: 'center',
     },
 });

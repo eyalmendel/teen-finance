@@ -300,9 +300,7 @@ const styles = StyleSheet.create({
         gap: verticalScale(16),
     },
     errorMessage: {
-        fontSize: TEXT.size.default,
-        fontFamily: TEXT.font.assistantBold,
-        color: COLORS.primary,
+        ...STYLES.label,
         paddingVertical: verticalScale(16),
     },
     submitButton: {

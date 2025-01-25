@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
+import {
+    Audio,
+    InterruptionModeAndroid,
+    InterruptionModeIOS,
+    AVPlaybackStatus,
+    AVPlaybackStatusSuccess,
+} from 'expo-av';
 
 import { COLORS } from '@config/colors';
 import { horizontalScale } from '@services/scale';
@@ -9,9 +15,10 @@ import { horizontalScale } from '@services/scale';
 type Props = {
     sourceUri: string;
     style: ViewStyle;
+    playbackSpeed: number;
 };
 
-function AppAudioPlayer({ sourceUri, style }: Props) {
+function AppAudioPlayer({ sourceUri, style, playbackSpeed }: Props) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const { current: sound } = useRef(new Audio.Sound());
 
@@ -32,6 +39,15 @@ function AppAudioPlayer({ sourceUri, style }: Props) {
             playThroughEarpieceAndroid: true,
         });
         await sound.loadAsync({ uri: sourceUri });
+
+        sound.setOnPlaybackStatusUpdate((status: AVPlaybackStatus) => {
+            if (status.isLoaded) {
+                const playbackStatus = status as AVPlaybackStatusSuccess;
+                if (playbackStatus.didJustFinish) {
+                    setIsPlaying(false);
+                }
+            }
+        });
     };
 
     async function handlePress() {
@@ -51,6 +67,12 @@ function AppAudioPlayer({ sourceUri, style }: Props) {
               }
             : undefined;
     }, [sound]);
+
+    useEffect(() => {
+        if (sound) {
+            sound.setRateAsync(playbackSpeed, true);
+        }
+    }, [playbackSpeed]);
 
     return (
         <Pressable style={[styles.container, style]} onPress={handlePress}>

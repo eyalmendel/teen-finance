@@ -16,9 +16,11 @@ import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import PlaybackSpeedControl from '@components/PlaybackSpeedControl';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
+    const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
 
     useEffect(() => {
         setAudioLearningUnits();
@@ -33,6 +35,10 @@ function ListeningStyleScreen() {
 
         const audioUnits = getAudioUnitsBySubjectName(selectedSubjectName);
         setAudioUnits(audioUnits);
+    };
+
+    const handleSpeedChange = (speed: number) => {
+        setPlaybackSpeed(speed);
     };
 
     return (
@@ -69,9 +75,14 @@ function ListeningStyleScreen() {
                                 )}
                                 <EstimatedTime time={item.estimatedTime} />
                                 <View style={styles.controlsContainer}>
+                                    <PlaybackSpeedControl
+                                        style={styles.playbackSpeed}
+                                        handleSpeedChange={handleSpeedChange}
+                                    />
                                     <AppAudioPlayer
                                         sourceUri={item.sourceUrl}
                                         style={styles.playerContainer}
+                                        playbackSpeed={playbackSpeed}
                                     ></AppAudioPlayer>
                                 </View>
                             </>
@@ -99,7 +110,7 @@ const styles = StyleSheet.create({
     },
     title: {
         ...STYLES.cardTitle,
-        marginBlockEnd: verticalScale(8),   
+        marginBlockEnd: verticalScale(8),
     },
     controlsContainer: {
         flexDirection: 'row-reverse',
@@ -110,6 +121,11 @@ const styles = StyleSheet.create({
         width: horizontalScale(40),
         aspectRatio: 1,
         borderRadius: moderateScale(40),
+    },
+    playbackSpeed: {
+        width: horizontalScale(40),
+        height: verticalScale(40),
+        
     },
 });
 

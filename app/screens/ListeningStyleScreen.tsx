@@ -16,7 +16,7 @@ import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import PlaybackSpeedControl from '@components/PlaybackSpeedControl';
+import AudioSettingsContainer from '@components/AudioSettingsContainer';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
@@ -74,8 +74,8 @@ function ListeningStyleScreen() {
                                     </Text>
                                 )}
                                 <EstimatedTime time={item.estimatedTime} />
-                                <View style={styles.controlsContainer}>
-                                    <PlaybackSpeedControl
+                                {/* <View style={styles.controlsContainer}> */}
+                                    {/* <PlaybackSpeedControl
                                         style={styles.playbackSpeed}
                                         handleSpeedChange={handleSpeedChange}
                                     />
@@ -83,8 +83,11 @@ function ListeningStyleScreen() {
                                         sourceUri={item.sourceUrl}
                                         style={styles.playerContainer}
                                         playbackSpeed={playbackSpeed}
-                                    ></AppAudioPlayer>
-                                </View>
+                                    ></AppAudioPlayer> */}
+                                     <AudioSettingsContainer
+                                    sourceUri={item.sourceUrl}
+                                />
+                                {/* </View> */}
                             </>
                         </AppCard>
                     )}
@@ -112,21 +115,21 @@ const styles = StyleSheet.create({
         ...STYLES.cardTitle,
         marginBlockEnd: verticalScale(8),
     },
-    controlsContainer: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-end',
-        marginBlockStart: verticalScale(16),
-    },
-    playerContainer: {
-        width: horizontalScale(40),
-        aspectRatio: 1,
-        borderRadius: moderateScale(40),
-    },
-    playbackSpeed: {
-        width: horizontalScale(40),
-        height: verticalScale(40),
+    // controlsContainer: {
+    //     flexDirection: 'row-reverse',
+    //     justifyContent: 'flex-end',
+    //     marginBlockStart: verticalScale(16),
+    // },
+    // playerContainer: {
+    //     width: horizontalScale(40),
+    //     aspectRatio: 1,
+    //     borderRadius: moderateScale(40),
+    // },
+    // playbackSpeed: {
+    //     width: horizontalScale(40),
+    //     height: verticalScale(40),
         
-    },
+    // },
 });
 
 export default ListeningStyleScreen;

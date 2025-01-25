@@ -1,26 +1,25 @@
-import { useState } from 'react';
-import { Pressable, StyleSheet, View, ViewStyle, Text } from 'react-native';
+import React from 'react';
+import { Pressable, StyleSheet, ViewStyle, Text } from 'react-native';
 import { COLORS } from '@config/colors';
 
 type Props = {
     style?: ViewStyle;
+    currentSpeed: number;
     handleSpeedChange: (speed: number) => void;
 };
 
-function PlaybackSpeedControl({ style, handleSpeedChange }: Props) {
+function PlaybackSpeedControl({ style, currentSpeed, handleSpeedChange }: Props) {
     const speeds = [1.0, 1.5, 2.0, 0.8];
-    const [currentSpeedIndex, setCurrentSpeedIndex] = useState(0);
 
     const handlePress = () => {
-        const nextIndex = (currentSpeedIndex + 1) % speeds.length;
-        const nextSpeed = speeds[nextIndex];
-        setCurrentSpeedIndex(nextIndex);
-        handleSpeedChange(nextSpeed);
+        const currentIndex = speeds.indexOf(currentSpeed);
+        const nextIndex = (currentIndex + 1) % speeds.length;
+        handleSpeedChange(speeds[nextIndex]);
     };
 
     return (
         <Pressable onPress={handlePress} style={[styles.container, style]}>
-            <Text style={styles.text}>{`${speeds[currentSpeedIndex]}x`}</Text>
+            <Text style={styles.text}>{`${currentSpeed}x`}</Text>
         </Pressable>
     );
 }
@@ -31,8 +30,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 40,
-        height: 40,
         borderRadius: 20,
         backgroundColor: COLORS.primary,
     },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { LearningPreview } from '@models/learning-preview';
 import PreviewCard from '@components/PreviewCard';
@@ -14,11 +14,13 @@ const LEARNING_PREVIEW: LearningPreview[] = [
         id: 0,
         name: 'dailyChallenge',
         icon: Icons.dailyChallenge,
+        isAvailable: false,
     },
     {
         id: 1,
         name: 'WhatsNew',
         icon: Icons.WhatsNew,
+        isAvailable: false,
     },
 ];
 
@@ -29,10 +31,16 @@ function PreviewLearningFeatures() {
             data={LEARNING_PREVIEW}
             renderItem={(item) => (
                 <PreviewCard
-                    style={styles.PreviewCardContainer}
+                    style={styles.container}
                     onPress={() => console.log('Feature')}
                 >
                     <>
+                        {/* {!item.isAvailable && (
+                            <AppImage
+                                style={styles.comingSoon}
+                                source={Icons.comingSoon}
+                            />
+                        )} */}
                         <Text style={styles.PreviewCardTitle}>
                             {translate(item.name)}
                         </Text>
@@ -49,7 +57,8 @@ function PreviewLearningFeatures() {
 }
 
 const styles = StyleSheet.create({
-    PreviewCardContainer: {
+    container: {
+        position: 'relative',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -74,6 +83,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         gap: moderateScale(16),
+    },
+    comingSoon: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        opacity: 0.2,
     },
 });
 

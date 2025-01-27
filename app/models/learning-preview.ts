@@ -5,4 +5,5 @@ export type LearningPreview = {
     id: number;
     name: StringKey;
     icon: ImageRequireSource;
+    isAvailable: boolean;
 };

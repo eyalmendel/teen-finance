@@ -6,20 +6,12 @@ import { TEXT } from '@config/text';
 type Props = {
     style?: ViewStyle;
     currentSpeed: number;
-    handleSpeedChange: (speed: number) => void;
+    onPress: () => void;
 };
 
-function PlaybackSpeedControl({style, currentSpeed, handleSpeedChange}: Props) {
-    const speeds = [1.0, 1.5, 2.0, 0.8];
-
-    const handlePress = () => {
-        const currentIndex = speeds.indexOf(currentSpeed);
-        const nextIndex = (currentIndex + 1) % speeds.length;
-        handleSpeedChange(speeds[nextIndex]);
-    };
-
+function PlaybackSpeedControl({ style, currentSpeed, onPress }: Props) {
     return (
-        <Pressable onPress={handlePress} style={[styles.container, style]}>
+        <Pressable onPress={onPress} style={[styles.container, style]}>
             <Text style={styles.text}>{`${currentSpeed}x`}</Text>
         </Pressable>
     );

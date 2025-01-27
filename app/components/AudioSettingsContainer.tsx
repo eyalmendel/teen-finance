@@ -11,9 +11,12 @@ type Props = {
 
 function AudioSettingsContainer({ sourceUri }: Props) {
     const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
+    const speeds = [1.0, 1.5, 2.0, 0.8];
 
-    const handleSpeedChange = (speed: number) => {
-        setPlaybackSpeed(speed);
+    const handleSpeedChange = () => {
+        const currentIndex = speeds.indexOf(playbackSpeed);
+        const nextIndex = (currentIndex + 1) % speeds.length;
+        setPlaybackSpeed(speeds[nextIndex]);
     };
 
     return (
@@ -21,7 +24,7 @@ function AudioSettingsContainer({ sourceUri }: Props) {
             <PlaybackSpeedControl
                 style={styles.playerContainer}
                 currentSpeed={playbackSpeed}
-                handleSpeedChange={handleSpeedChange}
+                onPress={handleSpeedChange}
             />
             <AppAudioPlayer
                 sourceUri={sourceUri}

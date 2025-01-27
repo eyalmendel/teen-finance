@@ -1,5 +1,7 @@
-name: Publish Pull Request
-on: pull_request
+name: Staging Publish
+on:
+    push:
+        branches: -staging
 
 jobs:
     update:
@@ -27,8 +29,5 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            - name: Create preview
-              uses: expo/expo-github-action/preview@v8
-              with:
-                  qr-target: expo-go
-                  command: eas update --auto --environment preview --platform all
+            - name: Build
+              run: eas build --profile preview --platform android --non-interactive

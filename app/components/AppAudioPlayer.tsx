@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Audio } from 'expo-av';
+import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
 
 import { COLORS } from '@config/colors';
 import { horizontalScale } from '@services/scale';
@@ -23,6 +23,14 @@ function AppAudioPlayer({ sourceUri, style }: Props) {
     }, []);
 
     const loadTrack = async (): Promise<void> => {
+        Audio.setAudioModeAsync({
+            staysActiveInBackground: true,
+            playsInSilentModeIOS: true,
+            interruptionModeIOS: InterruptionModeIOS.DoNotMix,
+            interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+            shouldDuckAndroid: false,
+            playThroughEarpieceAndroid: true,
+        });
         await sound.loadAsync({ uri: sourceUri });
     };
 

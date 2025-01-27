@@ -1,5 +1,5 @@
 const icons = {
-    logo: require('@assets/icons/green-pig-logo.svg'),
+    logo: require('@assets/icons/green-logo.svg'),
     bankAccount: require('@assets/icons/bank-account.svg'),
     comingSoon: require('@assets/icons/coming-soon.svg'),
     employmentRights: require('@assets/icons/employment-rights.svg'),

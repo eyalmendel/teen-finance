@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import ModalProvider from '@providers/ModalProvider';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -13,17 +13,17 @@ export default function App() {
         'Assistant-ExtraBold': require('./assets/fonts/Assistant/Assistant-ExtraBold.ttf'),
         'Assistant-Bold': require('./assets/fonts/Assistant/Assistant-Bold.ttf'),
         'Assistant-SemiBold': require('./assets/fonts/Assistant/Assistant-SemiBold.ttf'),
-      });
+    });
 
-      useEffect(() => {
+    useEffect(() => {
         if (fontsLoaded || fontsError) {
-          SplashScreen.hideAsync();
+            SplashScreen.hideAsync();
         }
-      }, [fontsLoaded, fontsError]);
-    
-      if (!fontsLoaded && !fontsError) {
+    }, [fontsLoaded, fontsError]);
+
+    if (!fontsLoaded && !fontsError) {
         return null;
-      }
+    }
 
     return (
         <ModalProvider>

@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         width: horizontalScale(55),
         aspectRatio: 1,
         objectFit: 'contain',
-        borderRadius: moderateScale(55),
     },
 });
 

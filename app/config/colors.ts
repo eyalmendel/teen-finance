@@ -1,7 +1,6 @@
 export const COLORS = {
     mainBackground: '#f2f2fa',
     primary: '#39276f',
-    primaryWithOpacity: 'rgba(57, 39, 111, 0.15)',
     secondary: '#9ce799',
     white: '#fff',
     black: '#000',

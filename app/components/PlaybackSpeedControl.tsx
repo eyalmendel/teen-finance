@@ -29,10 +29,11 @@ export default PlaybackSpeedControl;
 
 const styles = StyleSheet.create({
     container: {
+        width: '100%',
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20,
-        backgroundColor: COLORS.primaryWithOpacity,
+        backgroundColor: 'rgba(57, 39, 111, 0.15)',
     },
     text: {
         color: COLORS.primary,

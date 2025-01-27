@@ -19,7 +19,7 @@ function AudioSettingsContainer({ sourceUri }: Props) {
     return (
         <View style={[styles.controlsContainer]}>
             <PlaybackSpeedControl
-                style={styles.playbackSpeed}
+                style={styles.playerContainer}
                 currentSpeed={playbackSpeed}
                 handleSpeedChange={handleSpeedChange}
             />
@@ -38,10 +38,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         marginBlockStart: verticalScale(16),
         gap: 8,
-    },
-    playbackSpeed: {
-        width: horizontalScale(40),
-        height: verticalScale(40),
     },
     playerContainer: {
         width: horizontalScale(40),

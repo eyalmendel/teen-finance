@@ -5,23 +5,17 @@
     "experiments": {
       "tsconfigPaths": true
     },
-    "name": "teen-finance",
+    "name": "Teens Finance",
     "slug": "teen-finance",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icons/logo.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/icons/logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#f2f2fa"
-    },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.teenfinance.app"
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.teenfinance.app"
+      "package": "com.eyalmendel.teenfinance"
     },
     "web": {
       "favicon": "./assets/icons/logo.png"
@@ -34,7 +28,13 @@
           "supportsPictureInPicture": true
         }
       ],
-      "expo-font"
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icons/splash.png",
+          "backgroundColor": "#f2f2fa"
+        }
+      ]
     ],
     "extra": {
       "eas": {

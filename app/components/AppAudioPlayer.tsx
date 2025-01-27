@@ -40,11 +40,14 @@ function AppAudioPlayer({ sourceUri, style, playbackSpeed }: Props) {
         });
         await sound.loadAsync({ uri: sourceUri });
 
-        sound.setOnPlaybackStatusUpdate((status: AVPlaybackStatus) => {
+        sound.setOnPlaybackStatusUpdate(async (status: AVPlaybackStatus) => {
             if (status.isLoaded) {
                 const playbackStatus = status as AVPlaybackStatusSuccess;
                 if (playbackStatus.didJustFinish) {
+                    await sound.setPositionAsync(0);
                     setIsPlaying(false);
+                    await sound.pauseAsync();
+                    await sound.setPositionAsync(0);
                 }
             }
         });
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: COLORS.primary,
     },
+    
 });
 
 export default AppAudioPlayer;

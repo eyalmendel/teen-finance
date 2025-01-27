@@ -20,7 +20,6 @@ import AudioSettingsContainer from '@components/AudioSettingsContainer';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
-    const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
 
     useEffect(() => {
         setAudioLearningUnits();
@@ -35,10 +34,6 @@ function ListeningStyleScreen() {
 
         const audioUnits = getAudioUnitsBySubjectName(selectedSubjectName);
         setAudioUnits(audioUnits);
-    };
-
-    const handleSpeedChange = (speed: number) => {
-        setPlaybackSpeed(speed);
     };
 
     return (
@@ -75,7 +70,7 @@ function ListeningStyleScreen() {
                                 )}
                                 <EstimatedTime time={item.estimatedTime} />
                                 {/* <View style={styles.controlsContainer}> */}
-                                    {/* <PlaybackSpeedControl
+                                {/* <PlaybackSpeedControl
                                         style={styles.playbackSpeed}
                                         handleSpeedChange={handleSpeedChange}
                                     />
@@ -84,7 +79,7 @@ function ListeningStyleScreen() {
                                         style={styles.playerContainer}
                                         playbackSpeed={playbackSpeed}
                                     ></AppAudioPlayer> */}
-                                     <AudioSettingsContainer
+                                <AudioSettingsContainer
                                     sourceUri={item.sourceUrl}
                                 />
                                 {/* </View> */}
@@ -128,7 +123,7 @@ const styles = StyleSheet.create({
     // playbackSpeed: {
     //     width: horizontalScale(40),
     //     height: verticalScale(40),
-        
+
     // },
 });
 

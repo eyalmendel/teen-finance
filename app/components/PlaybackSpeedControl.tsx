@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, ViewStyle, Text } from 'react-native';
 import { COLORS } from '@config/colors';
+import { TEXT } from '@config/text';
 
 type Props = {
     style?: ViewStyle;
@@ -8,7 +9,11 @@ type Props = {
     handleSpeedChange: (speed: number) => void;
 };
 
-function PlaybackSpeedControl({ style, currentSpeed, handleSpeedChange }: Props) {
+function PlaybackSpeedControl({
+    style,
+    currentSpeed,
+    handleSpeedChange,
+}: Props) {
     const speeds = [1.0, 1.5, 2.0, 0.8];
 
     const handlePress = () => {
@@ -31,10 +36,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 20,
-        backgroundColor: COLORS.primary,
+        backgroundColor: COLORS.primaryWithOpacity,
     },
     text: {
-        color: COLORS.white,
-        fontWeight: 'bold',
+        color: COLORS.primary,
+        fontFamily: TEXT.font.assistantBold,
     },
 });

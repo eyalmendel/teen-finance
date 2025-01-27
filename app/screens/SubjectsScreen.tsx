@@ -5,12 +5,10 @@ import { Image } from 'expo-image';
 import Icons from '@assets/icons';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
-import ScreenTitle from '@components/ScreenTitle';
 import AppSimpleList from '@components/AppSimpleList';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { STYLES } from '@config/styles';
-import { TEXT } from '@config/text';
 import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
@@ -18,6 +16,7 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
 import AppImage from '@components/AppImage';
 import AppHeadline from '@components/AppHeadline';
+import PreviewLearningFeatures from '@components/PreviewLearningFeatures';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -41,6 +40,7 @@ function SubjectsScreen({ navigation }: Props) {
     return (
         <Screen>
             <AppHeadline text={translate('subjectsScreenTitle')} showIcon={false}/>
+            <PreviewLearningFeatures/>
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import AppAudioPlayer from '@components/AppAudioPlayer';
+import { StyleSheet, Text } from 'react-native';
 import AppCard from '@components/AppCard';
 import AppSimpleList from '@components/AppSimpleList';
 import EmptyState from '@components/EmptyState';
@@ -10,11 +8,10 @@ import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
-import { TEXT } from '@config/text';
 import { MediaLearningUnit } from '@models/learning-unit';
 import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
 import AudioSettingsContainer from '@components/AudioSettingsContainer';
 
@@ -69,20 +66,9 @@ function ListeningStyleScreen() {
                                     </Text>
                                 )}
                                 <EstimatedTime time={item.estimatedTime} />
-                                {/* <View style={styles.controlsContainer}> */}
-                                {/* <PlaybackSpeedControl
-                                        style={styles.playbackSpeed}
-                                        handleSpeedChange={handleSpeedChange}
-                                    />
-                                    <AppAudioPlayer
-                                        sourceUri={item.sourceUrl}
-                                        style={styles.playerContainer}
-                                        playbackSpeed={playbackSpeed}
-                                    ></AppAudioPlayer> */}
                                 <AudioSettingsContainer
                                     sourceUri={item.sourceUrl}
                                 />
-                                {/* </View> */}
                             </>
                         </AppCard>
                     )}
@@ -110,21 +96,6 @@ const styles = StyleSheet.create({
         ...STYLES.cardTitle,
         marginBlockEnd: verticalScale(8),
     },
-    // controlsContainer: {
-    //     flexDirection: 'row-reverse',
-    //     justifyContent: 'flex-end',
-    //     marginBlockStart: verticalScale(16),
-    // },
-    // playerContainer: {
-    //     width: horizontalScale(40),
-    //     aspectRatio: 1,
-    //     borderRadius: moderateScale(40),
-    // },
-    // playbackSpeed: {
-    //     width: horizontalScale(40),
-    //     height: verticalScale(40),
-
-    // },
 });
 
 export default ListeningStyleScreen;

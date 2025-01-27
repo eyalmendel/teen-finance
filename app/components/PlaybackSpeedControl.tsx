@@ -9,11 +9,7 @@ type Props = {
     handleSpeedChange: (speed: number) => void;
 };
 
-function PlaybackSpeedControl({
-    style,
-    currentSpeed,
-    handleSpeedChange,
-}: Props) {
+function PlaybackSpeedControl({style, currentSpeed, handleSpeedChange}: Props) {
     const speeds = [1.0, 1.5, 2.0, 0.8];
 
     const handlePress = () => {

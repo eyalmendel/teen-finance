@@ -47,7 +47,6 @@ function AppAudioPlayer({ sourceUri, style, playbackSpeed }: Props) {
                     await sound.setPositionAsync(0);
                     setIsPlaying(false);
                     await sound.pauseAsync();
-                    await sound.setPositionAsync(0);
                 }
             }
         });
@@ -96,7 +95,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: COLORS.primary,
     },
-    
 });
 
 export default AppAudioPlayer;

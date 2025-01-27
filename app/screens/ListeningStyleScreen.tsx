@@ -13,7 +13,7 @@ import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
 import { moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
-import AudioSettingsContainer from '@components/AudioSettingsContainer';
+import AppAudioPlayer from '@components/AppAudioPlayer';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
@@ -66,7 +66,7 @@ function ListeningStyleScreen() {
                                     </Text>
                                 )}
                                 <EstimatedTime time={item.estimatedTime} />
-                                <AudioSettingsContainer
+                                <AppAudioPlayer
                                     sourceUri={item.sourceUrl}
                                 />
                             </>

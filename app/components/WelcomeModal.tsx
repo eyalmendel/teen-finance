@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Icons from '@assets/icons';
 import { COLORS } from '@config/colors';
-import { StringKey } from '@config/strings';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
-import { ModalAction } from '@context/modalContext';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { MODAL_CONTENT } from '@mocks/modal-content';
-
 
 export default function WelcomeModal() {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.titleContainer}>
+                    <Image source={Icons.wavingHand} style={styles.icon} />
                     <Text style={styles.titleText}>{translate('welcome')}</Text>
                 </View>
                 <View style={styles.textContainer}>
@@ -38,6 +35,7 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         gap: moderateScale(8),
+        flexDirection: 'row',
     },
     titleText: {
         fontSize: TEXT.size.large,
@@ -45,15 +43,16 @@ const styles = StyleSheet.create({
         color: COLORS.primary,
         ...STYLES.rightAlignedText,
     },
-    textContainer: {
-
-    },
+    textContainer: {},
 
     text: {
-        fontFamily:TEXT.font.assistantRegular,
+        fontFamily: TEXT.font.assistantRegular,
         fontSize: TEXT.size.default,
         lineHeight: 20,
         ...STYLES.rightAlignedText,
-       
+    },
+    icon: {
+        width: horizontalScale(24),
+        height: verticalScale(24),
     },
 });

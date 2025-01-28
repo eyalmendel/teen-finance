@@ -2,20 +2,12 @@ import React, { useState } from 'react';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { LearningPreview } from '@models/learning-preview';
 import PreviewCard from '@components/PreviewCard';
-import {
-    Modal,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-    Image,
-} from 'react-native';
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { STYLES } from '@config/styles';
 import { translate } from '@services/language';
 import Icons from '@assets/icons';
 import AppSimpleList from '@components/AppSimpleList';
 import AppImage from '@components/AppImage';
-import { useModal } from '@hooks/useModal';
 import WelcomeModal from '@components/WelcomeModal';
 import { COLORS } from '@config/colors';
 
@@ -53,12 +45,12 @@ function PreviewLearningFeatures() {
                 renderItem={(item) => (
                     <PreviewCard style={styles.container} onPress={handlePress}>
                         <>
-                            {/* {!item.isAvailable && (
-                            <AppImage
-                                style={styles.comingSoon}
-                                source={Icons.comingSoon}
-                            />
-                        )} */}
+                            {!item.isAvailable && (
+                                <AppImage
+                                    style={styles.comingSoon}
+                                    source={Icons.comingSoon}
+                                />
+                            )}
                             <Text style={styles.PreviewCardTitle}>
                                 {translate(item.name)}
                             </Text>
@@ -75,7 +67,6 @@ function PreviewLearningFeatures() {
             <Modal
                 transparent={true}
                 visible={isModalVisible}
-                // animationType="fade"
                 onRequestClose={closeModal}
             >
                 <View style={styles.modalOverlay}>
@@ -99,35 +90,33 @@ function PreviewLearningFeatures() {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'relative',
+        //position: 'relative',
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: moderateScale(16),
+        alignItems: 'flex-end',
+        gap: moderateScale(10),
+        justifyContent: 'space-between',
     },
     image: {
         width: horizontalScale(120),
         height: verticalScale(120),
         aspectRatio: 1,
-        flexShrink: 0,
     },
     PreviewCardTitle: {
         ...STYLES.cardTitle,
         ...STYLES.rightAlignedText,
         width: horizontalScale(91),
         height: verticalScale(40),
-        //marginTop: 50,
     },
     featureList: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         gap: moderateScale(16),
     },
     comingSoon: {
-        width: '100%',
-        height: '100%',
+        //width: horizontalScale(154),
+        width: '60%',
+        gap: 10,
         position: 'absolute',
         opacity: 0.2,
     },

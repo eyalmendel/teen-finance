@@ -3,13 +3,11 @@ import {
     GestureResponderEvent,
     Pressable,
     StyleSheet,
-    View,
-    Text,
     ViewStyle,
 } from 'react-native';
 
-import { COLORS } from '@config/colors';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 
 export type Props = {
@@ -33,10 +31,8 @@ const styles = StyleSheet.create({
     container: {
         width: horizontalScale(250),
         height: verticalScale(120),
-        // margin: 'auto',
+        paddingLeft: verticalScale(24),
         borderRadius: moderateScale(16),
-        paddingVertical: verticalScale(16),
-        paddingHorizontal: horizontalScale(24),
         backgroundColor: COLORS.eggWhite,
     },
 });

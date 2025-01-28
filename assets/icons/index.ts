@@ -18,6 +18,8 @@ const icons = {
     dailyChallenge: require('@assets/icons/dailyChallenge.svg'),
     WhatsNew: require('@assets/icons/WhatsNew.svg'),
     cancel: require('@assets/icons/cancel.svg'),
+    wavingHand: require('@assets/icons/waving-hand.png'),
+    
 };
 
 export default icons;

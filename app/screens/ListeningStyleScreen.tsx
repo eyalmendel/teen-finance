@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import AppAudioPlayer from '@components/AppAudioPlayer';
+import { StyleSheet, Text } from 'react-native';
 import AppCard from '@components/AppCard';
 import AppSimpleList from '@components/AppSimpleList';
 import EmptyState from '@components/EmptyState';
@@ -10,12 +8,12 @@ import Screen from '@components/Screen';
 import SubjectScreenTitle from '@components/SubjectScreenTitle';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
-import { TEXT } from '@config/text';
 import { MediaLearningUnit } from '@models/learning-unit';
 import { getAudioUnitsBySubjectName } from '@services/data';
 import { translate } from '@services/language';
-import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
+import { moderateScale, verticalScale } from '@services/scale';
 import { getSelectedSubjectName } from '@services/state';
+import AppAudioPlayer from '@components/AppAudioPlayer';
 
 function ListeningStyleScreen() {
     const [audioUnits, setAudioUnits] = useState<MediaLearningUnit[]>([]);
@@ -68,12 +66,9 @@ function ListeningStyleScreen() {
                                     </Text>
                                 )}
                                 <EstimatedTime time={item.estimatedTime} />
-                                <View style={styles.controlsContainer}>
-                                    <AppAudioPlayer
-                                        sourceUri={item.sourceUrl}
-                                        style={styles.playerContainer}
-                                    ></AppAudioPlayer>
-                                </View>
+                                <AppAudioPlayer
+                                    sourceUri={item.sourceUrl}
+                                />
                             </>
                         </AppCard>
                     )}
@@ -99,17 +94,7 @@ const styles = StyleSheet.create({
     },
     title: {
         ...STYLES.cardTitle,
-        marginBlockEnd: verticalScale(8),   
-    },
-    controlsContainer: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-end',
-        marginBlockStart: verticalScale(16),
-    },
-    playerContainer: {
-        width: horizontalScale(40),
-        aspectRatio: 1,
-        borderRadius: moderateScale(40),
+        marginBlockEnd: verticalScale(8),
     },
 });
 

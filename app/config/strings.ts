@@ -42,7 +42,7 @@ export const STRINGS = {
     'review quiz answers': 'מעבר על התשובות',
     dailyChallenge: 'אתגר יומי',
     WhatsNew: "מה חדש?",
-    'welcome': 'ברוכים הבאים לאפליקציית נוער פיננסי!'
+    'welcome': 'ברוכים הבאים לאפליקציית נוער פיננסי!👋'
 } as const;
 
 export type StringKey = keyof typeof STRINGS;

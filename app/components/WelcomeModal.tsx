@@ -11,10 +11,7 @@ export default function WelcomeModal() {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <View style={styles.titleContainer}>
-                    <Image source={Icons.wavingHand} style={styles.icon} />
                     <Text style={styles.titleText}>{translate('welcome')}</Text>
-                </View>
                 <View>
                     <Text style={styles.text}>{MODAL_CONTENT}</Text>
                 </View>

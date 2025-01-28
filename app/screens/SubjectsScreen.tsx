@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import Icons from '@assets/icons';
 import EmptyState from '@components/EmptyState';
@@ -39,8 +39,13 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <AppHeadline text={translate('subjectsScreenTitle')} showIcon={false}/>
-            <PreviewLearningFeatures/>
+            <AppHeadline
+                text={translate('subjectsScreenTitle')}
+                showIcon={false}
+            />
+            <View style={styles.temp}>
+                <PreviewLearningFeatures />
+            </View>
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (
@@ -120,7 +125,6 @@ const styles = StyleSheet.create({
         ...STYLES.label,
         textAlign: 'center',
     },
-
 });
 
 export default SubjectsScreen;

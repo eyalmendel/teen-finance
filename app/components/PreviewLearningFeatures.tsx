@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { LearningPreview } from '@models/learning-preview';
-import PreviewCard from '@components/PreviewCard';
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { COLORS } from '@config/colors';
+import { useModal } from '@hooks/useModal';
 import { STYLES } from '@config/styles';
 import { translate } from '@services/language';
 import Icons from '@assets/icons';
 import AppSimpleList from '@components/AppSimpleList';
 import AppImage from '@components/AppImage';
 import WelcomeModal from '@components/WelcomeModal';
-import { COLORS } from '@config/colors';
+import PreviewCard from '@components/PreviewCard';
+import AppModal from './AppModal';
 
 const LEARNING_PREVIEW: LearningPreview[] = [
     {
@@ -27,23 +29,18 @@ const LEARNING_PREVIEW: LearningPreview[] = [
 ];
 
 function PreviewLearningFeatures() {
-    const [isModalVisible, setModalVisible] = useState(false);
+    const { showModal, hideModal } = useModal();
 
-    const handlePress = () => {
-        setModalVisible(true);
+    const handelPress = (): void => {
+        showModal(<WelcomeModal />, true);
     };
-
-    const closeModal = () => {
-        setModalVisible(false);
-    };
-
     return (
-        <>
+        <View>
             <AppSimpleList
                 style={styles.featureList}
                 data={LEARNING_PREVIEW}
                 renderItem={(item) => (
-                    <PreviewCard style={styles.container} onPress={handlePress}>
+                    <PreviewCard style={styles.content} onPress={handelPress}>
                         <>
                             {!item.isAvailable && (
                                 <AppImage
@@ -63,33 +60,21 @@ function PreviewLearningFeatures() {
                     </PreviewCard>
                 )}
             />
-
-            <Modal
-                transparent={true}
-                visible={isModalVisible}
-                onRequestClose={closeModal}
-            >
-                <View style={styles.modalOverlay}>
-                    <View style={styles.modalContent}>
-                        <TouchableOpacity
-                            style={styles.closeButton}
-                            onPress={closeModal}
-                        >
-                            <AppImage
-                                source={Icons.cancel}
-                                style={styles.closeIcon}
-                            />
-                        </TouchableOpacity>
-                        <WelcomeModal />
-                    </View>
-                </View>
-            </Modal>
-        </>
+            <AppModal />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    featureList: {
+        display: 'flex',
+        
+        //flexDirection: 'row',
+        //flexWrap: 'wrap',
+        //alignItems: 'flex-start',
+        gap: moderateScale(16),
+    },
+    content: {
         //position: 'relative',
         flexDirection: 'row',
         alignItems: 'flex-end',
@@ -107,12 +92,7 @@ const styles = StyleSheet.create({
         width: horizontalScale(91),
         height: verticalScale(40),
     },
-    featureList: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-        gap: moderateScale(16),
-    },
+
     comingSoon: {
         //width: horizontalScale(154),
         width: '60%',

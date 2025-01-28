@@ -43,9 +43,7 @@ function SubjectsScreen({ navigation }: Props) {
                 text={translate('subjectsScreenTitle')}
                 showIcon={false}
             />
-            <View style={styles.temp}>
-                <PreviewLearningFeatures />
-            </View>
+            <PreviewLearningFeatures />
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (

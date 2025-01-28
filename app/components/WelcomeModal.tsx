@@ -15,7 +15,7 @@ export default function WelcomeModal() {
                     <Image source={Icons.wavingHand} style={styles.icon} />
                     <Text style={styles.titleText}>{translate('welcome')}</Text>
                 </View>
-                <View style={styles.textContainer}>
+                <View>
                     <Text style={styles.text}>{MODAL_CONTENT}</Text>
                 </View>
             </View>
@@ -25,16 +25,18 @@ export default function WelcomeModal() {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+        //flexDirection: 'row',
+        //justifyContent: 'center',
         alignItems: 'center',
-        gap: moderateScale(8),
+        paddingTop: horizontalScale(8),
+        paddingBottom: horizontalScale(32),
+        paddingRight: verticalScale(32),
+        paddingLeft: verticalScale(8),
     },
     content: {
-        gap: moderateScale(32),
+        gap: moderateScale(16),
     },
     titleContainer: {
-        gap: moderateScale(8),
         flexDirection: 'row',
     },
     titleText: {
@@ -43,17 +45,15 @@ const styles = StyleSheet.create({
         color: COLORS.primary,
         ...STYLES.rightAlignedText,
     },
-    textContainer: {},
-
+    icon: {
+        width: horizontalScale(24),
+        height: verticalScale(24),
+        //position: 'absolute',
+    },
     text: {
         fontFamily: TEXT.font.assistantRegular,
         fontSize: TEXT.size.default,
         lineHeight: 20,
         ...STYLES.rightAlignedText,
     },
-    icon: {
-        width: horizontalScale(24),
-        height: verticalScale(24),
-    },
 });
-

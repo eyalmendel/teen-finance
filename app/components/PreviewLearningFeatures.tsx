@@ -1,13 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { LearningPreview } from '@models/learning-preview';
-import { COLORS } from '@config/colors';
 import { useModal } from '@hooks/useModal';
 import { STYLES } from '@config/styles';
 import { translate } from '@services/language';
 import Icons from '@assets/icons';
-import AppSimpleList from '@components/AppSimpleList';
 import AppImage from '@components/AppImage';
 import WelcomeModal from '@components/WelcomeModal';
 import PreviewCard from '@components/PreviewCard';
@@ -16,31 +14,38 @@ import AppModal from './AppModal';
 const LEARNING_PREVIEW: LearningPreview[] = [
     {
         id: 0,
-        name: 'dailyChallenge',
-        icon: Icons.dailyChallenge,
+        name: 'WhatsNew',
+        icon: Icons.WhatsNew,
         isAvailable: false,
     },
     {
         id: 1,
-        name: 'WhatsNew',
-        icon: Icons.WhatsNew,
+        name: 'dailyChallenge',
+        icon: Icons.dailyChallenge,
         isAvailable: false,
     },
 ];
 
 function PreviewLearningFeatures() {
-    const { showModal, hideModal } = useModal();
+    const { showModal } = useModal();
 
     const handelPress = (): void => {
         showModal(<WelcomeModal />, true);
     };
+
     return (
         <View>
-            <AppSimpleList
-                style={styles.featureList}
-                data={LEARNING_PREVIEW}
-                renderItem={(item) => (
-                    <PreviewCard style={styles.content} onPress={handelPress}>
+            <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.featureList}
+            >
+                {LEARNING_PREVIEW.map((item) => (
+                    <PreviewCard
+                        key={item.id}
+                        style={styles.content}
+                        onPress={handelPress}
+                    >
                         <>
                             {!item.isAvailable && (
                                 <AppImage
@@ -58,8 +63,8 @@ function PreviewLearningFeatures() {
                             />
                         </>
                     </PreviewCard>
-                )}
-            />
+                ))}
+            </ScrollView>
             <AppModal />
         </View>
     );
@@ -67,15 +72,12 @@ function PreviewLearningFeatures() {
 
 const styles = StyleSheet.create({
     featureList: {
-        display: 'flex',
-        
-        //flexDirection: 'row',
-        //flexWrap: 'wrap',
-        //alignItems: 'flex-start',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
         gap: moderateScale(16),
+        marginBottom: verticalScale(32),
     },
     content: {
-        //position: 'relative',
         flexDirection: 'row',
         alignItems: 'flex-end',
         gap: moderateScale(10),
@@ -94,35 +96,10 @@ const styles = StyleSheet.create({
     },
 
     comingSoon: {
-        //width: horizontalScale(154),
         width: '60%',
         gap: 10,
         position: 'absolute',
         opacity: 0.2,
-    },
-    modalOverlay: {
-        flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.20)',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    modalContent: {
-        width: horizontalScale(335),
-        borderRadius: moderateScale(28),
-        backgroundColor: COLORS.eggWhite,
-        paddingTop: horizontalScale(8),
-        paddingBottom: horizontalScale(32),
-        paddingRight: verticalScale(32),
-        paddingLeft: verticalScale(8),
-        alignItems: 'flex-end',
-    },
-    closeButton: {
-        zIndex: 10,
-        alignSelf: 'flex-start',
-    },
-    closeIcon: {
-        width: horizontalScale(24),
-        height: verticalScale(24),
     },
 });
 

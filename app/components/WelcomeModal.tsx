@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import Icons from '@assets/icons';
+import { StyleSheet, Text, View } from 'react-native';
 import { COLORS } from '@config/colors';
 import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
@@ -11,7 +10,7 @@ export default function WelcomeModal() {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                    <Text style={styles.titleText}>{translate('welcome')}</Text>
+                <Text style={styles.titleText}>{translate('welcome')}</Text>
                 <View>
                     <Text style={styles.text}>{MODAL_CONTENT}</Text>
                 </View>
@@ -22,30 +21,20 @@ export default function WelcomeModal() {
 
 const styles = StyleSheet.create({
     container: {
-        //flexDirection: 'row',
-        //justifyContent: 'center',
         alignItems: 'center',
         paddingTop: horizontalScale(8),
         paddingBottom: horizontalScale(32),
         paddingRight: verticalScale(32),
-        paddingLeft: verticalScale(8),
+        paddingLeft: verticalScale(16),
     },
     content: {
         gap: moderateScale(16),
-    },
-    titleContainer: {
-        flexDirection: 'row',
     },
     titleText: {
         fontSize: TEXT.size.large,
         fontFamily: TEXT.font.assistantBold,
         color: COLORS.primary,
         ...STYLES.rightAlignedText,
-    },
-    icon: {
-        width: horizontalScale(24),
-        height: verticalScale(24),
-        //position: 'absolute',
     },
     text: {
         fontFamily: TEXT.font.assistantRegular,

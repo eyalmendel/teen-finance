@@ -16,7 +16,7 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
 import AppImage from '@components/AppImage';
 import AppHeadline from '@components/AppHeadline';
-import PreviewLearningFeatures from '@components/PreviewLearningFeatures';
+import UpdatesPanel from '@components/UpdatesPanel';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -43,7 +43,7 @@ function SubjectsScreen({ navigation }: Props) {
                 text={translate('subjectsScreenTitle')}
                 showIcon={false}
             />
-            <PreviewLearningFeatures />
+            <UpdatesPanel  />
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (

@@ -41,8 +41,8 @@ export const STRINGS = {
     'Try again': 'נסה שוב 😬',
     'review quiz answers': 'מעבר על התשובות',
     dailyChallenge: 'אתגר יומי',
-    WhatsNew: "מה חדש?",
-    'welcome': 'ברוכים הבאים לאפליקציית נוער פיננסי!👋'
+    whatsNew: "מה חדש?",
+    welcomeModalTitle: 'ברוכים הבאים לאפליקציית נוער פיננסי!👋'
 } as const;
 
 export type StringKey = keyof typeof STRINGS;

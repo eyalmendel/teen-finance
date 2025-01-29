@@ -14,9 +14,10 @@ export type Props = {
     style: ViewStyle;
     children: JSX.Element;
     onPress?: (event: GestureResponderEvent) => void;
+    disabled?: boolean;
 };
 
-function PreviewCard({ style, children, onPress }: Props) {
+function PreviewCard({ style, children, onPress, disabled = false }: Props) {
     return (
         <Pressable
             style={[styles.container, STYLES.boxShadow, style]}
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     container: {
         width: horizontalScale(250),
         height: verticalScale(120),
-        paddingLeft: verticalScale(24),
+        paddingInline: horizontalScale(24),
         borderRadius: moderateScale(16),
         backgroundColor: COLORS.eggWhite,
     },

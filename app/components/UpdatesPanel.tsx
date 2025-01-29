@@ -14,9 +14,9 @@ import AppModal from './AppModal';
 const LEARNING_PREVIEW: LearningPreview[] = [
     {
         id: 0,
-        name: 'WhatsNew',
-        icon: Icons.WhatsNew,
-        isAvailable: false,
+        name: 'whatsNew',
+        icon: Icons.whatsNew,
+        isAvailable: true,
     },
     {
         id: 1,
@@ -26,17 +26,17 @@ const LEARNING_PREVIEW: LearningPreview[] = [
     },
 ];
 
-function PreviewLearningFeatures() {
+function UpdatesPanel() {
     const { showModal } = useModal();
 
-    const handelPress = (): void => {
+    const handlePress = (): void => {
         showModal(<WelcomeModal />, true);
     };
 
     return (
         <View>
             <ScrollView
-                horizontal={true}
+                horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.featureList}
             >
@@ -44,7 +44,7 @@ function PreviewLearningFeatures() {
                     <PreviewCard
                         key={item.id}
                         style={styles.content}
-                        onPress={handelPress}
+                        onPress={handlePress}
                     >
                         <>
                             {!item.isAvailable && (
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PreviewLearningFeatures;
+export default UpdatesPanel;

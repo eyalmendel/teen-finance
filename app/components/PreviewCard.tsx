@@ -22,6 +22,7 @@ function PreviewCard({ style, children, onPress, disabled = false }: Props) {
         <Pressable
             style={[styles.container, STYLES.boxShadow, style]}
             onPress={onPress}
+            disabled={disabled}
         >
             {children}
         </Pressable>

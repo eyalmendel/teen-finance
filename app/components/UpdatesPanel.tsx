@@ -45,6 +45,7 @@ function UpdatesPanel() {
                         key={item.id}
                         style={styles.content}
                         onPress={handlePress}
+                        disabled={!item.isAvailable}
                     >
                         <>
                             {!item.isAvailable && (

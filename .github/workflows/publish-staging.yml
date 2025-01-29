@@ -1,7 +1,10 @@
 name: Staging Publish
 on:
     push:
-        branches: -staging
+        branches: 
+            -staging
+        
+    workflow_dispatch:
 
 jobs:
     update:

@@ -4,7 +4,7 @@ import { STYLES } from '@config/styles';
 import { TEXT } from '@config/text';
 import { translate } from '@services/language';
 import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
-import {WELCOME_MODAL_CONTENT } from '@mocks/modal-content';
+import {WELCOME_MODAL_CONTENT } from '@mocks/welcome-modal-content';
 
 export default function WelcomeModal() {
     return (

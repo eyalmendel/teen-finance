@@ -1,16 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import Icons from '@assets/icons';
 import EmptyState from '@components/EmptyState';
 import Screen from '@components/Screen';
-import ScreenTitle from '@components/ScreenTitle';
 import AppSimpleList from '@components/AppSimpleList';
 import { COLORS } from '@config/colors';
 import { AppRoutesParamList, RouteNames } from '@config/routes';
 import { STYLES } from '@config/styles';
-import { TEXT } from '@config/text';
 import { Subject } from '@models/subject';
 import { getSubjects } from '@services/data';
 import { translate } from '@services/language';
@@ -18,6 +16,7 @@ import { horizontalScale, moderateScale, verticalScale } from '@services/scale';
 import { setSelectedSubjectName } from '@services/state';
 import AppImage from '@components/AppImage';
 import AppHeadline from '@components/AppHeadline';
+import UpdatesPanel from '@components/UpdatesPanel';
 
 type Props = NativeStackScreenProps<AppRoutesParamList, RouteNames.SUBJECTS>;
 
@@ -40,7 +39,11 @@ function SubjectsScreen({ navigation }: Props) {
 
     return (
         <Screen>
-            <AppHeadline text={translate('subjectsScreenTitle')} showIcon={false}/>
+            <AppHeadline
+                text={translate('subjectsScreenTitle')}
+                showIcon={false}
+            />
+            <UpdatesPanel  />
             {subjects?.length === 0 ? (
                 <EmptyState />
             ) : (
@@ -120,7 +123,6 @@ const styles = StyleSheet.create({
         ...STYLES.label,
         textAlign: 'center',
     },
-
 });
 
 export default SubjectsScreen;

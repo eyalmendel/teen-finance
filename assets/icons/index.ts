@@ -15,6 +15,8 @@ const icons = {
     saving: require('@assets/icons/saving.svg'),
     watchingStyle: require('@assets/icons/watching-style.svg'),
     goBack: require('@assets/icons/go-back.svg'),
+    dailyChallenge: require('@assets/icons/dailyChallenge.svg'),
+    whatsNew: require('@assets/icons/whatsNew.svg'),
 };
 
 export default icons;

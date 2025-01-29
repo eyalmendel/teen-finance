@@ -40,6 +40,9 @@ export const STRINGS = {
     'Except your employee bonus': 'חוץ מהבונוס שלך לעובד/ת החודש',
     'Try again': 'נסה שוב 😬',
     'review quiz answers': 'מעבר על התשובות',
+    dailyChallenge: 'אתגר יומי',
+    whatsNew: "מה חדש?",
+    welcomeModalTitle: 'ברוכים הבאים לאפליקציית נוער פיננסי!👋'
 } as const;
 
 export type StringKey = keyof typeof STRINGS;

@@ -14,15 +14,15 @@ import AppModal from './AppModal';
 const LEARNING_PREVIEW: LearningPreview[] = [
     {
         id: 0,
-        name: 'whatsNew',
-        icon: Icons.whatsNew,
-        isAvailable: true,
-    },
-    {
-        id: 1,
         name: 'dailyChallenge',
         icon: Icons.dailyChallenge,
         isAvailable: false,
+    },
+    {
+        id: 1,
+        name: 'whatsNew',
+        icon: Icons.whatsNew,
+        isAvailable: true,
     },
 ];
 
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         gap: moderateScale(16),
         marginBottom: verticalScale(32),
+        paddingHorizontal: horizontalScale(8),
     },
     content: {
         flexDirection: 'row',
